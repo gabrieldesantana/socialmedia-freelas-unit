@@ -1,8 +1,8 @@
 public interface IClienteService 
 {
-    Task<List<Cliente>> GetAllAsync();
-    Task<Cliente> GetByIdAsync(int id);
-    Task<Cliente> PostAsync(Cliente entidade);
-    Task<Cliente> PutAsync(int id, Cliente entidade);
+    Task<DefaultResponse<ClienteViewModel>> GetAllAsync();
+    Task<DefaultResponse<ClienteViewModel>> GetByIdAsync(int id);
+    Task<DefaultResponse<Cliente>> PostAsync(ClienteInputModel entidade);
+    Task<DefaultResponse<Cliente>> PutAsync(int id, Cliente entidade);
     Task<bool> DeleteAsync(int id);
 }

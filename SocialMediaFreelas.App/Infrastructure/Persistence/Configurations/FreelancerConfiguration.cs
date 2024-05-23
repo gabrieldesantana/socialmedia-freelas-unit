@@ -8,7 +8,6 @@ public class FreelancerConfiguration : IEntityTypeConfiguration<Freelancer>
     {
         builder.HasKey(x => x.Id);
         builder.ToTable("TB_Freelancers");
-
         builder.Property(x => x.NumeroDocumento).IsRequired();
         builder.Property(x => x.Nome).IsRequired();
         builder.Property(x => x.DataNascimento).IsRequired();

@@ -1,4 +1,4 @@
-public class ClienteViewModel
+public class ClienteViewModel : IDefaultEntity
 {
     public int Id { get; set; }
     public string Nome { get; set; }

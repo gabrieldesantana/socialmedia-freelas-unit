@@ -1,28 +1,72 @@
+using Microsoft.EntityFrameworkCore;
 
 public class ClienteRepository : IClienteRepository
 {
-    public Task<bool> DeleteAsync(int id)
+    private readonly AppDbContext _context;
+
+    public ClienteRepository(AppDbContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task<List<Cliente>> GetAllAsync()
+    public async Task<List<Cliente>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Clientes
+        .Where(x => x.Actived)
+        .ToListAsync();
     }
 
-    public Task<Cliente> GetByIdAsync(int id)
+    public async Task<Cliente> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Clientes.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public Task<Cliente> PostAsync(Cliente entidade)
+    public async Task<Cliente> PostAsync(Cliente entidade)
     {
-        throw new NotImplementedException();
+        await _context.AddAsync(entidade);
+        await _context.SaveChangesAsync();
+        return entidade;
     }
 
-    public Task<Cliente> PutAsync(int id, Cliente entidade)
+    public async Task<Cliente> PutAsync(int id, Cliente entidade)
     {
-        throw new NotImplementedException();
+        var entidadeDb = await GetByIdAsync(id);
+        if (entidadeDb != null)
+        {
+            try
+            {
+                // Exclude the 'Id' property from the update
+                var excludedProperties = new[] { "Id", "Senha" };
+
+                foreach (var property in entidadeDb.GetType().GetProperties())
+                {
+                    if (!excludedProperties.Contains(property.Name) && property.CanWrite) // Check for CanWrite
+                    {
+                        property.SetValue(entidadeDb, entidade.GetType().GetProperty(property.Name).GetValue(entidade));
+                    }
+                }
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+            }
+        }
+        return entidadeDb;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var retorno = await GetByIdAsync(id);
+        try
+        {
+            retorno.Actived = retorno.Actived ? false : true;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception)
+        {
+        }
+        return false;
     }
 }

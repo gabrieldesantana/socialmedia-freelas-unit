@@ -6,22 +6,22 @@ public class VagaService : IVagaService
         throw new NotImplementedException();
     }
 
-    public Task<List<Vaga>> GetAllAsync()
+    public Task<DefaultResponse<VagaViewModel>> GetAllAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<Vaga> GetByIdAsync(int id)
+    public Task<DefaultResponse<VagaViewModel>> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Vaga> PostAsync(Vaga entidade)
+    public Task<DefaultResponse<Vaga>> PostAsync(VagaInputModel entidade)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Vaga> PutAsync(int id, Vaga entidade)
+    public Task<DefaultResponse<Vaga>> PutAsync(int id, Vaga entidade)
     {
         throw new NotImplementedException();
     }

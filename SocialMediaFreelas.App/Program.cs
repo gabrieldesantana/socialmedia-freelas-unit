@@ -45,20 +45,15 @@ app.MapGet("/", () =>
 #endregion
 
 #region FreelancersEndpoint
-
-//GET api/freelancers/
 app.MapGet(@"/api/freelancers", async (IFreelancerService service) => 
 await service.GetAllAsync());
 
-//GET api/freelancers/1
 app.MapGet(@"/api/freelancers/{id:int}", async (int id, IFreelancerService service) =>
 await service.GetByIdAsync(id));
 
-//POST api/freelancers/
 app.MapPost(@"/api/freelancers", async ([FromBody] FreelancerInputModel inputModel, IFreelancerService service) 
 => await service.PostAsync(inputModel));
 
-//PUT api/freelancers/1
 app.MapPut(@"/api/freelancers/{id:int}", async (int id, [FromBody] FreelancerUpdateModel updateModel, IFreelancerService service) =>
 await service.PutAsync
 (
@@ -66,132 +61,76 @@ await service.PutAsync
     new Freelancer(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone, updateModel.PretensaoSalarial) )
 );
 
-//DELETE api/freelancers/1
 app.MapDelete(@"/api/freelancers/{id:int}", async (int id, IFreelancerService service) =>
  await service.DeleteAsync(id));
 
 #endregion
 
 #region ClientesEndpoint
-//// CLIENTE
-//GET 
-app.MapGet(@"/api/clientes",  (AppDbContext context) => 
-     context.Clientes.Select(x => new ClienteViewModel
-    {
-        Nome = x.Nome,
-        NumeroDocumento = x.NumeroDocumento,
-        DataNascimento = x.DataNascimento,
-        Email = x.Email,
-        Telefone = x.Telefone,
-    }).ToList()
+app.MapGet(@"/api/clientes", async (IClienteService service) =>
+await service.GetAllAsync());
+
+app.MapGet(@"/api/clientes/{id:int}", async (int id, IClienteService service) =>
+await service.GetByIdAsync(id));
+
+app.MapPost(@"/api/clientes", async ([FromBody] ClienteInputModel inputModel, IClienteService service)
+=> await service.PostAsync(inputModel));
+
+app.MapPut(@"/api/clientes/{id:int}", async (int id, [FromBody] ClienteUpdateModel updateModel, IClienteService service) =>
+await service.PutAsync
+(
+    id,
+    new Cliente(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone))
 );
-//GET/1
-app.MapGet(@"/api/clientes/{id:int}", (int id, AppDbContext context) => 
-    context.Clientes.FirstOrDefault(x => x.Id == id));
-//POST
-app.MapPost(@"/api/clientes", ([FromBody] ClienteInputModel inputModel, AppDbContext context) 
-=> context.Clientes.Add(new Cliente(
-    inputModel.Nome,
-    inputModel.NumeroDocumento,
-    inputModel.DataNascimento,
-     inputModel.Email,
-      inputModel.Telefone,
-       inputModel.Senha)));
-//PUT
-app.MapPut(@"/api/clientes/{id:int}", (int id, AppDbContext context) => 
-{
-    var cliente = context.Clientes.FirstOrDefault(x => x.Id == id);
-    return cliente;
-});
-//DELETE
-app.MapDelete(@"/api/clientes/{id:int}", (int id, AppDbContext context) => 
-{
-    var cliente = context.Clientes.FirstOrDefault(x => x.Id == id);
-    cliente!.Actived = false;
-    return cliente;
-});
+
+app.MapDelete(@"/api/clientes/{id:int}", async (int id, IClienteService service) =>
+ await service.DeleteAsync(id));
 #endregion
 
 #region VagasEndpoint
-//// VAGA
 //GET 
-app.MapGet(@"/api/vagas", (AppDbContext context) => 
-    context.Vagas.Select(x => new VagaViewModel 
-    {
-        Titulo = x.Titulo,
-        Descricao = x.Descricao,
-        Cargo = x.Cargo,
-        Tipo = x.Tipo,
-        Remuneracao = x.Remuneracao
-    }).ToList()
-);
+app.MapGet(@"/api/vagas", async (IClienteService service) =>
+await service.GetAllAsync());
 //GET/1
-app.MapGet(@"/api/vagas/{id:int}",  (int id, AppDbContext context) => 
-    context.Vagas.FirstOrDefault(x => x.Id == id));
+app.MapGet(@"/api/vagas/{id:int}", async (int id, IClienteService service) =>
+await service.GetByIdAsync(id));
 //POST
-app.MapPost(@"/api/vagas", ([FromBody] VagaInputModel inputModel, AppDbContext context) 
-=> context.Vagas.Add(new Vaga(
-    inputModel.Titulo,
-    inputModel.Descricao,
-     inputModel.Cargo,
-      inputModel.Tipo,
-      inputModel.Remuneracao,
-       inputModel.ClienteId)));
+app.MapPost(@"/api/vagas", async ([FromBody] FreelancerInputModel inputModel, IClienteService service)
+=> await service.PostAsync(inputModel));
 //PUT
-app.MapPut(@"/api/vagas/{id:int}", (int id, AppDbContext context) => 
-{
-    var vaga = context.Vagas.FirstOrDefault(x => x.Id == id);
-    return vaga;
-});
+app.MapPut(@"/api/vagas/{id:int}", async (int id, [FromBody] FreelancerUpdateModel updateModel, IClienteService service) =>
+await service.PutAsync
+(
+    id,
+    new Freelancer(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone, updateModel.PretensaoSalarial))
+);
 //DELETE
-app.MapDelete(@"/api/vagas/{id:int}", (int id, AppDbContext context) => 
-{
-    var vaga = context.Vagas.FirstOrDefault(x => x.Id == id);
-    vaga!.Actived = false;
-    return vaga;
-});
+app.MapDelete(@"/api/vagas/{id:int}", async (int id, IClienteService service) =>
+ await service.DeleteAsync(id));
 #endregion
 
-#region ExperienciasEndpoint
-//// EXPERIENCIA
-//GET 
-app.MapGet(@"/api/experiencias", (AppDbContext context) => 
-    context.Experiencias.Select(x => new ExperienciaViewModel 
-    {
-        FreelancerId = x.FreelancerId,
-        Projeto = x.Projeto,
-        Empresa = x.Empresa,
-        Tecnologia = x.Tecnologia,
-        Valor = x.Valor,
-        Avaliacao = x.Avaliacao,
-    }).ToList()
-);
-//GET/1
-app.MapGet(@"/api/experiencias/{id:int}", (int id, AppDbContext context) => 
-    context.Experiencias.FirstOrDefault(x => x.Id == id));
-//POST
-app.MapPost(@"/api/experiencias", ([FromBody] ExperienciaInputModel inputModel, AppDbContext context) 
-=> context.Experiencias.Add(new Experiencia(
-    inputModel.UsuarioId,
-    inputModel.Projeto,
-    inputModel.Empresa,
-     inputModel.Tecnologia,
-      inputModel.Valor,
-       inputModel.Avaliacao)));
-//PUT
-app.MapPut(@"/api/experiencias/{id:int}", (int id, AppDbContext context) => 
-{
-    var experiencia = context.Experiencias.FirstOrDefault(x => x.Id == id);
-    return experiencia;
-});
-//DELETE
-app.MapDelete(@"/api/experiencias/{id:int}", (int id, AppDbContext context) => 
-{
-    var experiencia = context.Experiencias.FirstOrDefault(x => x.Id == id);
-    experiencia!.Actived = false;
-    return experiencia;
-});
-#endregion
+//#region ExperienciasEndpoint
+////// EXPERIENCIA
+////GET 
+//app.MapGet(@"/api/experiencias", async (IClienteService service) =>
+//await service.GetAllAsync());
+////GET/1
+//app.MapGet(@"/api/experiencias/{id:int}", async (int id, IClienteService service) =>
+//await service.GetByIdAsync(id));
+////POST
+//app.MapPost(@"/api/experiencias", async ([FromBody] FreelancerInputModel inputModel, IClienteService service)
+//=> await service.PostAsync(inputModel));
+////PUT
+//app.MapPut(@"/api/experiencias/{id:int}", async (int id, [FromBody] FreelancerUpdateModel updateModel, IClienteService service) =>
+//await service.PutAsync
+//(
+//    id,
+//    new Freelancer(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone, updateModel.PretensaoSalarial))
+//);
+////DELETE
+//app.MapDelete(@"/api/experiencias/{id:int}", async (int id, IClienteService service) =>
+// await service.DeleteAsync(id));
+//#endregion
 
 if (app.Environment.IsDevelopment())
 {

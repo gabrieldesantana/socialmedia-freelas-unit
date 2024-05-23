@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaFreelas", "Presentation\SocialMediaFreelas.csproj", "{DC48A781-7BFE-4B4E-866B-6BEB0E7F303F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialMediaFreelas", "SocialMediaFreelas.App\SocialMediaFreelas.csproj", "{BACA3DEC-D71F-48A8-A8B1-12CFC21F8CCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DC48A781-7BFE-4B4E-866B-6BEB0E7F303F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC48A781-7BFE-4B4E-866B-6BEB0E7F303F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC48A781-7BFE-4B4E-866B-6BEB0E7F303F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC48A781-7BFE-4B4E-866B-6BEB0E7F303F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BACA3DEC-D71F-48A8-A8B1-12CFC21F8CCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BACA3DEC-D71F-48A8-A8B1-12CFC21F8CCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BACA3DEC-D71F-48A8-A8B1-12CFC21F8CCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BACA3DEC-D71F-48A8-A8B1-12CFC21F8CCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

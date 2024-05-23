@@ -1,13 +1,12 @@
 public class Cliente : BaseEntity
 {
-    public Cliente(string nome, string numeroDocumento, DateTime dataNascimento, string email, string telefone, string senha)
+    public Cliente(string numeroDocumento, string nome, DateTime dataNascimento, string email, string telefone)
     {
         Nome = nome;
         NumeroDocumento = numeroDocumento;
         DataNascimento = dataNascimento;
         Email = email;
         Telefone = telefone;
-        Senha = senha;
         Vagas = new List<Vaga>();
     }
     public string NumeroDocumento { get; private set; }

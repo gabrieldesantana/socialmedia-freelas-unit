@@ -36,7 +36,17 @@ public class FreelancerRepository : IFreelancerRepository
         {
             try
             {
-                _context.Entry(entidadeDb).CurrentValues.SetValues(entidade);
+                // Exclude the 'Id' property from the update
+                var excludedProperties = new[] { "Id", "Senha" };
+
+                foreach (var property in entidadeDb.GetType().GetProperties())
+                {
+                    if (!excludedProperties.Contains(property.Name) && property.CanWrite) // Check for CanWrite
+                    {
+                        property.SetValue(entidadeDb, entidade.GetType().GetProperty(property.Name).GetValue(entidade));
+                    }
+                }
+
                 await _context.SaveChangesAsync();
             }
             catch (Exception)

@@ -6,22 +6,22 @@ public class ExperienciaService : IExperienciaService
         throw new NotImplementedException();
     }
 
-    public Task<List<Experiencia>> GetAllAsync()
+    public Task<DefaultResponse<ExperienciaViewModel>> GetAllAsync()
     {
         throw new NotImplementedException();
     }
 
-    public Task<Experiencia> GetByIdAsync(int id)
+    public Task<DefaultResponse<ExperienciaViewModel>> GetByIdAsync(int id)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Experiencia> PostAsync(Experiencia entidade)
+    public Task<DefaultResponse<Experiencia>> PostAsync(ExperienciaInputModel entidade)
     {
         throw new NotImplementedException();
     }
 
-    public Task<Experiencia> PutAsync(int id, Experiencia entidade)
+    public Task<DefaultResponse<Experiencia>> PutAsync(int id, Experiencia entidade)
     {
         throw new NotImplementedException();
     }

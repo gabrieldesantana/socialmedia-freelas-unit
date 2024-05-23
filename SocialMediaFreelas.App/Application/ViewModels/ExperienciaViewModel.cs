@@ -1,4 +1,4 @@
-public class ExperienciaViewModel 
+public class ExperienciaViewModel : IDefaultEntity
 {
     public int FreelancerId { get; set; }
     public string Projeto { get; set; }

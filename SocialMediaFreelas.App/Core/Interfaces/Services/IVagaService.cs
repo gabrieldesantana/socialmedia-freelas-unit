@@ -1,8 +1,8 @@
 public interface IVagaService
 {
-    Task<List<Vaga>> GetAllAsync();
-    Task<Vaga> GetByIdAsync(int id);
-    Task<Vaga> PostAsync(Vaga entidade);
-    Task<Vaga> PutAsync(int id, Vaga entidade);
+    Task<DefaultResponse<VagaViewModel>> GetAllAsync();
+    Task<DefaultResponse<VagaViewModel>> GetByIdAsync(int id);
+    Task<DefaultResponse<Vaga>> PostAsync(VagaInputModel entidade);
+    Task<DefaultResponse<Vaga>> PutAsync(int id, Vaga entidade);
     Task<bool> DeleteAsync(int id);
 }
