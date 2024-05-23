@@ -1,0 +1,75 @@
+﻿@page
+@model SocialMediaFreelas.Pages.Freelancers.CreateModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Movie</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="form-group">
+                <label asp-for="FreelancerInputModel.NumeroDocumento" class="control-label"></label>
+                <input asp-for="FreelancerInputModel.NumeroDocumento" class="form-control" />
+                <span asp-validation-for="FreelancerInputModel.NumeroDocumento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FreelancerInputModel.Nome" class="control-label"></label>
+                <input asp-for="FreelancerInputModel.Nome" class="form-control" />
+                <span asp-validation-for="FreelancerInputModel.Nome" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FreelancerInputModel.DataNascimento" class="control-label"></label>
+                <input asp-for="FreelancerInputModel.DataNascimento" type="date" class="form-control" />
+                <span asp-validation-for="FreelancerInputModel.DataNascimento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FreelancerInputModel.Email" class="control-label"></label>
+                <input asp-for="FreelancerInputModel.Email" class="form-control" />
+                <span asp-validation-for="FreelancerInputModel.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FreelancerInputModel.Telefone" class="control-label"></label>
+                <input asp-for="FreelancerInputModel.Telefone" class="form-control" />
+                <span asp-validation-for="FreelancerInputModel.Telefone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FreelancerInputModel.Senha" class="control-label"></label>
+                <input asp-for="FreelancerInputModel.Senha" class="form-control" type="password" />
+                <span asp-validation-for="FreelancerInputModel.Senha" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FreelancerInputModel.PretensaoSalarial" class="control-label"></label>
+                <input asp-for="FreelancerInputModel.PretensaoSalarial" class="form-control" />
+                <span asp-validation-for="FreelancerInputModel.PretensaoSalarial" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

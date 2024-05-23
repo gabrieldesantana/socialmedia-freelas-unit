@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 public class Cliente : BaseEntity
 {
     public Cliente(string numeroDocumento, string nome, DateTime dataNascimento, string email, string telefone)
@@ -11,6 +13,8 @@ public class Cliente : BaseEntity
     }
     public string NumeroDocumento { get; private set; }
     public string Nome { get; private set; }
+
+    [DataType(DataType.Date)]
     public DateTime DataNascimento { get; private set; }
     public string Email { get; private set; }
     public string Telefone { get; private set; }

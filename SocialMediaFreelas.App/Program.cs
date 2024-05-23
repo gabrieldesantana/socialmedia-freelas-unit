@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Annotations;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,22 +27,23 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "SocialMediaFreelas.API", Description = "Backend for SocialMediaFreelasApp", Version = "v1" });
 });
 
+builder.Services.AddRazorPages();
 
 
 var app = builder.Build();
 
-#region ObjetosEndpoint
-app.MapGet("/", () =>
-{
-    var listaObjects = new List<object>();
+//#region ObjetosEndpoint
+//app.MapGet("/", () =>
+//{
+//    var listaObjects = new List<object>();
 
-    listaObjects.Add(new ClienteViewModel());
-    listaObjects.Add(new FreelancerViewModel());
-    listaObjects.Add(new VagaViewModel());
-    listaObjects.Add(new ExperienciaViewModel());
-    return listaObjects;
-});
-#endregion
+//    listaObjects.Add(new ClienteViewModel());
+//    listaObjects.Add(new FreelancerViewModel());
+//    listaObjects.Add(new VagaViewModel());
+//    listaObjects.Add(new ExperienciaViewModel());
+//    return listaObjects;
+//});
+//#endregion
 
 #region FreelancersEndpoint
 app.MapGet(@"/api/freelancers", async (IFreelancerService service) => 
@@ -179,6 +179,20 @@ if (app.Environment.IsDevelopment())
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "SocialMediaFreelas.API v1");
     });
+
+    app.UseExceptionHandler("/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
 }
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthorization();
+
+app.MapRazorPages();
+
 
 app.Run();

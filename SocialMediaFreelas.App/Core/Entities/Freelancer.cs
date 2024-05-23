@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 public class Freelancer : BaseEntity
 {
     public Freelancer(string nome, string numeroDocumento, DateTime dataNascimento, string email, string telefone, decimal pretensaoSalarial)
@@ -13,6 +15,8 @@ public class Freelancer : BaseEntity
 
     public string NumeroDocumento { get; private set; }
     public string Nome { get; private set; }
+
+    [DataType(DataType.Date)]
     public DateTime DataNascimento { get; private set; }
     public string Email { get; private set; }
     public string Telefone { get; private set; }
