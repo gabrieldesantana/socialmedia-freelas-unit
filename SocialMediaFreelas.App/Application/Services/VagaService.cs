@@ -1,28 +1,144 @@
-
 public class VagaService : IVagaService
 {
-    public Task<bool> DeleteAsync(int id)
+    private readonly IVagaRepository _repository;
+    public VagaService(IVagaRepository repository)
     {
-        throw new NotImplementedException();
+        _repository = repository;
+    }
+    public async Task<DefaultResponse<VagaViewModel>> GetAllAsync()
+    {
+        var vagas = await _repository.GetAllAsync();
+
+        if (!vagas.Any())
+        {
+            return new DefaultResponse<VagaViewModel>
+            {
+                Success = true,
+                ErrorMessage = "Lista vazia",
+                Body = new List<VagaViewModel>()
+            };
+        }
+
+        return new DefaultResponse<VagaViewModel>
+        {
+            Success = true,
+            ErrorMessage = string.Empty,
+            Body = vagas.Select(x => new VagaViewModel
+            {
+                Id = x.Id,
+                Titulo = x.Titulo,
+                Descricao = x.Descricao,
+                Cargo = x.Cargo,
+                Tipo = x.Tipo,
+                Remuneracao = x.Remuneracao,
+                ClienteId = x.ClienteId,
+                FreelancerId = x.FreelancerId
+            }).ToList()
+        };
     }
 
-    public Task<DefaultResponse<VagaViewModel>> GetAllAsync()
+    public async Task<DefaultResponse<VagaViewModel>> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        var vaga = await _repository.GetByIdAsync(id);
+
+        if (vaga == null) return new DefaultResponse<VagaViewModel>
+        {
+            Success = false,
+            ErrorMessage = "Vazio",
+            Body = new List<VagaViewModel>()
+        };
+
+        return new DefaultResponse<VagaViewModel>
+        {
+            Success = true,
+            ErrorMessage = string.Empty,
+            Body = new List<VagaViewModel>()
+            {
+                new ()
+                {
+                Id = vaga.Id,
+                Titulo = vaga.Titulo,
+                Descricao = vaga.Descricao,
+                Cargo = vaga.Cargo,
+                Tipo = vaga.Tipo,
+                Remuneracao = vaga.Remuneracao,
+                ClienteId = vaga.ClienteId,
+                FreelancerId = vaga.FreelancerId
+                }
+            }
+        };
     }
 
-    public Task<DefaultResponse<VagaViewModel>> GetByIdAsync(int id)
+    public async Task<DefaultResponse<Vaga>> PostAsync(VagaInputModel inputModel)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var vagaNew = new Vaga(
+            inputModel.Titulo,
+            inputModel.Descricao,
+            inputModel.Cargo,
+            inputModel.Tipo,
+            inputModel.Remuneracao,
+            inputModel.ClienteId,
+            inputModel.FreelancerId);
+
+            var vaga = await _repository.PostAsync(vagaNew);
+
+            return new DefaultResponse<Vaga>
+            {
+                Success = true,
+                ErrorMessage = string.Empty,
+                Body = new List<Vaga>() { vaga }
+            };
+        }
+        catch (Exception ex)
+        {
+            return new DefaultResponse<Vaga>
+            {
+                Success = false,
+                ErrorMessage = ex.Message.ToString(),
+                Body = new List<Vaga>()
+            };
+        }
     }
 
-    public Task<DefaultResponse<Vaga>> PostAsync(VagaInputModel entidade)
+    public async Task<DefaultResponse<Vaga>> PutAsync(int id, Vaga entidade)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var vaga = await _repository.PutAsync(id, entidade);
+
+            return new DefaultResponse<Vaga>
+            {
+                Success = true,
+                ErrorMessage = string.Empty,
+                Body = new List<Vaga>() { vaga }
+            };
+
+        }
+        catch (Exception ex)
+        {
+            return new DefaultResponse<Vaga>
+            {
+                Success = false,
+                ErrorMessage = ex.Message.ToString(),
+                Body = new List<Vaga>()
+            };
+        }
+
     }
 
-    public Task<DefaultResponse<Vaga>> PutAsync(int id, Vaga entidade)
+    public async Task<bool> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var vaga = await _repository.GetByIdAsync(id);
+            await _repository.DeleteAsync(vaga.Id);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 }

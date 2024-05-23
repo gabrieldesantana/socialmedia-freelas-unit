@@ -1,5 +1,6 @@
 public class ExperienciaViewModel : IDefaultEntity
 {
+    public int Id { get; set; }
     public int FreelancerId { get; set; }
     public string Projeto { get; set; }
     public string Empresa { get; set; }

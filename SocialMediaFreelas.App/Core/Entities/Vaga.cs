@@ -1,6 +1,6 @@
 public class Vaga : BaseEntity
 {
-    public Vaga(string titulo, string descricao, string cargo, string tipo, decimal remuneracao, int clienteId, int freelancerId = 0)
+    public Vaga(string titulo, string descricao, string cargo, string tipo, decimal remuneracao, int clienteId = 0, int freelancerId = 0)
     {
         Titulo = titulo;
         Descricao = descricao;

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Annotations;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,8 +13,8 @@ builder.Services.AddScoped<IExperienciaService, ExperienciaService>();
 
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IFreelancerRepository, FreelancerRepository>();
-builder.Services.AddScoped<IVagaService, VagaService>();
-builder.Services.AddScoped<IExperienciaService, ExperienciaService>();
+builder.Services.AddScoped<IVagaRepository, VagaRepository>();
+builder.Services.AddScoped<IExperienciaRepository, ExperienciaRepository>();
 
 var connectionString = builder.Configuration.GetConnectionString("SqliteConnectionString");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString));
@@ -46,91 +47,130 @@ app.MapGet("/", () =>
 
 #region FreelancersEndpoint
 app.MapGet(@"/api/freelancers", async (IFreelancerService service) => 
-await service.GetAllAsync());
+await service.GetAllAsync())
+.WithSummary("Retorna todos os freelancers")
+.WithDescription("GET - Retorna todos os freelancers");
 
 app.MapGet(@"/api/freelancers/{id:int}", async (int id, IFreelancerService service) =>
-await service.GetByIdAsync(id));
+await service.GetByIdAsync(id))
+.WithSummary("Retorna freelancer por Id")
+.WithDescription("GET - Retorna freelancer por Id");
 
 app.MapPost(@"/api/freelancers", async ([FromBody] FreelancerInputModel inputModel, IFreelancerService service) 
-=> await service.PostAsync(inputModel));
+=> await service.PostAsync(inputModel))
+.WithSummary("Adiciona freelancer")
+.WithDescription("POST - Adiciona freelancer");
 
 app.MapPut(@"/api/freelancers/{id:int}", async (int id, [FromBody] FreelancerUpdateModel updateModel, IFreelancerService service) =>
 await service.PutAsync
 (
     id, 
     new Freelancer(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone, updateModel.PretensaoSalarial) )
-);
+)
+.WithSummary("Atualiza freelancer")
+.WithDescription("PUT - Atualiza freelancer");
 
 app.MapDelete(@"/api/freelancers/{id:int}", async (int id, IFreelancerService service) =>
- await service.DeleteAsync(id));
+await service.DeleteAsync(id))
+.WithSummary("Remove freelancer")
+.WithDescription("DELETE - Remove freelancer");
 
 #endregion
 
 #region ClientesEndpoint
 app.MapGet(@"/api/clientes", async (IClienteService service) =>
-await service.GetAllAsync());
+await service.GetAllAsync())
+.WithSummary("Retorna todos os clientes")
+.WithDescription("GET - Retorna todos os clientes");
 
 app.MapGet(@"/api/clientes/{id:int}", async (int id, IClienteService service) =>
-await service.GetByIdAsync(id));
+await service.GetByIdAsync(id))
+.WithSummary("Retorna cliente por Id")
+.WithDescription("GET - Retorna cliente por Id");
 
 app.MapPost(@"/api/clientes", async ([FromBody] ClienteInputModel inputModel, IClienteService service)
-=> await service.PostAsync(inputModel));
+=> await service.PostAsync(inputModel))
+.WithSummary("Adiciona cliente")
+.WithDescription("POST - Adiciona cliente");
 
 app.MapPut(@"/api/clientes/{id:int}", async (int id, [FromBody] ClienteUpdateModel updateModel, IClienteService service) =>
 await service.PutAsync
 (
     id,
     new Cliente(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone))
-);
+)
+.WithSummary("Atualiza cliente")
+.WithDescription("PUT - Atualiza cliente");
 
 app.MapDelete(@"/api/clientes/{id:int}", async (int id, IClienteService service) =>
- await service.DeleteAsync(id));
+ await service.DeleteAsync(id))
+.WithSummary("Remove cliente")
+.WithDescription("DELETE - Remove cliente");
 #endregion
 
 #region VagasEndpoint
-//GET 
-app.MapGet(@"/api/vagas", async (IClienteService service) =>
-await service.GetAllAsync());
-//GET/1
-app.MapGet(@"/api/vagas/{id:int}", async (int id, IClienteService service) =>
-await service.GetByIdAsync(id));
-//POST
-app.MapPost(@"/api/vagas", async ([FromBody] FreelancerInputModel inputModel, IClienteService service)
-=> await service.PostAsync(inputModel));
-//PUT
-app.MapPut(@"/api/vagas/{id:int}", async (int id, [FromBody] FreelancerUpdateModel updateModel, IClienteService service) =>
+
+app.MapGet(@"/api/vagas", async (IVagaService service) =>
+await service.GetAllAsync())
+.WithSummary("Retorna todos os vagas")
+.WithDescription("GET - Retorna todos os vagas");
+
+app.MapGet(@"/api/vagas/{id:int}", async (int id, IVagaService service) =>
+await service.GetByIdAsync(id))
+.WithSummary("Retorna vaga por Id")
+.WithDescription("GET - Retorna vaga por Id");
+
+app.MapPost(@"/api/vagas", async ([FromBody] VagaInputModel inputModel, IVagaService service)
+=> await service.PostAsync(inputModel))
+.WithSummary("Adiciona vaga")
+.WithDescription("POST - Adiciona vaga");
+
+app.MapPut(@"/api/vagas/{id:int}", async (int id, [FromBody] VagaUpdateModel updateModel, IVagaService service) =>
 await service.PutAsync
 (
     id,
-    new Freelancer(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone, updateModel.PretensaoSalarial))
-);
-//DELETE
-app.MapDelete(@"/api/vagas/{id:int}", async (int id, IClienteService service) =>
- await service.DeleteAsync(id));
+    new Vaga(updateModel.Titulo, updateModel.Descricao, updateModel.Cargo, updateModel.Tipo, updateModel.Remuneracao))
+)
+.WithSummary("Atualiza vaga")
+.WithDescription("PUT - Atualiza vaga");
+
+app.MapDelete(@"/api/vagas/{id:int}", async (int id, IVagaService service) =>
+await service.DeleteAsync(id))
+.WithSummary("Remove vaga")
+.WithDescription("DELETE - Remove vaga");
 #endregion
 
-//#region ExperienciasEndpoint
-////// EXPERIENCIA
-////GET 
-//app.MapGet(@"/api/experiencias", async (IClienteService service) =>
-//await service.GetAllAsync());
-////GET/1
-//app.MapGet(@"/api/experiencias/{id:int}", async (int id, IClienteService service) =>
-//await service.GetByIdAsync(id));
-////POST
-//app.MapPost(@"/api/experiencias", async ([FromBody] FreelancerInputModel inputModel, IClienteService service)
-//=> await service.PostAsync(inputModel));
-////PUT
-//app.MapPut(@"/api/experiencias/{id:int}", async (int id, [FromBody] FreelancerUpdateModel updateModel, IClienteService service) =>
-//await service.PutAsync
-//(
-//    id,
-//    new Freelancer(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone, updateModel.PretensaoSalarial))
-//);
-////DELETE
-//app.MapDelete(@"/api/experiencias/{id:int}", async (int id, IClienteService service) =>
-// await service.DeleteAsync(id));
-//#endregion
+#region ExperienciasEndpoint
+
+app.MapGet(@"/api/experiencias", async (IExperienciaService service) =>
+await service.GetAllAsync())
+.WithSummary("Retorna todos os experiencias")
+.WithDescription("GET - Retorna todos os experiencias");
+
+app.MapGet(@"/api/experiencias/{id:int}", async (int id, IExperienciaService service) =>
+await service.GetByIdAsync(id))
+.WithSummary("Retorna experiencia por Id")
+.WithDescription("GET - Retorna experiencia por Id");
+
+app.MapPost(@"/api/experiencias", async ([FromBody] ExperienciaInputModel inputModel, IExperienciaService service)
+=> await service.PostAsync(inputModel))
+.WithSummary("Adiciona experiencia")
+.WithDescription("POST - Adiciona experiencia");
+
+app.MapPut(@"/api/experiencias/{id:int}", async (int id, [FromBody] ExperienciaUpdateModel updateModel, IExperienciaService service) =>
+await service.PutAsync
+(
+    id,
+    new Experiencia(updateModel.Projeto, updateModel.Empresa, updateModel.Tecnologia, updateModel.Valor, updateModel.Avaliacao))
+)
+.WithSummary("Atualiza experiencia")
+.WithDescription("PUT - Atualiza experiencia");
+
+app.MapDelete(@"/api/experiencias/{id:int}", async (int id, IExperienciaService service) =>
+ await service.DeleteAsync(id))
+.WithSummary("Remove experiencia")
+.WithDescription("DELETE - Remove experiencia");
+#endregion
 
 if (app.Environment.IsDevelopment())
 {

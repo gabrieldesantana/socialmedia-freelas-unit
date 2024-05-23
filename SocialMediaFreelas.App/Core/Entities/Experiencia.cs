@@ -1,6 +1,6 @@
 public class Experiencia : BaseEntity
 {
-    public Experiencia(int freelancerId, string projeto, string empresa, string tecnologia, decimal valor, int avaliacao)
+    public Experiencia(string projeto, string empresa, string tecnologia, decimal valor, int avaliacao, int freelancerId = 0)
     {
         FreelancerId = freelancerId;
         Projeto = projeto;

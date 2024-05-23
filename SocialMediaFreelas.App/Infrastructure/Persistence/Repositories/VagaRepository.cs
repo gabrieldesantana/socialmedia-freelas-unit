@@ -1,28 +1,71 @@
+using Microsoft.EntityFrameworkCore;
 
 public class VagaRepository : IVagaRepository
 {
-    public Task<bool> DeleteAsync(int id)
+    private readonly AppDbContext _context;
+
+    public VagaRepository(AppDbContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task<List<Vaga>> GetAllAsync()
+    public async Task<List<Vaga>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Vagas
+        .Where(x => x.Actived)
+        .ToListAsync();
     }
 
-    public Task<Vaga> GetByIdAsync(int id)
+    public async Task<Vaga> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Vagas.FirstOrDefaultAsync(x => x.Id == id);
     }
 
-    public Task<Vaga> PostAsync(Vaga entidade)
+    public async Task<Vaga> PostAsync(Vaga entidade)
     {
-        throw new NotImplementedException();
+        await _context.AddAsync(entidade);
+        await _context.SaveChangesAsync();
+        return entidade;
     }
 
-    public Task<Vaga> PutAsync(int id, Vaga entidade)
+    public async Task<Vaga> PutAsync(int id, Vaga entidade)
     {
-        throw new NotImplementedException();
+        var entidadeDb = await GetByIdAsync(id);
+        if (entidadeDb != null)
+        {
+            try
+            {
+                var excludedProperties = new[] { "Id", "ClienteId", "FreelancerId" };
+
+                foreach (var property in entidadeDb.GetType().GetProperties())
+                {
+                    if (!excludedProperties.Contains(property.Name) && property.CanWrite) // Check for CanWrite
+                    {
+                        property.SetValue(entidadeDb, entidade.GetType().GetProperty(property.Name).GetValue(entidade));
+                    }
+                }
+
+               await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+            }
+        }
+        return entidadeDb;
+    }
+
+    public async Task<bool> DeleteAsync(int id)
+    {
+        var retorno = await GetByIdAsync(id);
+        try
+        {
+            retorno.Actived = retorno.Actived ? false : true;
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception)
+        {
+        }
+        return false;
     }
 }
