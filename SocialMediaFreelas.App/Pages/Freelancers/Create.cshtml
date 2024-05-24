@@ -6,7 +6,16 @@
 
 <h1>Create</h1>
 
-<h4>Movie</h4>
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success button-success" role="alert" id="success-message">
+        @TempData["MensagemSucesso"]
+        <i class="fa fa-check" aria-hidden="true"></i>
+    </div>
+}
+
+<h4>Freelancer</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -53,7 +62,6 @@
             <div class="form-group">
                 <label asp-for="FreelancerInputModel.PretensaoSalarial" class="control-label"></label>
                 <input asp-for="FreelancerInputModel.PretensaoSalarial" class="form-control" />
-                <span asp-validation-for="FreelancerInputModel.PretensaoSalarial" class="text-danger"></span>
             </div>
 
 

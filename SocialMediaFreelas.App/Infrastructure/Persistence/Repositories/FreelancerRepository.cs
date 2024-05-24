@@ -17,7 +17,7 @@ public class FreelancerRepository : IFreelancerRepository
         .ToListAsync();
     }
 
-    public async Task<Freelancer> GetByIdAsync(int id)
+    public async Task<Freelancer> GetByIdAsync(int? id)
     {
         return await _context.Freelancers.FirstOrDefaultAsync(x => x.Id == id);
     }

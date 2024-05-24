@@ -35,7 +35,7 @@ public class FreelancerService : IFreelancerService
             };
     }
 
-    public async Task<DefaultResponse<FreelancerViewModel>> GetByIdAsync(int id)
+    public async Task<DefaultResponse<FreelancerViewModel>> GetByIdAsync(int? id)
     {
         var freelancer = await _repository.GetByIdAsync(id);
 

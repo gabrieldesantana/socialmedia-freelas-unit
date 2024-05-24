@@ -1,49 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
-using System.Text.Json.Serialization;
+using SocialMediaFreelas.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<IClienteService, ClienteService>();
-builder.Services.AddScoped<IFreelancerService, FreelancerService>();
-builder.Services.AddScoped<IVagaService, VagaService>();
-builder.Services.AddScoped<IExperienciaService, ExperienciaService>();
-
-builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
-builder.Services.AddScoped<IFreelancerRepository, FreelancerRepository>();
-builder.Services.AddScoped<IVagaRepository, VagaRepository>();
-builder.Services.AddScoped<IExperienciaRepository, ExperienciaRepository>();
-
-var connectionString = builder.Configuration.GetConnectionString("SqliteConnectionString");
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(connectionString));
-
-builder.Services.AddControllers().AddJsonOptions(x =>
-x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "SocialMediaFreelas.API", Description = "Backend for SocialMediaFreelasApp", Version = "v1" });
-});
-
-builder.Services.AddRazorPages();
-
+builder.Services.AddRegisterServices(builder.Configuration);
 
 var app = builder.Build();
-
-//#region ObjetosEndpoint
-//app.MapGet("/", () =>
-//{
-//    var listaObjects = new List<object>();
-
-//    listaObjects.Add(new ClienteViewModel());
-//    listaObjects.Add(new FreelancerViewModel());
-//    listaObjects.Add(new VagaViewModel());
-//    listaObjects.Add(new ExperienciaViewModel());
-//    return listaObjects;
-//});
-//#endregion
 
 #region FreelancersEndpoint
 app.MapGet(@"/api/freelancers", async (IFreelancerService service) => 

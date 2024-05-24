@@ -1,13 +1,29 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 public class FreelancerInputModel 
 {
-    public string NumeroDocumento { get; set; }
-    public string Nome { get; set; }
+    [Required(ErrorMessage = "Campo obrigátorio")]
+    [DisplayName("CPF")]
+    public string? NumeroDocumento { get; set; }
+
+    [Required(ErrorMessage = "Campo obrigátorio")]
+    [DisplayName("Nome Completo")]
+    public string? Nome { get; set; }
+
+    [Required(ErrorMessage = "Campo obrigátorio")]
     [DataType(DataType.Date)]
+    [DisplayName("Data de Nascimento")]
     public DateTime DataNascimento { get; set; }
-    public string Email { get; set; }
-    public string Telefone { get; set; }
-    public string Senha { get; set; }
+
+    [Required(ErrorMessage = "Campo obrigátorio")]
+    public string? Email { get; set; }
+
+    [Required(ErrorMessage = "Campo obrigátorio")]
+    public string? Telefone { get; set; }
+
+    [Required(ErrorMessage = "Campo obrigátorio")]
+    public string? Senha { get; set; }
+
     public decimal PretensaoSalarial { get; set; }
 }

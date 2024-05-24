@@ -31,6 +31,7 @@ namespace SocialMediaFreelas.Pages.Freelancers
             try
             {
                 await _service.PostAsync(FreelancerInputModel);
+                TempData["MensagemSucesso"] = "Cadastro feito com sucesso!";
                 return RedirectToPage("./Index");
             }
             catch (Exception)

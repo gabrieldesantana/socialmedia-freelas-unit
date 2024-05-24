@@ -1,0 +1,64 @@
+﻿@page "{id:int?}"
+@model SocialMediaFreelas.Pages.Freelancers.DeleteModel
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Delete</h1>
+
+<h4>Freelancer</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="FreelancerViewModel.Id"/>
+
+            <div class="form-group">
+                <label asp-for="FreelancerViewModel.NumeroDocumento" class="control-label"></label>
+                <input asp-for="FreelancerViewModel.NumeroDocumento" class="form-control" disabled />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FreelancerViewModel.Nome" class="control-label"></label>
+                <input asp-for="FreelancerViewModel.Nome" class="form-control" disabled />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FreelancerViewModel.DataNascimento" class="control-label"></label>
+                <input asp-for="FreelancerViewModel.DataNascimento" type="date" class="form-control" disabled />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FreelancerViewModel.Email" class="control-label"></label>
+                <input asp-for="FreelancerViewModel.Email" class="form-control" disabled />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FreelancerViewModel.Telefone" class="control-label"></label>
+                <input asp-for="FreelancerViewModel.Telefone" class="form-control" disabled />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FreelancerViewModel.PretensaoSalarial" class="control-label"></label>
+                <input asp-for="FreelancerViewModel.PretensaoSalarial" class="form-control" disabled />
+            </div>
+
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
