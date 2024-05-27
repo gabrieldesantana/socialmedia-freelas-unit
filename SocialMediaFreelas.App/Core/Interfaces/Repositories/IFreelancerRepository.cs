@@ -5,4 +5,5 @@ public interface IFreelancerRepository
     Task<Freelancer> PostAsync(Freelancer entidade);
     Task<Freelancer> PutAsync(int id, Freelancer entidade);
     Task<bool> DeleteAsync(int id);
+    Task<Freelancer> LoginAsync(string email, string senha);
 }

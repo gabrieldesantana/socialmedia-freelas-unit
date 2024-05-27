@@ -27,6 +27,7 @@
     <Folder Include="Pages\Experiencias\" />
     <Folder Include="Pages\Clientes\" />
     <Folder Include="Pages\Vagas\" />
+    <Folder Include="wwwroot\assets\img\" />
   </ItemGroup>
 
 </Project>

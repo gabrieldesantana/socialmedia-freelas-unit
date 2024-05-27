@@ -138,4 +138,24 @@ public class FreelancerService : IFreelancerService
             return false;
         }
     }
+
+    public async Task<FreelancerViewModel> LoginAsync(string email, string senha)
+    {
+        var senhaCriptografada = senha.GenerateHash();
+
+        var freelancer = await _repository.LoginAsync(email, senhaCriptografada);
+
+        if (freelancer == null) return null;
+
+        return new FreelancerViewModel
+        {
+            Id = freelancer.Id,
+            NumeroDocumento = freelancer.NumeroDocumento,
+            Nome = freelancer.Nome,
+            DataNascimento = freelancer.DataNascimento,
+            Email = freelancer.Email,
+            Telefone = freelancer.Telefone,
+            PretensaoSalarial = freelancer.PretensaoSalarial
+        };
+    }
 }

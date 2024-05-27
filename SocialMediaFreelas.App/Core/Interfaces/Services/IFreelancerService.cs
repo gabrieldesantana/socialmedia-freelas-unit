@@ -5,4 +5,5 @@ public interface IFreelancerService
     Task<DefaultResponse<Freelancer>> PostAsync(FreelancerInputModel entidade);
     Task<DefaultResponse<Freelancer>> PutAsync(int id, Freelancer entidade);
     Task<bool> DeleteAsync(int id);
+    Task<FreelancerViewModel> LoginAsync(string email, string senha);
 }

@@ -70,4 +70,13 @@ public class FreelancerRepository : IFreelancerRepository
         }
         return false;
     }
+
+    public async Task<Freelancer> LoginAsync(string email, string senha)
+    {
+        return await _context.Freelancers
+            .FirstOrDefaultAsync(
+            cliente => cliente.Email.ToUpper() == email.ToUpper()
+            &&
+            cliente.Senha == senha);
+    }
 }
