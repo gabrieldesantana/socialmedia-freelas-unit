@@ -4,6 +4,12 @@
     ViewData["Title"] = "Create";
 }
 
+<style>
+    .classe{
+        background: red !important;
+    }
+</style>
+
 <h1>Create</h1>
 
 
@@ -23,7 +29,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
-            <div class="form-group">
+            <div class="form-group classe">
                 <label asp-for="FreelancerInputModel.NumeroDocumento" class="control-label"></label>
                 <input asp-for="FreelancerInputModel.NumeroDocumento" class="form-control" />
                 <span asp-validation-for="FreelancerInputModel.NumeroDocumento" class="text-danger"></span>
