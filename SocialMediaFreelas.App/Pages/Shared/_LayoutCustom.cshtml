@@ -12,173 +12,21 @@
 </head>
 <body>
 
-    <!-- <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f2f2f2;
-        }
-
-        header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px;
-            background-color: #fff;
-            border-bottom: 1px solid #ddd;
-            position: relative;
-        }
-
-
-        .logo {
-            position: absolute;
-            left: 20px;
-        }
-
-            .logo img {
-                height: 80px;
-            }
-
-        .search-bar {
-            display: flex;
-            align-items: center;
-            width: 400px; /* Adjust this width as needed */
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-            .search-bar input {
-                width: 100%;
-                padding: 10px;
-                border: none;
-                outline: none;
-            }
-
-            .search-bar button {
-                padding: 10px;
-                border: none;
-                background-color: #0044cc;
-                cursor: pointer;
-            }
-
-                .search-bar button img {
-                    height: 20px;
-                    width: 20px;
-                }
-
-        nav {
-            background-color: #f9f9f9;
-            border-bottom: 1px solid #ddd;
-            display: flex;
-            justify-content: center;
-            padding: 10px 0;
-        }
-
-            nav ul {
-                list-style: none;
-                margin: 0;
-                padding: 0;
-                display: flex;
-            }
-
-                nav ul li {
-                    margin: 0 15px;
-                }
-
-                    nav ul li a {
-                        text-decoration: none;
-                        color: #333;
-                        font-weight: bold;
-                    }
-
-        main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: calc(100vh - 130px);
-        }
-
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            padding-top: 20px; /* Ajuste este valor para aumentar ou diminuir o espaçamento do topo */
-        }
-
-        .job-card {
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 20px; /* Ajuste este valor para aumentar ou diminuir o espaçamento entre os blocos */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-            .job-card h2 {
-                margin-top: 0;
-            }
-
-            .job-card p {
-                color: #666;
-            }
-
-            .job-card .saiba-mais {
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: #007bff;
-                color: #fff;
-                text-decoration: none;
-                border-radius: 5px;
-                transition: background-color 0.3s;
-            }
-
-                .job-card .saiba-mais:hover {
-                    background-color: #0056b3;
-                }
-
-    </style> -->
-
-    <!-- <header>
-        <div class="logo">
-            <img src="~/assets/img/unit-png.png" alt="Unit Logo">
-        </div>
-        <div class="search-bar">
-            <input type="text" value="www.freelasunit.com.br" readonly>
-            <button type="button" disabled>
-                <img src="~/assets/img/search-icon.png" alt="Search">
-            </button>
-        </div>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#">´</a></li>
-            <li><a href="#">´</a></li>
-            <li><a href="#">´</a></li>
-        </ul>
-    </nav> -->
-
-  @*  <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">SocialMediaFreelas.App</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+        <div class="container px-5">
+            <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Freelas Unit</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="resume.html">Quem somos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="projects.html">Clientes</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
             </div>
-        </nav>
-    </header>*@
+        </div>
+    </nav>
+
     <div class="container">
         @RenderBody()
     </div>
