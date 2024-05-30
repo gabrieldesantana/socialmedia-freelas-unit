@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 public class Freelancer : BaseEntity
 {
-    public Freelancer(string nome, string numeroDocumento, DateTime dataNascimento, string email, string telefone, decimal pretensaoSalarial)
+    public Freelancer(string nome, string numeroDocumento, DateTime dataNascimento, string email, string telefone, double pretensaoSalarial)
     {
         Nome = nome;
         NumeroDocumento = numeroDocumento;
@@ -21,7 +21,7 @@ public class Freelancer : BaseEntity
     public string Email { get; private set; }
     public string Telefone { get; private set; }
     public string Senha { get; private set; }
-    public decimal PretensaoSalarial { get; private set; }
+    public double PretensaoSalarial { get; private set; }
 
     public List<Experiencia>? Experiencias { get; private set; }
 

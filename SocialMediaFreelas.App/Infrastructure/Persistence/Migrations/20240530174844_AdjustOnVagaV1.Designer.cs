@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240530174844_AdjustOnVagaV1")]
+    partial class AdjustOnVagaV1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
@@ -89,8 +92,8 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("Valor")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("Valor")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -129,8 +132,8 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("PretensaoSalarial")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("PretensaoSalarial")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Senha")
                         .IsRequired()
@@ -174,8 +177,8 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                     b.Property<int?>("FreelancerId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Remuneracao")
-                        .HasColumnType("REAL");
+                    b.Property<decimal>("Remuneracao")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Tipo")
                         .IsRequired()

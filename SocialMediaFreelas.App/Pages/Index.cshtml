@@ -4,6 +4,31 @@
     ViewData["Title"] = "Home page";
 }
 
+<style>
+
+
+    @@media (min-width: 1000px)
+    {
+
+        .profile-img {
+            max-width: 500px !important;
+        }
+        
+    }
+
+    @@media (min-width: 1500px) {
+
+        .profile-img 
+        {
+            max-width: 400px !important;
+        }
+
+        #titulo-principal-home
+        {
+            max-width: 60ch;
+        }
+    }
+</style>
 
     <!-- Navigation-->
 
@@ -15,11 +40,11 @@
                     <!-- Header text content-->
                     <div class="text-center text-xxl-start">
                         <div class="badge bg-gradient-primary-to-secondary text-white mb-4"><div class="text-uppercase">Design &middot; Development &middot; Marketing</div></div>
-                        <div class="fs-3 fw-light text-muted">We can help your business to</div>
-                        <h1 class="display-3 fw-bolder mb-5"><span class="text-gradient d-inline">The right professional</span></h1>
+                        <div class="fs-3 fw-light text-muted">Nós podemos ajudar a sua empresa a </div>
+                        <h1 class="display-3 fw-bolder mb-5" id="titulo-principal-home"><span class="text-gradient d-inline">Encontrar os melhores programadores</span></h1>
                         <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                            <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="login/cliente">Find a professional</a>
-                            <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="login/freelancer">I want to work</a>
+                            <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="login/cliente">Encontre um profissional</a>
+                            <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="login/freelancer">Quero trabalhar</a>
                         </div>
                     </div>
                 </div>
@@ -183,7 +208,7 @@
                 </div>
             </div>
 
-      <section class="py-5">
+      <section class="py-5" id="contato">
                 <div class="container px-5">
                     <!-- Contact form-->
                     <div class="bg-light rounded-4 py-5 px-4 px-md-5">

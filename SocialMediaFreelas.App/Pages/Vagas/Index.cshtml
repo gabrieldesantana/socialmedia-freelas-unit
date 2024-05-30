@@ -1,4 +1,78 @@
 ﻿@page
 @model SocialMediaFreelas.Pages.Vagas.IndexModel
 @{
+    ViewData["Title"] = "Index";
 }
+
+<h1>Index</h1>
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success button-success" role="alert" id="success-message">
+        @TempData["MensagemSucesso"]
+        <i class="fa fa-check" aria-hidden="true"></i>
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Response[0].ClienteId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Response[0].FreelancerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Response[0].Titulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Response[0].Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Response[0].Cargo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Response[0].Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Response[0].Remuneracao)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Response)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ClienteId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FreelancerId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Titulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cargo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Remuneracao)
+                </td>
+                <td>
+                    <a asp-page="./Create">Create</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

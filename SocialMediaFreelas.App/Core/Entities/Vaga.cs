@@ -1,6 +1,6 @@
 public class Vaga : BaseEntity
 {
-    public Vaga(string titulo, string descricao, string cargo, string tipo, decimal remuneracao, int clienteId = 0, int freelancerId = 0)
+    public Vaga(string titulo, string descricao, string cargo, string tipo, double remuneracao, int clienteId = 0, int? freelancerId = 0)
     {
         Titulo = titulo;
         Descricao = descricao;
@@ -15,9 +15,9 @@ public class Vaga : BaseEntity
     public string Descricao { get; private set; }
     public string Cargo { get; private set; }
     public string Tipo { get; private set; }
-    public decimal Remuneracao { get; private set; }
-    public int FreelancerId { get; private set; }
+    public double Remuneracao { get ; private set; }
+    public int? FreelancerId { get; private set; }
     public int ClienteId { get; private set; }
-    public virtual Freelancer Freelancer { get; private set; }
+    public virtual Freelancer? Freelancer { get; private set; }
     public virtual Cliente Cliente { get; private set; }
 }

@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SocialMediaFreelas.Pages.Vagas
 {
-    public class DeleteModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly IVagaService _service;
 
-        public DeleteModel(IVagaService service)
+        public DetailsModel(IVagaService service)
         {
             _service = service;
         }
@@ -24,27 +24,6 @@ namespace SocialMediaFreelas.Pages.Vagas
             VagaViewModel = model.Body[0];
 
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (_service == null || VagaViewModel == null)
-            {
-                return Page();
-            }
-
-            try
-            {
-                await _service.DeleteAsync(VagaViewModel.Id);
-
-                TempData["MensagemSucesso"] = "Deleção feita com sucesso!";
-                return RedirectToPage("./Index");
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
         }
     }
 }

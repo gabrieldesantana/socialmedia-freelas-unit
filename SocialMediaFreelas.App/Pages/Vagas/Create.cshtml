@@ -1,4 +1,83 @@
 ﻿@page
 @model SocialMediaFreelas.Pages.Vagas.CreateModel
 @{
+    ViewData["Title"] = "Create";
+}
+
+<style>
+    .classe{
+        background: red !important;
+    }
+</style>
+
+<h1>Create</h1>
+
+
+@if (TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success button-success" role="alert" id="success-message">
+        @TempData["MensagemSucesso"]
+        <i class="fa fa-check" aria-hidden="true"></i>
+    </div>
+}
+
+<h4>Vaga</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+            <div class="form-group classe">
+                <label asp-for="VagaInputModel.ClienteId" class="control-label"></label>
+                <input asp-for="VagaInputModel.ClienteId" class="form-control" />
+                <span asp-validation-for="VagaInputModel.ClienteId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VagaInputModel.Titulo" class="control-label"></label>
+                <input asp-for="VagaInputModel.Titulo" class="form-control" />
+                <span asp-validation-for="VagaInputModel.Titulo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VagaInputModel.Descricao" class="control-label"></label>
+                <input asp-for="VagaInputModel.Descricao" type="date" class="form-control" />
+                <span asp-validation-for="VagaInputModel.Descricao" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VagaInputModel.Cargo" class="control-label"></label>
+                <input asp-for="VagaInputModel.Cargo" class="form-control" />
+                <span asp-validation-for="VagaInputModel.Cargo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VagaInputModel.Tipo" class="control-label"></label>
+                <input asp-for="VagaInputModel.Tipo" class="form-control" />
+                <span asp-validation-for="VagaInputModel.Tipo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VagaInputModel.Remuneracao" class="control-label"></label>
+                <input asp-for="VagaInputModel.Remuneracao" class="form-control" type="password" />
+                <span asp-validation-for="VagaInputModel.Remuneracao" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

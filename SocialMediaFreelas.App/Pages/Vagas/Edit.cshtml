@@ -1,4 +1,69 @@
-﻿@page
+﻿@page "{id:int?}"
 @model SocialMediaFreelas.Pages.Vagas.EditModel
 @{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Vaga</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="VagaUpdateModel.Id"/>
+
+            <div class="form-group">
+                <label asp-for="VagaUpdateModel.FreelancerId" class="control-label"></label>
+                <input asp-for="VagaUpdateModel.FreelancerId" class="form-control" />
+                <span asp-validation-for="VagaUpdateModel.FreelancerId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VagaUpdateModel.Titulo" class="control-label"></label>
+                <input asp-for="VagaUpdateModel.Titulo" class="form-control" />
+                <span asp-validation-for="VagaUpdateModel.Titulo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VagaUpdateModel.Descricao" class="control-label"></label>
+                <input asp-for="VagaUpdateModel.Descricao" class="form-control" />
+                <span asp-validation-for="VagaUpdateModel.Descricao" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VagaUpdateModel.Cargo" class="control-label"></label>
+                <input asp-for="VagaUpdateModel.Cargo" class="form-control" />
+                <span asp-validation-for="VagaUpdateModel.Cargo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VagaUpdateModel.Tipo" class="control-label"></label>
+                <input asp-for="VagaUpdateModel.Tipo" class="form-control" />
+                <span asp-validation-for="VagaUpdateModel.Tipo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VagaUpdateModel.Remuneracao" class="control-label"></label>
+                <input asp-for="VagaUpdateModel.Remuneracao" class="form-control" />
+                <span asp-validation-for="VagaUpdateModel.Remuneracao" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

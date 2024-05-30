@@ -35,7 +35,7 @@ public class VagaRepository : IVagaRepository
         {
             try
             {
-                var excludedProperties = new[] { "Id", "ClienteId", "FreelancerId" };
+                var excludedProperties = new[] { "Id", "ClienteId"};
 
                 foreach (var property in entidadeDb.GetType().GetProperties())
                 {
