@@ -15,7 +15,7 @@ namespace SocialMediaFreelas.Pages.Freelancers
         [BindProperty]
         public FreelancerViewModel FreelancerViewModel { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
             var freelancer = await _service.GetByIdAsync(id);
 

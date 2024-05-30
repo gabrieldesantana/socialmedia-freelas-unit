@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 public class ClienteUpdateModel
 {
+    public int Id { get; set; }
     public string Nome { get; set; }
     public string NumeroDocumento { get; set; }
     [DataType(DataType.Date)]
