@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SocialMediaFreelas.Pages.Experiencias
 {
-    public class DeleteModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly IExperienciaService _service;
 
-        public DeleteModel(IExperienciaService service)
+        public DetailsModel(IExperienciaService service)
         {
             _service = service;
         }
@@ -24,27 +24,6 @@ namespace SocialMediaFreelas.Pages.Experiencias
             ExperienciaViewModel = model.Body[0];
 
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (_service == null || ExperienciaViewModel == null)
-            {
-                return Page();
-            }
-
-            try
-            {
-                await _service.DeleteAsync(ExperienciaViewModel.Id);
-
-                TempData["MensagemSucesso"] = "Deleção feita com sucesso!";
-                return RedirectToPage("./Index");
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
         }
     }
 }

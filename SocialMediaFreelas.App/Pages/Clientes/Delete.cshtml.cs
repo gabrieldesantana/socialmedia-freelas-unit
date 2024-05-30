@@ -17,11 +17,11 @@ namespace SocialMediaFreelas.Pages.Clientes
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var freelancer = await _service.GetByIdAsync(id);
+            var model = await _service.GetByIdAsync(id);
 
-            if (!freelancer.Body.Any()) return RedirectToPage("./Index");
+            if (!model.Body.Any()) return RedirectToPage("./Index");
 
-            ClienteViewModel = freelancer.Body[0];
+            ClienteViewModel = model.Body[0];
 
             return Page();
         }

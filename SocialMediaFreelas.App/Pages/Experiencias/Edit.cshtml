@@ -1,4 +1,63 @@
-﻿@page
+﻿@page "{id:int?}"
 @model SocialMediaFreelas.Pages.Experiencias.EditModel
 @{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Experiencia</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="ExperienciaUpdateModel.Id"/>
+
+            <div class="form-group">
+                <label asp-for="ExperienciaUpdateModel.Projeto" class="control-label"></label>
+                <input asp-for="ExperienciaUpdateModel.Projeto" class="form-control" />
+                <span asp-validation-for="ExperienciaUpdateModel.Projeto" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ExperienciaUpdateModel.Empresa" class="control-label"></label>
+                <input asp-for="ExperienciaUpdateModel.Empresa" class="form-control" />
+                <span asp-validation-for="ExperienciaUpdateModel.Empresa" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ExperienciaUpdateModel.Tecnologia" class="control-label"></label>
+                <input asp-for="ExperienciaUpdateModel.Tecnologia" type="date" class="form-control" />
+                <span asp-validation-for="ExperienciaUpdateModel.Tecnologia" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ExperienciaUpdateModel.Valor" class="control-label"></label>
+                <input asp-for="ExperienciaUpdateModel.Valor" class="form-control" />
+                <span asp-validation-for="ExperienciaUpdateModel.Valor" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ExperienciaUpdateModel.Avaliacao" class="control-label"></label>
+                <input asp-for="ExperienciaUpdateModel.Avaliacao" class="form-control" />
+                <span asp-validation-for="ExperienciaUpdateModel.Avaliacao" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

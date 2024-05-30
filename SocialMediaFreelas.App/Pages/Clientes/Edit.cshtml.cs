@@ -17,10 +17,10 @@ namespace SocialMediaFreelas.Pages.Clientes
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var freelancer = await _service.GetByIdAsync(id);
+            var model = await _service.GetByIdAsync(id);
 
             #pragma warning disable CS8601
-            ClienteUpdateModel = freelancer.Body.Select(x => new ClienteUpdateModel
+            ClienteUpdateModel = model.Body.Select(x => new ClienteUpdateModel
             {
                 Id = x.Id,
                 NumeroDocumento = x.NumeroDocumento,
