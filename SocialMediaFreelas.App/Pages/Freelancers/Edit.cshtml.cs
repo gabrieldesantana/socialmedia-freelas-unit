@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Freelancers
 {
-    public class EditModel : PageModel
+    public class EditModel : BaseModel
     {
         private readonly IFreelancerService _service;
 
-        public EditModel(IFreelancerService service)
+        public EditModel(IFreelancerService service, ISessao sessao) 
+            : base(sessao)
         {
             _service = service;
         }
@@ -17,7 +18,8 @@ namespace SocialMediaFreelas.Pages.Freelancers
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var freelancer = await _service.GetByIdAsync(id);
+            var tenantId = GetTenantIdUser();
+            var freelancer = await _service.GetByIdAsync(id, tenantId);
 
             #pragma warning disable CS8601
             FreelancerUpdateModel = freelancer.Body.Select(x => new FreelancerUpdateModel
@@ -44,6 +46,7 @@ namespace SocialMediaFreelas.Pages.Freelancers
 
             try
             {
+                var tenantId = GetTenantIdUser();
                 await _service.PutAsync(
                     FreelancerUpdateModel.Id,
                     new Freelancer(
@@ -52,7 +55,8 @@ namespace SocialMediaFreelas.Pages.Freelancers
                         FreelancerUpdateModel.DataNascimento,
                         FreelancerUpdateModel.Email,
                         FreelancerUpdateModel.Telefone,
-                        FreelancerUpdateModel.PretensaoSalarial)
+                        FreelancerUpdateModel.PretensaoSalarial),
+                    tenantId
                     );
 
                 TempData["MensagemSucesso"] = "Atualização feita com sucesso!";

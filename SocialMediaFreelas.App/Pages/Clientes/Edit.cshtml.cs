@@ -1,13 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Clientes
 {
-    public class EditModel : PageModel
+    public class EditModel : BaseModel
     {
         private readonly IClienteService _service;
 
-        public EditModel(IClienteService service)
+        public EditModel(IClienteService service, ISessao sessao)
+            :base(sessao)
         {
             _service = service;
         }
@@ -17,7 +19,8 @@ namespace SocialMediaFreelas.Pages.Clientes
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var model = await _service.GetByIdAsync(id);
+            var tenantId = GetTenantIdUser();
+            var model = await _service.GetByIdAsync(id, tenantId);
 
             #pragma warning disable CS8601
             ClienteUpdateModel = model.Body.Select(x => new ClienteUpdateModel
@@ -43,6 +46,7 @@ namespace SocialMediaFreelas.Pages.Clientes
 
             try
             {
+                var tenantId = GetTenantIdUser();
                 await _service.PutAsync(
                     ClienteUpdateModel.Id,
                     new Cliente(
@@ -50,7 +54,8 @@ namespace SocialMediaFreelas.Pages.Clientes
                         ClienteUpdateModel.NumeroDocumento,
                         ClienteUpdateModel.DataNascimento,
                         ClienteUpdateModel.Email,
-                        ClienteUpdateModel.Telefone)
+                        ClienteUpdateModel.Telefone),
+                    tenantId
                     );
 
                 TempData["MensagemSucesso"] = "Atualização feita com sucesso!";

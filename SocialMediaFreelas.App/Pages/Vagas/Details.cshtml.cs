@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Vagas
 {
-    public class DetailsModel : PageModel
+    public class DetailsModel : BaseModel
     {
         private readonly IVagaService _service;
 
-        public DetailsModel(IVagaService service)
+        public DetailsModel(IVagaService service, ISessao sessao) 
+            : base(sessao)
         {
             _service = service;
         }
@@ -17,7 +18,8 @@ namespace SocialMediaFreelas.Pages.Vagas
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var model = await _service.GetByIdAsync(id);
+            var tenantId = GetTenantIdUser();
+            var model = await _service.GetByIdAsync(id, tenantId);
 
             if (!model.Body.Any()) return RedirectToPage("./Index");
 

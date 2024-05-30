@@ -1,16 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SocialMediaFreelas.Application.InputModels;
+using SocialMediaFreelas.Frontend.Dtos;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Login.Freelancer
 {
     public class LoginModel : PageModel
     {
-        private readonly IFreelancerService _freelancerService;
+        private readonly IClienteService _clienteService;
+        private readonly ISessao _sessao;
 
-        public LoginModel(IFreelancerService freelancerService)
+        public LoginModel(IClienteService clienteService, ISessao sessao)
         {
-            _freelancerService = freelancerService;
+            _clienteService = clienteService;
+            _sessao = sessao;
         }
 
         public void OnGet()
@@ -24,13 +28,27 @@ namespace SocialMediaFreelas.Pages.Login.Freelancer
         {
             if (LoginInputModel.Email == null || LoginInputModel.Senha == null) return Page();
 
-            var loginInputModel = await _freelancerService.LoginAsync(LoginInputModel.Email, LoginInputModel.Senha);
+            var loginInputModel = await _clienteService.LoginAsync(LoginInputModel.Email, LoginInputModel.Senha);
 
             if (loginInputModel == null)
             {
                 TempData["MensagemErro"] = "Email ou Senha Incorretos!";
                 return Page();
             }
+
+
+            UserDTO userDTO = new UserDTO
+                        (
+                            loginInputModel.Name,
+                            loginInputModel.CompanyName,
+                            loginInputModel.Role,
+                            loginInputModel.Login,
+                            loginInputModel.Email,
+                            loginInputModel.TenantId
+                        );
+
+            _sessao.CreateUserSession(userDTO);
+
 
             TempData["MensagemSucesso"] = "Login realizado com sucesso!";
             return Page();

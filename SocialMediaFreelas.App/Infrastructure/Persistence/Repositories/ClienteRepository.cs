@@ -9,16 +9,16 @@ public class ClienteRepository : IClienteRepository
         _context = context;
     }
 
-    public async Task<List<Cliente>> GetAllAsync()
+    public async Task<List<Cliente>> GetAllAsync(string? tenantId)
     {
         return await _context.Clientes
-        .Where(x => x.Actived)
+        .Where(x => x.Actived && x.TenantId.ToUpper() == tenantId.ToUpper())
         .ToListAsync();
     }
 
-    public async Task<Cliente> GetByIdAsync(int id)
+    public async Task<Cliente> GetByIdAsync(int id, string? tenantId)
     {
-        return await _context.Clientes.FirstOrDefaultAsync(x => x.Id == id);
+        return await _context.Clientes.FirstOrDefaultAsync(x => x.Id == id && x.TenantId.ToUpper() == tenantId.ToUpper());
     }
 
     public async Task<Cliente> PostAsync(Cliente entidade)
@@ -28,15 +28,15 @@ public class ClienteRepository : IClienteRepository
         return entidade;
     }
 
-    public async Task<Cliente> PutAsync(int id, Cliente entidade)
+    public async Task<Cliente> PutAsync(int id, Cliente entidade, string? tenantId)
     {
-        var entidadeDb = await GetByIdAsync(id);
+        var entidadeDb = await GetByIdAsync(id, tenantId);
         if (entidadeDb != null)
         {
             try
             {
                 // Exclude the 'Id' property from the update
-                var excludedProperties = new[] { "Id", "Senha" };
+                var excludedProperties = new[] { "Id", "Senha", "TenantId" };
 
                 foreach (var property in entidadeDb.GetType().GetProperties())
                 {
@@ -55,9 +55,9 @@ public class ClienteRepository : IClienteRepository
         return entidadeDb;
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id, string? tenantId)
     {
-        var retorno = await GetByIdAsync(id);
+        var retorno = await GetByIdAsync(id, tenantId);
         try
         {
             retorno.Actived = retorno.Actived ? false : true;
@@ -68,5 +68,14 @@ public class ClienteRepository : IClienteRepository
         {
         }
         return false;
+    }
+
+    public async Task<Cliente> LoginAsync(string email, string senha)
+    {
+        return await _context.Clientes
+            .FirstOrDefaultAsync(
+            cliente => cliente.Email.ToUpper() == email.ToUpper()
+            &&
+            cliente.Senha == senha);
     }
 }

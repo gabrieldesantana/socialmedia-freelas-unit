@@ -1,13 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Freelancers
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BaseModel
     {
         private readonly IFreelancerService _service;
 
-        public IndexModel(IFreelancerService service)
+        public IndexModel(IFreelancerService service, ISessao sessao) 
+            : base(sessao)
         {
             _service= service;
         }
@@ -16,7 +18,8 @@ namespace SocialMediaFreelas.Pages.Freelancers
 
         public async Task OnGetAsync()
         {
-            var response = await _service.GetAllAsync();
+            var tenantId = GetTenantIdUser();
+            var response = await _service.GetAllAsync(tenantId);
             Response = response.Body;
         }
     }

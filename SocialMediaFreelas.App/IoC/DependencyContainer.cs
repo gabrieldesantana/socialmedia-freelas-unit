@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using SocialMediaFreelas.Frontend.Helpers;
 using System.Text.Json.Serialization;
 
 namespace SocialMediaFreelas.IoC
@@ -8,6 +9,18 @@ namespace SocialMediaFreelas.IoC
     {
         public static void AddRegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
+            #region Sessao
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddScoped<ISessao, Sessao>();
+
+            services.AddSession(x =>
+            {
+                x.Cookie.HttpOnly = true;
+                x.Cookie.IsEssential = true;
+            });
+            #endregion
+
             #region Services
             services.AddScoped<IClienteService, ClienteService>();
             services.AddScoped<IFreelancerService, FreelancerService>();

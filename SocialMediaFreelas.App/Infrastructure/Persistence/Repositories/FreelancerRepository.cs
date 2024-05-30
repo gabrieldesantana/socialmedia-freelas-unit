@@ -10,16 +10,16 @@ public class FreelancerRepository : IFreelancerRepository
         _context = context;
     }
 
-    public async Task<List<Freelancer>> GetAllAsync()
+    public async Task<List<Freelancer>> GetAllAsync(string? tenantId)
     {
         return await _context.Freelancers
-        .Where(freelancer => freelancer.Actived)
+        .Where(x => x.Actived && x.TenantId.ToUpper() == tenantId.ToUpper())
         .ToListAsync();
     }
 
-    public async Task<Freelancer> GetByIdAsync(int? id)
+    public async Task<Freelancer> GetByIdAsync(int? id, string? tenantId)
     {
-        return await _context.Freelancers.FirstOrDefaultAsync(x => x.Id == id);
+        return await _context.Freelancers.FirstOrDefaultAsync(x => x.Id == id && x.TenantId.ToUpper() == tenantId.ToUpper());
     }
 
     public async Task<Freelancer> PostAsync(Freelancer entidade)
@@ -29,15 +29,15 @@ public class FreelancerRepository : IFreelancerRepository
         return entidade;
     }
 
-    public async Task<Freelancer> PutAsync(int id, Freelancer entidade)
+    public async Task<Freelancer> PutAsync(int id, Freelancer entidade, string? tenantId)
     {
-        var entidadeDb = await GetByIdAsync(id);
+        var entidadeDb = await GetByIdAsync(id, tenantId);
         if (entidadeDb != null)
         {
             try
             {
                 // Exclude the 'Id' property from the update
-                var excludedProperties = new[] { "Id", "Senha" };
+                var excludedProperties = new[] { "Id", "Senha", "TenantId" };
 
                 foreach (var property in entidadeDb.GetType().GetProperties())
                 {
@@ -56,9 +56,9 @@ public class FreelancerRepository : IFreelancerRepository
         return entidadeDb; 
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id, string? tenantId)
     {
-        var retorno = await GetByIdAsync(id);
+        var retorno = await GetByIdAsync(id, tenantId);
         try
         {
             retorno.Actived = retorno.Actived ? false : true;

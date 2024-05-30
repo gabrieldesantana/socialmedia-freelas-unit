@@ -5,9 +5,9 @@ public class FreelancerService : IFreelancerService
     {
         _repository = repository;
     }
-    public async Task<DefaultResponse<FreelancerViewModel>> GetAllAsync()
+    public async Task<DefaultResponse<FreelancerViewModel>> GetAllAsync(string? tenantId)
     {
-        var freelancers = await _repository.GetAllAsync();
+        var freelancers = await _repository.GetAllAsync(tenantId);
 
         if (!freelancers.Any())
         {
@@ -35,9 +35,9 @@ public class FreelancerService : IFreelancerService
             };
     }
 
-    public async Task<DefaultResponse<FreelancerViewModel>> GetByIdAsync(int id)
+    public async Task<DefaultResponse<FreelancerViewModel>> GetByIdAsync(int id, string? tenantId)
     {
-        var freelancer = await _repository.GetByIdAsync(id);
+        var freelancer = await _repository.GetByIdAsync(id, tenantId);
 
         if (freelancer == null) return new DefaultResponse<FreelancerViewModel> 
         {
@@ -78,6 +78,7 @@ public class FreelancerService : IFreelancerService
             inputModel.Telefone,
             inputModel.PretensaoSalarial);
 
+            freelancerNew.TenantId = Guid.NewGuid().ToString();
             freelancerNew.SetPasswordHash(inputModel.Senha);
             var freelancer = await _repository.PostAsync(freelancerNew);
         
@@ -99,11 +100,11 @@ public class FreelancerService : IFreelancerService
         }
     }
 
-    public async Task<DefaultResponse<Freelancer>> PutAsync(int id, Freelancer entidade)
+    public async Task<DefaultResponse<Freelancer>> PutAsync(int id, Freelancer entidade, string? tenantId)
     {
         try
         {
-            var freelancer = await _repository.PutAsync(id, entidade);
+            var freelancer = await _repository.PutAsync(id, entidade, tenantId);
 
             return new DefaultResponse<Freelancer> 
             {
@@ -125,12 +126,12 @@ public class FreelancerService : IFreelancerService
 
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id, string? tenantId)
     {
         try
         {
-            var freelancer = await _repository.GetByIdAsync(id);
-            await _repository.DeleteAsync(freelancer.Id);
+            var freelancer = await _repository.GetByIdAsync(id, tenantId);
+            await _repository.DeleteAsync(freelancer.Id, tenantId);
             return true;
         }
         catch (Exception)

@@ -5,9 +5,9 @@ public class ExperienciaService : IExperienciaService
     {
         _repository = repository;
     }
-    public async Task<DefaultResponse<ExperienciaViewModel>> GetAllAsync()
+    public async Task<DefaultResponse<ExperienciaViewModel>> GetAllAsync(string? tenantId)
     {
-        var experiencias = await _repository.GetAllAsync();
+        var experiencias = await _repository.GetAllAsync(tenantId);
 
         if (!experiencias.Any())
         {
@@ -36,9 +36,9 @@ public class ExperienciaService : IExperienciaService
         };
     }
 
-    public async Task<DefaultResponse<ExperienciaViewModel>> GetByIdAsync(int id)
+    public async Task<DefaultResponse<ExperienciaViewModel>> GetByIdAsync(int id, string? tenantId)
     {
-        var experiencia = await _repository.GetByIdAsync(id);
+        var experiencia = await _repository.GetByIdAsync(id, tenantId);
 
         if (experiencia == null) return new DefaultResponse<ExperienciaViewModel>
         {
@@ -79,6 +79,7 @@ public class ExperienciaService : IExperienciaService
             inputModel.Avaliacao,
             inputModel.FreelancerId);
 
+            experienciaNew.TenantId = Guid.NewGuid().ToString();
             var experiencia = await _repository.PostAsync(experienciaNew);
 
             return new DefaultResponse<Experiencia>
@@ -99,11 +100,11 @@ public class ExperienciaService : IExperienciaService
         }
     }
 
-    public async Task<DefaultResponse<Experiencia>> PutAsync(int id, Experiencia entidade)
+    public async Task<DefaultResponse<Experiencia>> PutAsync(int id, Experiencia entidade, string? tenantId)
     {
         try
         {
-            var experiencia = await _repository.PutAsync(id, entidade);
+            var experiencia = await _repository.PutAsync(id, entidade, tenantId);
 
             return new DefaultResponse<Experiencia>
             {
@@ -125,12 +126,12 @@ public class ExperienciaService : IExperienciaService
 
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id, string? tenantId)
     {
         try
         {
-            var experiencia = await _repository.GetByIdAsync(id);
-            await _repository.DeleteAsync(experiencia.Id);
+            var experiencia = await _repository.GetByIdAsync(id, tenantId);
+            await _repository.DeleteAsync(experiencia.Id, tenantId);
             return true;
         }
         catch (Exception)

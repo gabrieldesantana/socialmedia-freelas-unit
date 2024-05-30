@@ -11,6 +11,7 @@ public class Cliente : BaseEntity
         Telefone = telefone;
         Vagas = new List<Vaga>();
     }
+
     public string NumeroDocumento { get; private set; }
     public string Nome { get; private set; }
 

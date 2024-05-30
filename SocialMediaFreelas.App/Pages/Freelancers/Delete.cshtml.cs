@@ -1,13 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Freelancers
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : BaseModel
     {
         private readonly IFreelancerService _service;
 
-        public DeleteModel(IFreelancerService service)
+        public DeleteModel(IFreelancerService service, ISessao sessao) 
+            : base(sessao)
         {
             _service = service;
         }
@@ -17,7 +19,8 @@ namespace SocialMediaFreelas.Pages.Freelancers
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var freelancer = await _service.GetByIdAsync(id);
+            var tenantId = GetTenantIdUser();
+            var freelancer = await _service.GetByIdAsync(id, tenantId);
 
             if (!freelancer.Body.Any()) return RedirectToPage("./Index");
 
@@ -35,7 +38,8 @@ namespace SocialMediaFreelas.Pages.Freelancers
 
             try
             {
-                await _service.DeleteAsync(FreelancerViewModel.Id);
+                var tenantId = GetTenantIdUser();
+                await _service.DeleteAsync(FreelancerViewModel.Id, tenantId);
 
                 TempData["MensagemSucesso"] = "Deleção feita com sucesso!";
                 return RedirectToPage("./Index");

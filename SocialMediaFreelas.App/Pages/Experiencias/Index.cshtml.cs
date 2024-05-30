@@ -1,13 +1,13 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Experiencias
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BaseModel
     {
         private readonly IExperienciaService _service;
 
-        public IndexModel(IExperienciaService service)
+        public IndexModel(IExperienciaService service, ISessao sessao) 
+            : base(sessao)
         {
             _service= service;
         }
@@ -16,7 +16,8 @@ namespace SocialMediaFreelas.Pages.Experiencias
 
         public async Task OnGetAsync()
         {
-            var response = await _service.GetAllAsync();
+            var tenantId = GetTenantIdUser();
+            var response = await _service.GetAllAsync(tenantId);
             Response = response.Body;
         }
     }
