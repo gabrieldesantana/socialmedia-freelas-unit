@@ -4,12 +4,11 @@ using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Freelancers
 {
-    public class DetailsModel : BaseModel
+    public class DetailsModel : PageModel
     {
         private readonly IFreelancerService _service;
 
-        public DetailsModel(IFreelancerService service, ISessao sessao) 
-            : base(sessao)
+        public DetailsModel(IFreelancerService service)
         {
             _service = service;
         }
@@ -19,8 +18,7 @@ namespace SocialMediaFreelas.Pages.Freelancers
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var tenantId = GetTenantIdUser();
-            var freelancer = await _service.GetByIdAsync(id, tenantId);
+            var freelancer = await _service.GetByIdAsync(id);
 
             if (!freelancer.Body.Any()) return RedirectToPage("./Index");
 

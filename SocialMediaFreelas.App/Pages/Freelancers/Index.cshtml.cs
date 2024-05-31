@@ -19,7 +19,7 @@ namespace SocialMediaFreelas.Pages.Freelancers
         public async Task OnGetAsync()
         {
             var tenantId = GetTenantIdUser();
-            var response = await _service.GetAllAsync(tenantId);
+            var response = await _service.GetAllAsync();
             Response = response.Body;
         }
     }

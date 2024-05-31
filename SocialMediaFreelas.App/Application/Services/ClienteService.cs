@@ -1,4 +1,5 @@
 using SocialMediaFreelas.Application.ViewModels;
+using SocialMediaFreelas.Frontend.Enums;
 
 public class ClienteService : IClienteService
 {
@@ -7,9 +8,9 @@ public class ClienteService : IClienteService
     {
         _repository = repository;
     }
-    public async Task<DefaultResponse<ClienteViewModel>> GetAllAsync(string? tenantId)
+    public async Task<DefaultResponse<ClienteViewModel>> GetAllAsync()
     {
-        var clientes = await _repository.GetAllAsync(tenantId);
+        var clientes = await _repository.GetAllAsync();
 
         if (!clientes.Any())
         {
@@ -36,9 +37,9 @@ public class ClienteService : IClienteService
         };
     }
 
-    public async Task<DefaultResponse<ClienteViewModel>> GetByIdAsync(int id, string? tenantId)
+    public async Task<DefaultResponse<ClienteViewModel>> GetByIdAsync(int id)
     {
-        var cliente = await _repository.GetByIdAsync(id, tenantId);
+        var cliente = await _repository.GetByIdAsync(id);
 
         if (cliente == null) return new DefaultResponse<ClienteViewModel>
         {
@@ -100,11 +101,11 @@ public class ClienteService : IClienteService
         }
     }
 
-    public async Task<DefaultResponse<Cliente>> PutAsync(int id, Cliente entidade, string? tenantId)
+    public async Task<DefaultResponse<Cliente>> PutAsync(int id, Cliente entidade)
     {
         try
         {
-            var cliente = await _repository.PutAsync(id, entidade, tenantId);
+            var cliente = await _repository.PutAsync(id, entidade);
 
             return new DefaultResponse<Cliente>
             {
@@ -126,12 +127,12 @@ public class ClienteService : IClienteService
 
     }
 
-    public async Task<bool> DeleteAsync(int id, string? tenantId)
+    public async Task<bool> DeleteAsync(int id)
     {
         try
         {
-            var cliente = await _repository.GetByIdAsync(id, tenantId);
-            await _repository.DeleteAsync(cliente.Id, tenantId);
+            var cliente = await _repository.GetByIdAsync(id);
+            await _repository.DeleteAsync(cliente.Id);
             return true;
         }
         catch (Exception)
@@ -151,12 +152,9 @@ public class ClienteService : IClienteService
         return new UsuarioViewModel
         {
             TenantId = cliente.TenantId,
-            Id = cliente.Id,
-            NumeroDocumento = cliente.NumeroDocumento,
             Nome = cliente.Nome,
-            DataNascimento = cliente.DataNascimento,
             Email = cliente.Email,
-            Telefone = cliente.Telefone
+            Role = EUserRole.Cliente
         };
     }
 }

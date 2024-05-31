@@ -1,3 +1,6 @@
+using SocialMediaFreelas.Application.ViewModels;
+using SocialMediaFreelas.Frontend.Enums;
+
 public class FreelancerService : IFreelancerService
 {
     private readonly IFreelancerRepository _repository;
@@ -5,9 +8,9 @@ public class FreelancerService : IFreelancerService
     {
         _repository = repository;
     }
-    public async Task<DefaultResponse<FreelancerViewModel>> GetAllAsync(string? tenantId)
+    public async Task<DefaultResponse<FreelancerViewModel>> GetAllAsync()
     {
-        var freelancers = await _repository.GetAllAsync(tenantId);
+        var freelancers = await _repository.GetAllAsync();
 
         if (!freelancers.Any())
         {
@@ -35,9 +38,9 @@ public class FreelancerService : IFreelancerService
             };
     }
 
-    public async Task<DefaultResponse<FreelancerViewModel>> GetByIdAsync(int id, string? tenantId)
+    public async Task<DefaultResponse<FreelancerViewModel>> GetByIdAsync(int id)
     {
-        var freelancer = await _repository.GetByIdAsync(id, tenantId);
+        var freelancer = await _repository.GetByIdAsync(id);
 
         if (freelancer == null) return new DefaultResponse<FreelancerViewModel> 
         {
@@ -100,11 +103,11 @@ public class FreelancerService : IFreelancerService
         }
     }
 
-    public async Task<DefaultResponse<Freelancer>> PutAsync(int id, Freelancer entidade, string? tenantId)
+    public async Task<DefaultResponse<Freelancer>> PutAsync(int id, Freelancer entidade)
     {
         try
         {
-            var freelancer = await _repository.PutAsync(id, entidade, tenantId);
+            var freelancer = await _repository.PutAsync(id, entidade);
 
             return new DefaultResponse<Freelancer> 
             {
@@ -126,12 +129,12 @@ public class FreelancerService : IFreelancerService
 
     }
 
-    public async Task<bool> DeleteAsync(int id, string? tenantId)
+    public async Task<bool> DeleteAsync(int id)
     {
         try
         {
-            var freelancer = await _repository.GetByIdAsync(id, tenantId);
-            await _repository.DeleteAsync(freelancer.Id, tenantId);
+            var freelancer = await _repository.GetByIdAsync(id);
+            await _repository.DeleteAsync(freelancer.Id);
             return true;
         }
         catch (Exception)
@@ -140,7 +143,7 @@ public class FreelancerService : IFreelancerService
         }
     }
 
-    public async Task<FreelancerViewModel> LoginAsync(string email, string senha)
+    public async Task<UsuarioViewModel> LoginAsync(string email, string senha)
     {
         var senhaCriptografada = senha.GenerateHash();
 
@@ -148,15 +151,12 @@ public class FreelancerService : IFreelancerService
 
         if (freelancer == null) return null;
 
-        return new FreelancerViewModel
+        return new UsuarioViewModel
         {
-            Id = freelancer.Id,
-            NumeroDocumento = freelancer.NumeroDocumento,
+            TenantId = freelancer.TenantId,
             Nome = freelancer.Nome,
-            DataNascimento = freelancer.DataNascimento,
             Email = freelancer.Email,
-            Telefone = freelancer.Telefone,
-            PretensaoSalarial = freelancer.PretensaoSalarial
+            Role = EUserRole.Freelancer
         };
     }
 }

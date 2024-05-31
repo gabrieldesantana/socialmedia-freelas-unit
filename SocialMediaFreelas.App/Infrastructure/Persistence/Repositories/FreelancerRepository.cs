@@ -10,16 +10,16 @@ public class FreelancerRepository : IFreelancerRepository
         _context = context;
     }
 
-    public async Task<List<Freelancer>> GetAllAsync(string? tenantId)
+    public async Task<List<Freelancer>> GetAllAsync()
     {
         return await _context.Freelancers
-        .Where(x => x.Actived && x.TenantId.ToUpper() == tenantId.ToUpper())
+        .Where(x => x.Actived)
         .ToListAsync();
     }
 
-    public async Task<Freelancer> GetByIdAsync(int? id, string? tenantId)
+    public async Task<Freelancer> GetByIdAsync(int? id)
     {
-        return await _context.Freelancers.FirstOrDefaultAsync(x => x.Id == id && x.TenantId.ToUpper() == tenantId.ToUpper());
+        return await _context.Freelancers.FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<Freelancer> PostAsync(Freelancer entidade)
@@ -29,9 +29,9 @@ public class FreelancerRepository : IFreelancerRepository
         return entidade;
     }
 
-    public async Task<Freelancer> PutAsync(int id, Freelancer entidade, string? tenantId)
+    public async Task<Freelancer> PutAsync(int id, Freelancer entidade)
     {
-        var entidadeDb = await GetByIdAsync(id, tenantId);
+        var entidadeDb = await GetByIdAsync(id);
         if (entidadeDb != null)
         {
             try
@@ -56,9 +56,9 @@ public class FreelancerRepository : IFreelancerRepository
         return entidadeDb; 
     }
 
-    public async Task<bool> DeleteAsync(int id, string? tenantId)
+    public async Task<bool> DeleteAsync(int id)
     {
-        var retorno = await GetByIdAsync(id, tenantId);
+        var retorno = await GetByIdAsync(id);
         try
         {
             retorno.Actived = retorno.Actived ? false : true;

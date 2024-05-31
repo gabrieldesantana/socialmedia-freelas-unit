@@ -7,4 +7,6 @@ public class VagaInputModel
     public double Remuneracao { get; set; }
     public int FreelancerId { get; set; }
     public int ClienteId { get; set; }
+
+    public string? TenantIdOwner { get; set; }
 }

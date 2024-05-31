@@ -15,7 +15,6 @@ public class Cliente : BaseEntity
     public string NumeroDocumento { get; private set; }
     public string Nome { get; private set; }
 
-    [DataType(DataType.Date)]
     public DateTime DataNascimento { get; private set; }
     public string Email { get; private set; }
     public string Telefone { get; private set; }

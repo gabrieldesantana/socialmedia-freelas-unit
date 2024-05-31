@@ -4,12 +4,11 @@ using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Clientes
 {
-    public class DetailsModel : BaseModel
+    public class DetailsModel : PageModel
     {
         private readonly IClienteService _service;
 
-        public DetailsModel(IClienteService service, ISessao sessao)
-            : base(sessao)
+        public DetailsModel(IClienteService service)
         {
             _service = service;
         }
@@ -19,9 +18,7 @@ namespace SocialMediaFreelas.Pages.Clientes
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var tenantId = GetTenantIdUser();
-
-            var model = await _service.GetByIdAsync(id, tenantId);
+            var model = await _service.GetByIdAsync(id);
 
             if (!model.Body.Any()) return RedirectToPage("./Index");
 

@@ -3,17 +3,18 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SocialMediaFreelas.Application.InputModels;
 using SocialMediaFreelas.Frontend.Dtos;
 using SocialMediaFreelas.Frontend.Helpers;
+using System.Text.RegularExpressions;
 
 namespace SocialMediaFreelas.Pages.Login.Freelancer
 {
     public class LoginModel : PageModel
     {
-        private readonly IClienteService _clienteService;
+        private readonly IFreelancerService _freelancerService;
         private readonly ISessao _sessao;
 
-        public LoginModel(IClienteService clienteService, ISessao sessao)
+        public LoginModel(IFreelancerService freelancerService, ISessao sessao)
         {
-            _clienteService = clienteService;
+            _freelancerService = freelancerService;
             _sessao = sessao;
         }
 
@@ -28,9 +29,9 @@ namespace SocialMediaFreelas.Pages.Login.Freelancer
         {
             if (LoginInputModel.Email == null || LoginInputModel.Senha == null) return Page();
 
-            var loginInputModel = await _clienteService.LoginAsync(LoginInputModel.Email, LoginInputModel.Senha);
+            var usuarioViewModel = await _freelancerService.LoginAsync(LoginInputModel.Email, LoginInputModel.Senha);
 
-            if (loginInputModel == null)
+            if (usuarioViewModel == null)
             {
                 TempData["MensagemErro"] = "Email ou Senha Incorretos!";
                 return Page();
@@ -38,20 +39,19 @@ namespace SocialMediaFreelas.Pages.Login.Freelancer
 
 
             UserDTO userDTO = new UserDTO
-                        (
-                            loginInputModel.Name,
-                            loginInputModel.CompanyName,
-                            loginInputModel.Role,
-                            loginInputModel.Login,
-                            loginInputModel.Email,
-                            loginInputModel.TenantId
-                        );
+            {
+             Name = usuarioViewModel.Nome,
+             Role = usuarioViewModel.Role,
+             Email = usuarioViewModel.Email,
+             TenantId = usuarioViewModel.TenantId ?? "tenantIdVazio"
+            };
 
             _sessao.CreateUserSession(userDTO);
 
 
             TempData["MensagemSucesso"] = "Login realizado com sucesso!";
-            return Page();
+            ////return RedirectToPage("../Register/Index");
+            return RedirectPreserveMethod("../Home/Freelancer" );
         }
     }
 }

@@ -4,12 +4,11 @@ using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Freelancers
 {
-    public class DeleteModel : BaseModel
+    public class DeleteModel : PageModel
     {
         private readonly IFreelancerService _service;
 
-        public DeleteModel(IFreelancerService service, ISessao sessao) 
-            : base(sessao)
+        public DeleteModel(IFreelancerService service)
         {
             _service = service;
         }
@@ -19,8 +18,7 @@ namespace SocialMediaFreelas.Pages.Freelancers
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var tenantId = GetTenantIdUser();
-            var freelancer = await _service.GetByIdAsync(id, tenantId);
+            var freelancer = await _service.GetByIdAsync(id);
 
             if (!freelancer.Body.Any()) return RedirectToPage("./Index");
 
@@ -38,8 +36,7 @@ namespace SocialMediaFreelas.Pages.Freelancers
 
             try
             {
-                var tenantId = GetTenantIdUser();
-                await _service.DeleteAsync(FreelancerViewModel.Id, tenantId);
+                await _service.DeleteAsync(FreelancerViewModel.Id);
 
                 TempData["MensagemSucesso"] = "Deleção feita com sucesso!";
                 return RedirectToPage("./Index");

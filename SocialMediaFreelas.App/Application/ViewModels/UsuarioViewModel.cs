@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SocialMediaFreelas.Frontend.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace SocialMediaFreelas.Application.ViewModels
 {
@@ -6,6 +7,7 @@ namespace SocialMediaFreelas.Application.ViewModels
     {
         public string TenantId { get; set; }
         public string Nome { get; set; }
-        public string Email { get; private set; }
+        public string Email { get; set; }
+        public EUserRole Role { get; set; }
     }
 }

@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Experiencias
 {
-    public class CreateModel : PageModel
+    public class CreateModel : BaseModel
     {
         private readonly IExperienciaService _service;
 
-        public CreateModel(IExperienciaService service)
+        public CreateModel(IExperienciaService service, ISessao sessao)
+            : base(sessao)
         {
             _service = service;
         }
@@ -29,6 +30,7 @@ namespace SocialMediaFreelas.Pages.Experiencias
 
             try
             {
+                ExperienciaInputModel.TenantIdOwner = GetTenantIdUser();
                 await _service.PostAsync(ExperienciaInputModel);
                 TempData["MensagemSucesso"] = "Cadastro feito com sucesso!";
                 return RedirectToPage("./Index");

@@ -1,14 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace SocialMediaFreelas.App.Pages;
+namespace SocialMediaFreelas.App.Pages.Home.Freelancer;
 
-public class HomeFreelancerModel : PageModel
+public class IndexModel : PageModel
 {
-    private readonly ILogger<HomeFreelancerModel> _logger;
+    private readonly ILogger<IndexModel> _logger;
 
-    public HomeFreelancerModel(ILogger<HomeFreelancerModel> logger)
+    public IndexModel(ILogger<IndexModel> logger)
     {
         _logger = logger;
     }

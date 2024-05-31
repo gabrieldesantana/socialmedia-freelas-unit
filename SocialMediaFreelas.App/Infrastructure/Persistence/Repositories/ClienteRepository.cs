@@ -9,16 +9,16 @@ public class ClienteRepository : IClienteRepository
         _context = context;
     }
 
-    public async Task<List<Cliente>> GetAllAsync(string? tenantId)
+    public async Task<List<Cliente>> GetAllAsync()
     {
         return await _context.Clientes
-        .Where(x => x.Actived && x.TenantId.ToUpper() == tenantId.ToUpper())
+        .Where(x => x.Actived)
         .ToListAsync();
     }
 
-    public async Task<Cliente> GetByIdAsync(int id, string? tenantId)
+    public async Task<Cliente> GetByIdAsync(int id)
     {
-        return await _context.Clientes.FirstOrDefaultAsync(x => x.Id == id && x.TenantId.ToUpper() == tenantId.ToUpper());
+        return await _context.Clientes.FirstOrDefaultAsync(x => x.Id == id);
     }
 
     public async Task<Cliente> PostAsync(Cliente entidade)
@@ -28,9 +28,9 @@ public class ClienteRepository : IClienteRepository
         return entidade;
     }
 
-    public async Task<Cliente> PutAsync(int id, Cliente entidade, string? tenantId)
+    public async Task<Cliente> PutAsync(int id, Cliente entidade)
     {
-        var entidadeDb = await GetByIdAsync(id, tenantId);
+        var entidadeDb = await GetByIdAsync(id);
         if (entidadeDb != null)
         {
             try
@@ -55,9 +55,9 @@ public class ClienteRepository : IClienteRepository
         return entidadeDb;
     }
 
-    public async Task<bool> DeleteAsync(int id, string? tenantId)
+    public async Task<bool> DeleteAsync(int id)
     {
-        var retorno = await GetByIdAsync(id, tenantId);
+        var retorno = await GetByIdAsync(id);
         try
         {
             retorno.Actived = retorno.Actived ? false : true;

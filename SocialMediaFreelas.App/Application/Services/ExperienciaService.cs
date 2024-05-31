@@ -79,7 +79,8 @@ public class ExperienciaService : IExperienciaService
             inputModel.Avaliacao,
             inputModel.FreelancerId);
 
-            experienciaNew.TenantId = Guid.NewGuid().ToString();
+            experienciaNew.TenantId = inputModel.TenantIdOwner;
+
             var experiencia = await _repository.PostAsync(experienciaNew);
 
             return new DefaultResponse<Experiencia>

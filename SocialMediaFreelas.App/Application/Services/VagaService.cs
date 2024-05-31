@@ -82,7 +82,7 @@ public class VagaService : IVagaService
             inputModel.ClienteId,
             inputModel.FreelancerId);
 
-            vagaNew.TenantId = Guid.NewGuid().ToString();
+            vagaNew.TenantId = inputModel.TenantIdOwner;
             var vaga = await _repository.PostAsync(vagaNew);
 
             return new DefaultResponse<Vaga>
