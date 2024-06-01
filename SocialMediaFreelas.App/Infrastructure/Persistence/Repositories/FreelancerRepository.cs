@@ -1,37 +1,18 @@
 
 using Microsoft.EntityFrameworkCore;
+using SocialMediaFreelas.Infrastructure.Persistence.Repositories;
 
-public class FreelancerRepository : IFreelancerRepository
+public class FreelancerRepository : GenericRepository<Freelancer>, IFreelancerRepository
 {
-    private readonly AppDbContext _context;
 
     public FreelancerRepository(AppDbContext context)
+        : base(context)
     {
-        _context = context;
     }
 
-    public async Task<List<Freelancer>> GetAllAsync()
+    public async Task<Freelancer> PutAsync(int id, Freelancer entidade, string? tenantId = "")
     {
-        return await _context.Freelancers
-        .Where(x => x.Actived)
-        .ToListAsync();
-    }
-
-    public async Task<Freelancer> GetByIdAsync(int? id)
-    {
-        return await _context.Freelancers.FirstOrDefaultAsync(x => x.Id == id);
-    }
-
-    public async Task<Freelancer> PostAsync(Freelancer entidade)
-    {
-        await _context.AddAsync(entidade);
-        await _context.SaveChangesAsync();
-        return entidade;
-    }
-
-    public async Task<Freelancer> PutAsync(int id, Freelancer entidade)
-    {
-        var entidadeDb = await GetByIdAsync(id);
+        var entidadeDb = await GetByIdAsync(id, tenantId);
         if (entidadeDb != null)
         {
             try
@@ -54,21 +35,6 @@ public class FreelancerRepository : IFreelancerRepository
             }
         }
         return entidadeDb; 
-    }
-
-    public async Task<bool> DeleteAsync(int id)
-    {
-        var retorno = await GetByIdAsync(id);
-        try
-        {
-            retorno.Actived = retorno.Actived ? false : true;
-            await _context.SaveChangesAsync();
-            return true;
-        }
-        catch (Exception)
-        {
-        }
-        return false;
     }
 
     public async Task<Freelancer> LoginAsync(string email, string senha)

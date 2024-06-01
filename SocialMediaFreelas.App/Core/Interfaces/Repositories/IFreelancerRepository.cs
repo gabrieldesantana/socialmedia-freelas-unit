@@ -1,9 +1,7 @@
-public interface IFreelancerRepository 
+using SocialMediaFreelas.Core.Interfaces.Repositories;
+
+public interface IFreelancerRepository : IGenericRepository<Freelancer>
 {
-    Task<List<Freelancer>> GetAllAsync();
-    Task<Freelancer> GetByIdAsync(int? id);
-    Task<Freelancer> PostAsync(Freelancer entidade);
-    Task<Freelancer> PutAsync(int id, Freelancer entidade);
-    Task<bool> DeleteAsync(int id);
+    Task<Freelancer> PutAsync(int id, Freelancer entidade, string? tenantId = "");
     Task<Freelancer> LoginAsync(string email, string senha);
 }

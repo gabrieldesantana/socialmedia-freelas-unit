@@ -17,14 +17,21 @@ public class VagaConfiguration : IEntityTypeConfiguration<Vaga>
         //public int FreelancerId { get; private set; }
         //public int ClienteId { get; private set; }
 
-        builder.HasOne(x => x.Freelancer)
-        .WithOne()
-        .HasForeignKey<Vaga>(x => x.FreelancerId)
-        .OnDelete(DeleteBehavior.Cascade);
+        builder
+        .HasMany(x => x.Freelancers)
+        .WithMany(x => x.Vagas);
 
         builder.HasOne(x => x.Cliente)
-        .WithOne()
-        .HasForeignKey<Vaga>(x => x.ClienteId)
+        .WithMany(x => x.Vagas)
+        .HasForeignKey(x => x.ClienteId)
         .OnDelete(DeleteBehavior.Cascade);
+
+        //builder.HasMany(e => e.Freelancers)
+        //.WithMany(e => e.Vagas)
+        //.UsingEntity(
+        //    "VagaFreelancer",
+        //    l => l.HasOne(typeof(Freelancer)).WithMany().HasForeignKey("FreelancersId").HasPrincipalKey(nameof(Freelancer.Id)),
+        //    r => r.HasOne(typeof(Vaga)).WithMany().HasForeignKey("VagasId").HasPrincipalKey(nameof(Vaga.Id)),
+        //    j => j.HasKey("VagasId", "FreelancersId"));
     }
 }

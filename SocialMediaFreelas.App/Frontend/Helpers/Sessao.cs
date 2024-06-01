@@ -42,5 +42,19 @@ namespace SocialMediaFreelas.Frontend.Helpers
         {
             _contextAccessor.HttpContext?.Session?.Remove("userSessionLogged");
         }
+
+        public int GetUserId()
+        {
+            string userSession = _contextAccessor.HttpContext.Session.GetString("userSessionLogged");
+            if (string.IsNullOrEmpty(userSession)) return 0;
+
+            var user = JsonConvert.DeserializeObject<UserDTO>(userSession);
+
+            int userId = user.UserId;
+
+            if (user == null) return 0;
+
+            return user.UserId;
+        }
     }
 }

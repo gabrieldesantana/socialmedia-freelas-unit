@@ -8,5 +8,6 @@ namespace SocialMediaFreelas.Frontend.Helpers
         void RemoveUserSession();
         UserDTO GetUserSession();
         string GetTenantIdUser();
+        int GetUserId();
     }
 }

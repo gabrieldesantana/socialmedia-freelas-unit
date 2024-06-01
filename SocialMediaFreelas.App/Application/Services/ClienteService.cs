@@ -8,7 +8,7 @@ public class ClienteService : IClienteService
     {
         _repository = repository;
     }
-    public async Task<DefaultResponse<ClienteViewModel>> GetAllAsync()
+    public async Task<DefaultResponse<ClienteViewModel>> GetAllAsync(string? tenantId = "")
     {
         var clientes = await _repository.GetAllAsync();
 
@@ -37,7 +37,7 @@ public class ClienteService : IClienteService
         };
     }
 
-    public async Task<DefaultResponse<ClienteViewModel>> GetByIdAsync(int id)
+    public async Task<DefaultResponse<ClienteViewModel>> GetByIdAsync(int id, string? tenantId = "")
     {
         var cliente = await _repository.GetByIdAsync(id);
 
@@ -101,7 +101,7 @@ public class ClienteService : IClienteService
         }
     }
 
-    public async Task<DefaultResponse<Cliente>> PutAsync(int id, Cliente entidade)
+    public async Task<DefaultResponse<Cliente>> PutAsync(int id, Cliente entidade, string? tenantId = "")
     {
         try
         {
@@ -127,7 +127,7 @@ public class ClienteService : IClienteService
 
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id, string? tenantId = "")
     {
         try
         {
@@ -151,6 +151,7 @@ public class ClienteService : IClienteService
 
         return new UsuarioViewModel
         {
+            UserId = cliente.Id,
             TenantId = cliente.TenantId,
             Nome = cliente.Nome,
             Email = cliente.Email,

@@ -32,7 +32,7 @@ public class VagaService : IVagaService
                 Tipo = x.Tipo,
                 Remuneracao = x.Remuneracao,
                 ClienteId = x.ClienteId,
-                FreelancerId = x.FreelancerId
+                Freelancers = x.Freelancers!
             }).ToList()
         };
     }
@@ -62,8 +62,7 @@ public class VagaService : IVagaService
                 Cargo = vaga.Cargo,
                 Tipo = vaga.Tipo,
                 Remuneracao = vaga.Remuneracao,
-                ClienteId = vaga.ClienteId,
-                FreelancerId = vaga.FreelancerId
+                ClienteId = vaga.ClienteId
                 }
             }
         };
@@ -79,8 +78,7 @@ public class VagaService : IVagaService
             inputModel.Cargo,
             inputModel.Tipo,
             inputModel.Remuneracao,
-            inputModel.ClienteId,
-            inputModel.FreelancerId);
+            inputModel.ClienteId);
 
             vagaNew.TenantId = inputModel.TenantIdOwner;
             var vaga = await _repository.PostAsync(vagaNew);
@@ -135,6 +133,21 @@ public class VagaService : IVagaService
         {
             var vaga = await _repository.GetByIdAsync(id, tenantId);
             await _repository.DeleteAsync(vaga.Id, tenantId);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+
+    public async Task<bool> AddFreelancerAsync(int idVaga, int idFreelancer)
+    {
+        try
+        {
+            var vaga = await _repository.GetByIdAsync(idVaga);
+
+            await _repository.AddFreelancerAsync(vaga.Id, idFreelancer);
             return true;
         }
         catch (Exception)

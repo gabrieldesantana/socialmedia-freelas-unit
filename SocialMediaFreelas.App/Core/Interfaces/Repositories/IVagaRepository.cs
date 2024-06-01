@@ -1,8 +1,8 @@
-public interface IVagaRepository 
+using SocialMediaFreelas.Core.Interfaces.Repositories;
+
+public interface IVagaRepository : IGenericRepository<Vaga>
 {
-    Task<List<Vaga>> GetAllAsync(string? tenantId);
-    Task<Vaga> GetByIdAsync(int id, string? tenantId);
-    Task<Vaga> PostAsync(Vaga entidade);
-    Task<Vaga> PutAsync(int id, Vaga entidade, string? tenantId);
-    Task<bool> DeleteAsync(int id, string? tenantId);
+    Task<Vaga> PutAsync(int id, Vaga entidade, string? tenantId = "");
+
+    Task<bool> AddFreelancerAsync(int idVaga, int idFreelancer);
 }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SocialMediaFreelas.Frontend.Helpers;
 
@@ -21,6 +22,24 @@ namespace SocialMediaFreelas.Pages
                 throw;
             }
 
+        }
+
+        public int GetUserId()
+        {
+            try
+            {
+                return _sessao.GetUserId();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public IActionResult OnPostLogoutAsync()
+        {
+            _sessao.RemoveUserSession();
+            return RedirectToPage("/Index");
         }
     }
 }

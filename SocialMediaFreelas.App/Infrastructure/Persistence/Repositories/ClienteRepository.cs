@@ -1,36 +1,16 @@
 using Microsoft.EntityFrameworkCore;
+using SocialMediaFreelas.Infrastructure.Persistence.Repositories;
 
-public class ClienteRepository : IClienteRepository
+public class ClienteRepository : GenericRepository<Cliente>, IClienteRepository
 {
-    private readonly AppDbContext _context;
-
     public ClienteRepository(AppDbContext context)
+        :base(context)
     {
-        _context = context;
     }
 
-    public async Task<List<Cliente>> GetAllAsync()
+    public async Task<Cliente> PutAsync(int id, Cliente entidade, string? tenantId)
     {
-        return await _context.Clientes
-        .Where(x => x.Actived)
-        .ToListAsync();
-    }
-
-    public async Task<Cliente> GetByIdAsync(int id)
-    {
-        return await _context.Clientes.FirstOrDefaultAsync(x => x.Id == id);
-    }
-
-    public async Task<Cliente> PostAsync(Cliente entidade)
-    {
-        await _context.AddAsync(entidade);
-        await _context.SaveChangesAsync();
-        return entidade;
-    }
-
-    public async Task<Cliente> PutAsync(int id, Cliente entidade)
-    {
-        var entidadeDb = await GetByIdAsync(id);
+        var entidadeDb = await GetByIdAsync(id, tenantId);
         if (entidadeDb != null)
         {
             try
@@ -53,21 +33,6 @@ public class ClienteRepository : IClienteRepository
             }
         }
         return entidadeDb;
-    }
-
-    public async Task<bool> DeleteAsync(int id)
-    {
-        var retorno = await GetByIdAsync(id);
-        try
-        {
-            retorno.Actived = retorno.Actived ? false : true;
-            await _context.SaveChangesAsync();
-            return true;
-        }
-        catch (Exception)
-        {
-        }
-        return false;
     }
 
     public async Task<Cliente> LoginAsync(string email, string senha)

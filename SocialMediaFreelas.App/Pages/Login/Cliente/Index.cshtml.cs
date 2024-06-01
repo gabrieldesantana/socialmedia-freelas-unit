@@ -27,9 +27,9 @@ namespace SocialMediaFreelas.Pages.Login.Cliente
         {
             if (LoginInputModel.Email == null || LoginInputModel.Senha == null) return Page();
 
-            var loginInputModel = await _clienteService.LoginAsync(LoginInputModel.Email, LoginInputModel.Senha);
+            var usuarioViewModel = await _clienteService.LoginAsync(LoginInputModel.Email, LoginInputModel.Senha);
 
-            if (loginInputModel == null)
+            if (usuarioViewModel == null)
             {
                 TempData["MensagemErro"] = "Email ou Senha Incorretos!";
                 return Page();
@@ -38,18 +38,26 @@ namespace SocialMediaFreelas.Pages.Login.Cliente
 
             UserDTO userDTO = new UserDTO
             {
-                Name = loginInputModel.Nome,
-                Role = loginInputModel.Role,
-                Email = loginInputModel.Email,
-                TenantId = loginInputModel.TenantId
+                UserId = usuarioViewModel.UserId,
+                Name = usuarioViewModel.Nome,
+                Role = usuarioViewModel.Role,
+                Email = usuarioViewModel.Email,
+                TenantId = usuarioViewModel.TenantId ?? "tenantIdVazio"
             };
 
             _sessao.CreateUserSession(userDTO);
 
-
+            TempData["MensagemSucesso"] = null;
             TempData["MensagemSucesso"] = "Login realizado com sucesso!";
-            return Page();
 
+            return RedirectPreserveMethod("../Home/Cliente");
+
+        }
+
+        public async Task<IActionResult> OnGetOtherHandler()
+        {
+            _sessao.RemoveUserSession();
+            return RedirectToPage("../");
         }
     }
 }

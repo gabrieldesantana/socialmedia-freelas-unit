@@ -4,6 +4,7 @@ namespace SocialMediaFreelas.Frontend.Dtos
 {
     public class UserDTO
     {
+        public int UserId { get; set; }
         public string? TenantId { get; set; }
         public string? Name { get; set; }
         //public string? CompanyName { get; set; }

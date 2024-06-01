@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using SocialMediaFreelas.Core.Interfaces.Repositories;
 using SocialMediaFreelas.Frontend.Helpers;
+using SocialMediaFreelas.Infrastructure.Persistence.Repositories;
 using System.Text.Json.Serialization;
 
 namespace SocialMediaFreelas.IoC
@@ -33,6 +35,7 @@ namespace SocialMediaFreelas.IoC
             services.AddScoped<IFreelancerRepository, FreelancerRepository>();
             services.AddScoped<IVagaRepository, VagaRepository>();
             services.AddScoped<IExperienciaRepository, ExperienciaRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             #endregion
 
             #region Data_context

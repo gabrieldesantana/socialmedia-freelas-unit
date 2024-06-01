@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SocialMediaFreelas.Application.InputModels;
 using SocialMediaFreelas.Frontend.Dtos;
 using SocialMediaFreelas.Frontend.Helpers;
-using System.Text.RegularExpressions;
 
 namespace SocialMediaFreelas.Pages.Login.Freelancer
 {
@@ -40,6 +39,7 @@ namespace SocialMediaFreelas.Pages.Login.Freelancer
 
             UserDTO userDTO = new UserDTO
             {
+             UserId = usuarioViewModel.UserId,
              Name = usuarioViewModel.Nome,
              Role = usuarioViewModel.Role,
              Email = usuarioViewModel.Email,
@@ -48,9 +48,8 @@ namespace SocialMediaFreelas.Pages.Login.Freelancer
 
             _sessao.CreateUserSession(userDTO);
 
-
+            TempData["MensagemSucesso"] = null;
             TempData["MensagemSucesso"] = "Login realizado com sucesso!";
-            ////return RedirectToPage("../Register/Index");
             return RedirectPreserveMethod("../Home/Freelancer" );
         }
     }

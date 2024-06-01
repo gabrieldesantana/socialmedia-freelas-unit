@@ -6,13 +6,13 @@
 
 <h1>Index</h1>
 
-@if (TempData["MensagemSucesso"] != null)
+@*@if (TempData["MensagemSucesso"] != null)
 {
     <div class="alert alert-success button-success" role="alert" id="success-message">
         @TempData["MensagemSucesso"]
         <i class="fa fa-check" aria-hidden="true"></i>
     </div>
-}
+}*@
 
 <table class="table">
     <thead>
@@ -20,8 +20,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Response[0].ClienteId)
             </th>
-            <th>
+@*            <th>
                 @Html.DisplayNameFor(model => model.Response[0].FreelancerId)
+            </th>*@
+
+            <th>
+                Candidatos
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Response[0].Titulo)
@@ -49,8 +53,21 @@
                     @Html.DisplayFor(modelItem => item.ClienteId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FreelancerId)
+                    @if (!Model.Response.First<VagaViewModel>(x=> x.Id == item.Id).Freelancers.Any())
+                    {
+                        <p>Nenhum candidado</p>
+                    }
+                    else
+                    {
+                        @foreach (var freelancer in Model.Response.First<VagaViewModel>(x=> x.Id == item.Id).Freelancers)
+                        {
+                            <p>@freelancer.Nome
+                                <a asp-page="../Freelancers/Details" asp-route-id="@freelancer.Id">Perfil</a></p>
+                        }
+                    }
+
                 </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.Titulo)
                 </td>

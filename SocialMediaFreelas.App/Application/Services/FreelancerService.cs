@@ -8,7 +8,7 @@ public class FreelancerService : IFreelancerService
     {
         _repository = repository;
     }
-    public async Task<DefaultResponse<FreelancerViewModel>> GetAllAsync()
+    public async Task<DefaultResponse<FreelancerViewModel>> GetAllAsync(string? tenantId = "")
     {
         var freelancers = await _repository.GetAllAsync();
 
@@ -38,7 +38,7 @@ public class FreelancerService : IFreelancerService
             };
     }
 
-    public async Task<DefaultResponse<FreelancerViewModel>> GetByIdAsync(int id)
+    public async Task<DefaultResponse<FreelancerViewModel>> GetByIdAsync(int id, string? tenantId = "")
     {
         var freelancer = await _repository.GetByIdAsync(id);
 
@@ -74,8 +74,8 @@ public class FreelancerService : IFreelancerService
         try
         {
             var freelancerNew = new Freelancer(
-            inputModel.NumeroDocumento,
             inputModel.Nome,
+            inputModel.NumeroDocumento,
             inputModel.DataNascimento,
             inputModel.Email,
             inputModel.Telefone,
@@ -103,7 +103,7 @@ public class FreelancerService : IFreelancerService
         }
     }
 
-    public async Task<DefaultResponse<Freelancer>> PutAsync(int id, Freelancer entidade)
+    public async Task<DefaultResponse<Freelancer>> PutAsync(int id, Freelancer entidade, string? tenantId = "")
     {
         try
         {
@@ -129,7 +129,7 @@ public class FreelancerService : IFreelancerService
 
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id, string? tenantId = "")
     {
         try
         {
@@ -153,6 +153,7 @@ public class FreelancerService : IFreelancerService
 
         return new UsuarioViewModel
         {
+            UserId = freelancer.Id,
             TenantId = freelancer.TenantId,
             Nome = freelancer.Nome,
             Email = freelancer.Email,

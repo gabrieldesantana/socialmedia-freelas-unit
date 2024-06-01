@@ -30,7 +30,7 @@ namespace SocialMediaFreelas.Pages.Vagas
                 Cargo = x.Cargo,
                 Tipo = x.Tipo,
                 Remuneracao = x.Remuneracao,
-                FreelancerId = x.FreelancerId
+                //FreelancerId = x.FreelancerId
             }).FirstOrDefault();
             #pragma warning restore CS8601
 
@@ -55,8 +55,7 @@ namespace SocialMediaFreelas.Pages.Vagas
                         VagaUpdateModel.Descricao,
                         VagaUpdateModel.Cargo,
                         VagaUpdateModel.Tipo,
-                        VagaUpdateModel.Remuneracao,
-                        freelancerId: VagaUpdateModel.FreelancerId),
+                        VagaUpdateModel.Remuneracao),
                     tenantId
                     );
 

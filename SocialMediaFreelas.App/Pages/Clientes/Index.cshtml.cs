@@ -1,12 +1,13 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Clientes
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BaseModel
     {
         private readonly IClienteService _service;
 
-        public IndexModel(IClienteService service)
+        public IndexModel(IClienteService service, ISessao sessao) : base(sessao)
         {
             _service= service;
         }

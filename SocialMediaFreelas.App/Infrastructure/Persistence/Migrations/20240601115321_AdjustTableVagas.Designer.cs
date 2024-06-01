@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240601115321_AdjustTableVagas")]
+    partial class AdjustTableVagas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.0");
@@ -148,21 +151,6 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                     b.ToTable("TB_Freelancers", (string)null);
                 });
 
-            modelBuilder.Entity("FreelancerVaga", b =>
-                {
-                    b.Property<int>("FreelancersId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("VagasId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("FreelancersId", "VagasId");
-
-                    b.HasIndex("VagasId");
-
-                    b.ToTable("FreelancerVaga");
-                });
-
             modelBuilder.Entity("Vaga", b =>
                 {
                     b.Property<int>("Id")
@@ -186,6 +174,9 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("FreelancerId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<double>("Remuneracao")
                         .HasColumnType("REAL");
 
@@ -204,6 +195,8 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
 
                     b.HasIndex("ClienteId");
 
+                    b.HasIndex("FreelancerId");
+
                     b.ToTable("TB_Vagas", (string)null);
                 });
 
@@ -218,21 +211,6 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                     b.Navigation("Freelancer");
                 });
 
-            modelBuilder.Entity("FreelancerVaga", b =>
-                {
-                    b.HasOne("Freelancer", null)
-                        .WithMany()
-                        .HasForeignKey("FreelancersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Vaga", null)
-                        .WithMany()
-                        .HasForeignKey("VagasId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Vaga", b =>
                 {
                     b.HasOne("Cliente", "Cliente")
@@ -241,7 +219,14 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Freelancer", "Freelancer")
+                        .WithMany("Vagas")
+                        .HasForeignKey("FreelancerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.Navigation("Cliente");
+
+                    b.Navigation("Freelancer");
                 });
 
             modelBuilder.Entity("Cliente", b =>
@@ -252,6 +237,8 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Freelancer", b =>
                 {
                     b.Navigation("Experiencias");
+
+                    b.Navigation("Vagas");
                 });
 #pragma warning restore 612, 618
         }
