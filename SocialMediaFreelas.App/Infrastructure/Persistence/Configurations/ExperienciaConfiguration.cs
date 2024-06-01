@@ -17,7 +17,7 @@ public class ExperienciaConfiguration : IEntityTypeConfiguration<Experiencia>
         // public int FreelancerId { get; private set; }
 
         builder.HasOne(x => x.Freelancer)
-        .WithMany()
+        .WithMany(f => f.Experiencias)
         .HasForeignKey(x => x.FreelancerId)
         .OnDelete(DeleteBehavior.Cascade);
     }
