@@ -5,26 +5,102 @@
 }
 
 <style>
-    .classe{
-        background: red !important;
+    body {
+        background-color: #edf2f6 !important;
+        font-family: Arial, sans-serif !important;
     }
 
-    @@media (max-width: 768px){
-        .classe {background: blue !important;}
+    .profile-container {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        padding: 20px !important;
+    }
+
+    .profile-sidebar, .profile-form {
+        background-color: #fff !important;
+        padding: 20px !important;
+        border-radius: 10px !important;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .profile-sidebar {
+        margin-right: 20px !important;
+        text-align: center !important;
+    }
+
+    .profile-sidebar img {
+        border-radius: 50% !important;
+        width: 150px !important;
+        height: 150px !important;
+    }
+
+    .profile-sidebar h2 {
+        font-size: 24px !important;
+        margin: 10px 0 !important;
+    }
+
+    .profile-sidebar p {
+        color: #777 !important;
+    }
+
+    .profile-sidebar button {
+        background-color: #dc3545 !important;
+        color: #fff !important;
+        border: none !important;
+        padding: 10px 20px !important;
+        margin-top: 10px !important;
+        cursor: pointer !important;
+    }
+
+    .profile-form {
+        flex: 1 !important;
+        max-width: 600px !important;
+    }
+
+    .profile-form h3 {
+        margin-bottom: 20px !important;
+        font-size: 24px !important;
+    }
+
+    .profile-form .form-group {
+        margin-bottom: 15px !important;
+    }
+
+    .profile-form label {
+        display: block !important;
+        margin-bottom: 5px !important;
+    }
+
+    .profile-form input, .profile-form select {
+        width: 100% !important;
+        padding: 10px !important;
+        border: 1px solid #ccc !important;
+        border-radius: 5px !important;
+    }
+
+    .profile-form button {
+        background-color: #28a745 !important;
+        color: #fff !important;
+        border: none !important;
+        padding: 10px 20px !important;
+        cursor: pointer !important;
     }
 </style>
 
-<h1>Create</h1>
+<div class="profile-container">
+    <div class="profile-sidebar">
+        <img src="path_to_default_profile_picture.jpg" alt="Profile Picture">
+        <h2>Jamed Allan</h2>
+        <p>Upload a new avatar. Larger image will be resized automatically.</p>
+    </div>
 
-<h4>Freelancer</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    <div class="profile-form">
+        <h3>Edit Profile</h3>
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
-            <div class="form-group classe">
+            <div class="form-group">
                 <label asp-for="FreelancerInputModel.NumeroDocumento" class="control-label"></label>
                 <input asp-for="FreelancerInputModel.NumeroDocumento" class="form-control" />
                 <span asp-validation-for="FreelancerInputModel.NumeroDocumento" class="text-danger"></span>
@@ -65,9 +141,8 @@
                 <input asp-for="FreelancerInputModel.PretensaoSalarial" class="form-control" />
             </div>
 
-
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="submit" class="btn btn-primary">Create</button>
             </div>
         </form>
     </div>

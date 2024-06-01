@@ -1,15 +1,99 @@
 ﻿@page "{id:int?}"
 @model SocialMediaFreelas.Pages.Freelancers.DeleteModel
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<style>
+    body {
+        background-color: #edf2f6 !important;
+        font-family: Arial, sans-serif !important;
+    }
 
-<h4>Freelancer</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    .profile-container {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        padding: 20px !important;
+    }
+
+    .profile-sidebar, .profile-form {
+        background-color: #fff !important;
+        padding: 20px !important;
+        border-radius: 10px !important;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .profile-sidebar {
+        margin-right: 20px !important;
+        text-align: center !important;
+    }
+
+    .profile-sidebar img {
+        border-radius: 50% !important;
+        width: 150px !important;
+        height: 150px !important;
+    }
+
+    .profile-sidebar h2 {
+        font-size: 24px !important;
+        margin: 10px 0 !important;
+    }
+
+    .profile-sidebar p {
+        color: #777 !important;
+    }
+
+    .profile-sidebar button {
+        background-color: #dc3545 !important;
+        color: #fff !important;
+        border: none !important;
+        padding: 10px 20px !important;
+        margin-top: 10px !important;
+        cursor: pointer !important;
+    }
+
+    .profile-form {
+        flex: 1 !important;
+        max-width: 600px !important;
+    }
+
+    .profile-form h3 {
+        margin-bottom: 20px !important;
+        font-size: 24px !important;
+    }
+
+    .profile-form .form-group {
+        margin-bottom: 15px !important;
+    }
+
+    .profile-form label {
+        display: block !important;
+        margin-bottom: 5px !important;
+    }
+
+    .profile-form input, .profile-form select {
+        width: 100% !important;
+        padding: 10px !important;
+        border: 1px solid #ccc !important;
+        border-radius: 5px !important;
+    }
+
+    .profile-form button {
+        background-color: #28a745 !important;
+        color: #fff !important;
+        border: none !important;
+        padding: 10px 20px !important;
+        cursor: pointer !important;
+    }
+</style>
+
+<div class="profile-container">
+    <div class="profile-sidebar">
+        <img src="~/assets/img/freelancer.jpg" alt="Profile Picture">
+        <h2>Excluir perfil</h2>
+    </div>
+    <div class="profile-form">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -45,16 +129,17 @@
                 <input asp-for="FreelancerViewModel.PretensaoSalarial" class="form-control" disabled />
             </div>
 
+            <div style="display: flex; justify-content: space-between;">
+                <div class="form-group">
+                    <a asp-page="Index" class="btn btn-secondary">Voltar</a>
+                </div>
 
-            <div class="form-group mt-2">
-                <input type="submit" value="Delete" class="btn btn-danger" />
+                <div class="form-group">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {
