@@ -11,10 +11,10 @@ public class Cliente : BaseEntity
         Telefone = telefone;
         Vagas = new List<Vaga>();
     }
+
     public string NumeroDocumento { get; private set; }
     public string Nome { get; private set; }
 
-    [DataType(DataType.Date)]
     public DateTime DataNascimento { get; private set; }
     public string Email { get; private set; }
     public string Telefone { get; private set; }

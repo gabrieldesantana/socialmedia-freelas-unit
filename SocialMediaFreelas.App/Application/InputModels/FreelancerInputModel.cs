@@ -12,7 +12,6 @@ public class FreelancerInputModel
     public string? Nome { get; set; }
 
     [Required(ErrorMessage = "Campo obrigátorio")]
-    [DataType(DataType.Date)]
     [DisplayName("Data de Nascimento")]
     public DateTime DataNascimento { get; set; }
 

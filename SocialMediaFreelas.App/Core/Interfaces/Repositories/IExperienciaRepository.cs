@@ -1,8 +1,6 @@
-public interface IExperienciaRepository 
+using SocialMediaFreelas.Core.Interfaces.Repositories;
+
+public interface IExperienciaRepository : IGenericRepository<Experiencia>
 {
-    Task<List<Experiencia>> GetAllAsync();
-    Task<Experiencia> GetByIdAsync(int id);
-    Task<Experiencia> PostAsync(Experiencia entidade);
-    Task<Experiencia> PutAsync(int id, Experiencia entidade);
-    Task<bool> DeleteAsync(int id);
+    Task<Experiencia> PutAsync(int id, Experiencia entidade, string? tenantId = "");
 }

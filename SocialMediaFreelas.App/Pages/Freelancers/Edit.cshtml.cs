@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Freelancers
 {
-    public class EditModel : PageModel
+    public class EditModel : BaseModel
     {
         private readonly IFreelancerService _service;
 
-        public EditModel(IFreelancerService service)
+        public EditModel(IFreelancerService service, ISessao sessao) : base(sessao)
         {
             _service = service;
         }

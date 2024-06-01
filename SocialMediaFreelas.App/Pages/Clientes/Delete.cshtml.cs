@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Clientes
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : BaseModel
     {
         private readonly IClienteService _service;
 
-        public DeleteModel(IClienteService service)
+        public DeleteModel(IClienteService service, ISessao sessao) : base(sessao)
         {
             _service = service;
         }

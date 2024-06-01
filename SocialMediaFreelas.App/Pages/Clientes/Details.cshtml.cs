@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Clientes
 {
-    public class DetailsModel : PageModel
+    public class DetailsModel : BaseModel
     {
         private readonly IClienteService _service;
 
-        public DetailsModel(IClienteService service)
+        public DetailsModel(IClienteService service, ISessao sessao) : base(sessao)
         {
             _service = service;
         }

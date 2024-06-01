@@ -51,6 +51,9 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("TenantId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("TB_Clientes", (string)null);
@@ -78,9 +81,6 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                     b.Property<int>("FreelancerId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("FreelancerId1")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Projeto")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -89,15 +89,15 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("TenantId")
+                        .HasColumnType("TEXT");
+
                     b.Property<double>("Valor")
                         .HasColumnType("REAL");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FreelancerId")
-                        .IsUnique();
-
-                    b.HasIndex("FreelancerId1");
+                    b.HasIndex("FreelancerId");
 
                     b.ToTable("TB_Experiencias", (string)null);
                 });
@@ -140,9 +140,27 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("TenantId")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.ToTable("TB_Freelancers", (string)null);
+                });
+
+            modelBuilder.Entity("FreelancerVaga", b =>
+                {
+                    b.Property<int>("FreelancersId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("VagasId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("FreelancersId", "VagasId");
+
+                    b.HasIndex("VagasId");
+
+                    b.ToTable("FreelancerVaga");
                 });
 
             modelBuilder.Entity("Vaga", b =>
@@ -161,9 +179,6 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                     b.Property<int>("ClienteId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("ClienteId1")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
@@ -171,11 +186,11 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("FreelancerId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<double>("Remuneracao")
                         .HasColumnType("REAL");
+
+                    b.Property<string>("TenantId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Tipo")
                         .IsRequired()
@@ -187,13 +202,7 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClienteId")
-                        .IsUnique();
-
-                    b.HasIndex("ClienteId1");
-
-                    b.HasIndex("FreelancerId")
-                        .IsUnique();
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("TB_Vagas", (string)null);
                 });
@@ -201,38 +210,38 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Migrations
             modelBuilder.Entity("Experiencia", b =>
                 {
                     b.HasOne("Freelancer", "Freelancer")
-                        .WithOne()
-                        .HasForeignKey("Experiencia", "FreelancerId")
+                        .WithMany("Experiencias")
+                        .HasForeignKey("FreelancerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Freelancer", null)
-                        .WithMany("Experiencias")
-                        .HasForeignKey("FreelancerId1");
-
                     b.Navigation("Freelancer");
+                });
+
+            modelBuilder.Entity("FreelancerVaga", b =>
+                {
+                    b.HasOne("Freelancer", null)
+                        .WithMany()
+                        .HasForeignKey("FreelancersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Vaga", null)
+                        .WithMany()
+                        .HasForeignKey("VagasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Vaga", b =>
                 {
                     b.HasOne("Cliente", "Cliente")
-                        .WithOne()
-                        .HasForeignKey("Vaga", "ClienteId")
+                        .WithMany("Vagas")
+                        .HasForeignKey("ClienteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Cliente", null)
-                        .WithMany("Vagas")
-                        .HasForeignKey("ClienteId1");
-
-                    b.HasOne("Freelancer", "Freelancer")
-                        .WithOne()
-                        .HasForeignKey("Vaga", "FreelancerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.Navigation("Cliente");
-
-                    b.Navigation("Freelancer");
                 });
 
             modelBuilder.Entity("Cliente", b =>

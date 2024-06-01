@@ -1,8 +1,7 @@
-public interface IClienteRepository
+using SocialMediaFreelas.Core.Interfaces.Repositories;
+
+public interface IClienteRepository : IGenericRepository<Cliente>
 {
-    Task<List<Cliente>> GetAllAsync();
-    Task<Cliente> GetByIdAsync(int id);
-    Task<Cliente> PostAsync(Cliente entidade);
-    Task<Cliente> PutAsync(int id, Cliente entidade);
-    Task<bool> DeleteAsync(int id);
+    Task<Cliente> PutAsync(int id, Cliente entidade, string? tenantId = "");
+    Task<Cliente> LoginAsync(string email, string senha);
 }

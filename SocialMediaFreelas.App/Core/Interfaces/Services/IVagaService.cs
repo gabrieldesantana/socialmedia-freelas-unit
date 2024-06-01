@@ -1,8 +1,10 @@
 public interface IVagaService
 {
-    Task<DefaultResponse<VagaViewModel>> GetAllAsync();
-    Task<DefaultResponse<VagaViewModel>> GetByIdAsync(int id);
+    Task<DefaultResponse<VagaViewModel>> GetAllAsync(string? tenantId = "");
+    Task<DefaultResponse<VagaViewModel>> GetByIdAsync(int id, string? tenantId = "");
     Task<DefaultResponse<Vaga>> PostAsync(VagaInputModel entidade);
-    Task<DefaultResponse<Vaga>> PutAsync(int id, Vaga entidade);
-    Task<bool> DeleteAsync(int id);
+    Task<DefaultResponse<Vaga>> PutAsync(int id, Vaga entidade, string? tenantId = "");
+    Task<bool> DeleteAsync(int id, string? tenantId = "");
+
+    Task<bool> AddFreelancerAsync(int idVaga, int idFreelancer);
 }

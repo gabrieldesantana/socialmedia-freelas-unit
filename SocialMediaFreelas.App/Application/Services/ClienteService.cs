@@ -1,3 +1,6 @@
+using SocialMediaFreelas.Application.ViewModels;
+using SocialMediaFreelas.Frontend.Enums;
+
 public class ClienteService : IClienteService
 {
     private readonly IClienteRepository _repository;
@@ -5,7 +8,7 @@ public class ClienteService : IClienteService
     {
         _repository = repository;
     }
-    public async Task<DefaultResponse<ClienteViewModel>> GetAllAsync()
+    public async Task<DefaultResponse<ClienteViewModel>> GetAllAsync(string? tenantId = "")
     {
         var clientes = await _repository.GetAllAsync();
 
@@ -34,7 +37,7 @@ public class ClienteService : IClienteService
         };
     }
 
-    public async Task<DefaultResponse<ClienteViewModel>> GetByIdAsync(int id)
+    public async Task<DefaultResponse<ClienteViewModel>> GetByIdAsync(int id, string? tenantId = "")
     {
         var cliente = await _repository.GetByIdAsync(id);
 
@@ -75,6 +78,7 @@ public class ClienteService : IClienteService
             inputModel.Email,
             inputModel.Telefone);
 
+            clienteNew.TenantId = Guid.NewGuid().ToString();
             clienteNew.SetPasswordHash(inputModel.Senha);
 
             var cliente = await _repository.PostAsync(clienteNew);
@@ -97,7 +101,7 @@ public class ClienteService : IClienteService
         }
     }
 
-    public async Task<DefaultResponse<Cliente>> PutAsync(int id, Cliente entidade)
+    public async Task<DefaultResponse<Cliente>> PutAsync(int id, Cliente entidade, string? tenantId = "")
     {
         try
         {
@@ -123,7 +127,7 @@ public class ClienteService : IClienteService
 
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id, string? tenantId = "")
     {
         try
         {
@@ -135,5 +139,23 @@ public class ClienteService : IClienteService
         {
             return false;
         }
+    }
+
+    public async Task<UsuarioViewModel> LoginAsync(string email, string senha)
+    {
+        var senhaCriptografada = senha.GenerateHash();
+
+        var cliente = await _repository.LoginAsync(email, senhaCriptografada);
+
+        if (cliente == null) return null;
+
+        return new UsuarioViewModel
+        {
+            UserId = cliente.Id,
+            TenantId = cliente.TenantId,
+            Nome = cliente.Nome,
+            Email = cliente.Email,
+            Role = EUserRole.Cliente
+        };
     }
 }

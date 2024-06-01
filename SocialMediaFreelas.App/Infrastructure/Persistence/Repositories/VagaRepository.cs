@@ -1,41 +1,22 @@
 using Microsoft.EntityFrameworkCore;
+using SocialMediaFreelas.Infrastructure.Persistence.Repositories;
 
-public class VagaRepository : IVagaRepository
+public class VagaRepository : GenericRepository<Vaga>, IVagaRepository
 {
-    private readonly AppDbContext _context;
-
     public VagaRepository(AppDbContext context)
+        : base(context)
     {
-        _context = context;
     }
 
-    public async Task<List<Vaga>> GetAllAsync()
-    {
-        return await _context.Vagas
-        .Where(x => x.Actived)
-        .ToListAsync();
-    }
 
-    public async Task<Vaga> GetByIdAsync(int id)
+    public async Task<Vaga> PutAsync(int id, Vaga entidade, string? tenantId = "")
     {
-        return await _context.Vagas.FirstOrDefaultAsync(x => x.Id == id);
-    }
-
-    public async Task<Vaga> PostAsync(Vaga entidade)
-    {
-        await _context.AddAsync(entidade);
-        await _context.SaveChangesAsync();
-        return entidade;
-    }
-
-    public async Task<Vaga> PutAsync(int id, Vaga entidade)
-    {
-        var entidadeDb = await GetByIdAsync(id);
+        var entidadeDb = await GetByIdAsync(id, tenantId);
         if (entidadeDb != null)
         {
             try
             {
-                var excludedProperties = new[] { "Id", "ClienteId"};
+                var excludedProperties = new[] { "Id", "ClienteId", "TenantId"};
 
                 foreach (var property in entidadeDb.GetType().GetProperties())
                 {
@@ -54,12 +35,26 @@ public class VagaRepository : IVagaRepository
         return entidadeDb;
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public override async Task<List<Vaga>> GetAllAsync(string? tenantId = "")
     {
-        var retorno = await GetByIdAsync(id);
+        return (tenantId == "")
+          ? await _context.Vagas
+          .Include(x => x.Freelancers)
+          .Where(x => x.Actived).ToListAsync()
+          : await _context.Vagas
+          .Include(x => x.Freelancers)
+          .Where(x => x.Actived && x.TenantId == tenantId).ToListAsync();
+    }
+
+    public async Task<bool> AddFreelancerAsync(int idVaga,int idFreelancer)
+    {
+        var vaga = await GetByIdAsync(idVaga);
+        var freelancer = _context.Freelancers.First(x => x.Id == idFreelancer);
+
         try
         {
-            retorno.Actived = retorno.Actived ? false : true;
+            vaga.CadastrarFreelancer(freelancer);
+
             await _context.SaveChangesAsync();
             return true;
         }

@@ -6,4 +6,6 @@ public class ExperienciaInputModel
     public double Valor { get; set; }
     public int Avaliacao { get; set; }
     public int FreelancerId { get; set; }
+
+    public string? TenantIdOwner { get; set; }
 }

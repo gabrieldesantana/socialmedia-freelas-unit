@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Vagas
 {
-    public class EditModel : PageModel
+    public class EditModel : BaseModel
     {
         private readonly IVagaService _service;
 
-        public EditModel(IVagaService service)
+        public EditModel(IVagaService service, ISessao sessao) 
+            : base(sessao)
         {
             _service = service;
         }
@@ -17,7 +18,8 @@ namespace SocialMediaFreelas.Pages.Vagas
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            var model = await _service.GetByIdAsync(id);
+            var tenantId = GetTenantIdUser();
+            var model = await _service.GetByIdAsync(id, tenantId);
 
             #pragma warning disable CS8601
             VagaUpdateModel = model.Body.Select(x => new VagaUpdateModel
@@ -28,7 +30,7 @@ namespace SocialMediaFreelas.Pages.Vagas
                 Cargo = x.Cargo,
                 Tipo = x.Tipo,
                 Remuneracao = x.Remuneracao,
-                FreelancerId = x.FreelancerId
+                //FreelancerId = x.FreelancerId
             }).FirstOrDefault();
             #pragma warning restore CS8601
 
@@ -44,6 +46,8 @@ namespace SocialMediaFreelas.Pages.Vagas
 
             try
             {
+                var tenantId = GetTenantIdUser();
+
                 await _service.PutAsync(
                     VagaUpdateModel.Id,
                     new Vaga(
@@ -51,8 +55,8 @@ namespace SocialMediaFreelas.Pages.Vagas
                         VagaUpdateModel.Descricao,
                         VagaUpdateModel.Cargo,
                         VagaUpdateModel.Tipo,
-                        VagaUpdateModel.Remuneracao,
-                        freelancerId: VagaUpdateModel.FreelancerId)
+                        VagaUpdateModel.Remuneracao),
+                    tenantId
                     );
 
                 TempData["MensagemSucesso"] = "Atualização feita com sucesso!";

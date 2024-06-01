@@ -5,9 +5,9 @@ public class VagaService : IVagaService
     {
         _repository = repository;
     }
-    public async Task<DefaultResponse<VagaViewModel>> GetAllAsync()
+    public async Task<DefaultResponse<VagaViewModel>> GetAllAsync(string? tenantId)
     {
-        var vagas = await _repository.GetAllAsync();
+        var vagas = await _repository.GetAllAsync(tenantId);
 
         if (!vagas.Any())
         {
@@ -32,14 +32,14 @@ public class VagaService : IVagaService
                 Tipo = x.Tipo,
                 Remuneracao = x.Remuneracao,
                 ClienteId = x.ClienteId,
-                FreelancerId = x.FreelancerId
+                Freelancers = x.Freelancers!
             }).ToList()
         };
     }
 
-    public async Task<DefaultResponse<VagaViewModel>> GetByIdAsync(int id)
+    public async Task<DefaultResponse<VagaViewModel>> GetByIdAsync(int id, string? tenantId)
     {
-        var vaga = await _repository.GetByIdAsync(id);
+        var vaga = await _repository.GetByIdAsync(id, tenantId);
 
         if (vaga == null) return new DefaultResponse<VagaViewModel>
         {
@@ -62,8 +62,7 @@ public class VagaService : IVagaService
                 Cargo = vaga.Cargo,
                 Tipo = vaga.Tipo,
                 Remuneracao = vaga.Remuneracao,
-                ClienteId = vaga.ClienteId,
-                FreelancerId = vaga.FreelancerId
+                ClienteId = vaga.ClienteId
                 }
             }
         };
@@ -79,9 +78,9 @@ public class VagaService : IVagaService
             inputModel.Cargo,
             inputModel.Tipo,
             inputModel.Remuneracao,
-            inputModel.ClienteId,
-            inputModel.FreelancerId);
+            inputModel.ClienteId);
 
+            vagaNew.TenantId = inputModel.TenantIdOwner;
             var vaga = await _repository.PostAsync(vagaNew);
 
             return new DefaultResponse<Vaga>
@@ -102,11 +101,11 @@ public class VagaService : IVagaService
         }
     }
 
-    public async Task<DefaultResponse<Vaga>> PutAsync(int id, Vaga entidade)
+    public async Task<DefaultResponse<Vaga>> PutAsync(int id, Vaga entidade, string? tenantId)
     {
         try
         {
-            var vaga = await _repository.PutAsync(id, entidade);
+            var vaga = await _repository.PutAsync(id, entidade, tenantId);
 
             return new DefaultResponse<Vaga>
             {
@@ -128,12 +127,27 @@ public class VagaService : IVagaService
 
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id, string? tenantId)
     {
         try
         {
-            var vaga = await _repository.GetByIdAsync(id);
-            await _repository.DeleteAsync(vaga.Id);
+            var vaga = await _repository.GetByIdAsync(id, tenantId);
+            await _repository.DeleteAsync(vaga.Id, tenantId);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+
+    public async Task<bool> AddFreelancerAsync(int idVaga, int idFreelancer)
+    {
+        try
+        {
+            var vaga = await _repository.GetByIdAsync(idVaga);
+
+            await _repository.AddFreelancerAsync(vaga.Id, idFreelancer);
             return true;
         }
         catch (Exception)

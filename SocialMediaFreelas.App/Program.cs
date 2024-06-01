@@ -7,8 +7,10 @@ builder.Services.AddRegisterServices(builder.Configuration);
 
 var app = builder.Build();
 
+const string tenantId = "B4ck3ndS0c14lM3d14";
+
 #region FreelancersEndpoint
-app.MapGet(@"/api/freelancers", async (IFreelancerService service) => 
+app.MapGet(@"/api/freelancers", async (IFreelancerService service) =>
 await service.GetAllAsync())
 .WithSummary("Retorna todos os freelancers")
 .WithDescription("GET - Retorna todos os freelancers");
@@ -18,7 +20,7 @@ await service.GetByIdAsync(id))
 .WithSummary("Retorna freelancer por Id")
 .WithDescription("GET - Retorna freelancer por Id");
 
-app.MapPost(@"/api/freelancers", async ([FromBody] FreelancerInputModel inputModel, IFreelancerService service) 
+app.MapPost(@"/api/freelancers", async ([FromBody] FreelancerInputModel inputModel, IFreelancerService service)
 => await service.PostAsync(inputModel))
 .WithSummary("Adiciona freelancer")
 .WithDescription("POST - Adiciona freelancer");
@@ -26,8 +28,8 @@ app.MapPost(@"/api/freelancers", async ([FromBody] FreelancerInputModel inputMod
 app.MapPut(@"/api/freelancers/{id:int}", async (int id, [FromBody] FreelancerUpdateModel updateModel, IFreelancerService service) =>
 await service.PutAsync
 (
-    id, 
-    new Freelancer(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone, updateModel.PretensaoSalarial) )
+    id,
+    new Freelancer(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone, updateModel.PretensaoSalarial))
 )
 .WithSummary("Atualiza freelancer")
 .WithDescription("PUT - Atualiza freelancer");
@@ -73,12 +75,12 @@ app.MapDelete(@"/api/clientes/{id:int}", async (int id, IClienteService service)
 #region VagasEndpoint
 
 app.MapGet(@"/api/vagas", async (IVagaService service) =>
-await service.GetAllAsync())
+await service.GetAllAsync(tenantId))
 .WithSummary("Retorna todos os vagas")
 .WithDescription("GET - Retorna todos os vagas");
 
 app.MapGet(@"/api/vagas/{id:int}", async (int id, IVagaService service) =>
-await service.GetByIdAsync(id))
+await service.GetByIdAsync(id, tenantId))
 .WithSummary("Retorna vaga por Id")
 .WithDescription("GET - Retorna vaga por Id");
 
@@ -91,13 +93,14 @@ app.MapPut(@"/api/vagas/{id:int}", async (int id, [FromBody] VagaUpdateModel upd
 await service.PutAsync
 (
     id,
-    new Vaga(updateModel.Titulo, updateModel.Descricao, updateModel.Cargo, updateModel.Tipo, updateModel.Remuneracao))
+    new Vaga(updateModel.Titulo, updateModel.Descricao, updateModel.Cargo, updateModel.Tipo, updateModel.Remuneracao),
+    tenantId)
 )
 .WithSummary("Atualiza vaga")
 .WithDescription("PUT - Atualiza vaga");
 
 app.MapDelete(@"/api/vagas/{id:int}", async (int id, IVagaService service) =>
-await service.DeleteAsync(id))
+await service.DeleteAsync(id, tenantId))
 .WithSummary("Remove vaga")
 .WithDescription("DELETE - Remove vaga");
 #endregion
@@ -105,12 +108,12 @@ await service.DeleteAsync(id))
 #region ExperienciasEndpoint
 
 app.MapGet(@"/api/experiencias", async (IExperienciaService service) =>
-await service.GetAllAsync())
+await service.GetAllAsync(tenantId))
 .WithSummary("Retorna todos os experiencias")
 .WithDescription("GET - Retorna todos os experiencias");
 
 app.MapGet(@"/api/experiencias/{id:int}", async (int id, IExperienciaService service) =>
-await service.GetByIdAsync(id))
+await service.GetByIdAsync(id, tenantId))
 .WithSummary("Retorna experiencia por Id")
 .WithDescription("GET - Retorna experiencia por Id");
 
@@ -123,13 +126,14 @@ app.MapPut(@"/api/experiencias/{id:int}", async (int id, [FromBody] ExperienciaU
 await service.PutAsync
 (
     id,
-    new Experiencia(updateModel.Projeto, updateModel.Empresa, updateModel.Tecnologia, updateModel.Valor, updateModel.Avaliacao))
+    new Experiencia(updateModel.Projeto, updateModel.Empresa, updateModel.Tecnologia, updateModel.Valor, updateModel.Avaliacao),
+    tenantId)
 )
 .WithSummary("Atualiza experiencia")
 .WithDescription("PUT - Atualiza experiencia");
 
 app.MapDelete(@"/api/experiencias/{id:int}", async (int id, IExperienciaService service) =>
- await service.DeleteAsync(id))
+ await service.DeleteAsync(id, tenantId))
 .WithSummary("Remove experiencia")
 .WithDescription("DELETE - Remove experiencia");
 #endregion
@@ -155,6 +159,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+app.UseSession(); //added it
 
 
 app.Run();

@@ -1,9 +1,11 @@
+using SocialMediaFreelas.Application.ViewModels;
+
 public interface IFreelancerService 
 {
-    Task<DefaultResponse<FreelancerViewModel>> GetAllAsync();
-    Task<DefaultResponse<FreelancerViewModel>> GetByIdAsync(int id);
+    Task<DefaultResponse<FreelancerViewModel>> GetAllAsync(string? tenantId = "");
+    Task<DefaultResponse<FreelancerViewModel>> GetByIdAsync(int id, string? tenantId = "");
     Task<DefaultResponse<Freelancer>> PostAsync(FreelancerInputModel entidade);
-    Task<DefaultResponse<Freelancer>> PutAsync(int id, Freelancer entidade);
-    Task<bool> DeleteAsync(int id);
-    Task<FreelancerViewModel> LoginAsync(string email, string senha);
+    Task<DefaultResponse<Freelancer>> PutAsync(int id, Freelancer entidade, string? tenantId = "");
+    Task<bool> DeleteAsync(int id, string? tenantId = "");
+    Task<UsuarioViewModel> LoginAsync(string email, string senha);
 }

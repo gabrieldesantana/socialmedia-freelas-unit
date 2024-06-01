@@ -1,3 +1,6 @@
+using SocialMediaFreelas.Application.ViewModels;
+using SocialMediaFreelas.Frontend.Enums;
+
 public class FreelancerService : IFreelancerService
 {
     private readonly IFreelancerRepository _repository;
@@ -5,7 +8,7 @@ public class FreelancerService : IFreelancerService
     {
         _repository = repository;
     }
-    public async Task<DefaultResponse<FreelancerViewModel>> GetAllAsync()
+    public async Task<DefaultResponse<FreelancerViewModel>> GetAllAsync(string? tenantId = "")
     {
         var freelancers = await _repository.GetAllAsync();
 
@@ -35,7 +38,7 @@ public class FreelancerService : IFreelancerService
             };
     }
 
-    public async Task<DefaultResponse<FreelancerViewModel>> GetByIdAsync(int id)
+    public async Task<DefaultResponse<FreelancerViewModel>> GetByIdAsync(int id, string? tenantId = "")
     {
         var freelancer = await _repository.GetByIdAsync(id);
 
@@ -71,13 +74,14 @@ public class FreelancerService : IFreelancerService
         try
         {
             var freelancerNew = new Freelancer(
-            inputModel.NumeroDocumento,
             inputModel.Nome,
+            inputModel.NumeroDocumento,
             inputModel.DataNascimento,
             inputModel.Email,
             inputModel.Telefone,
             inputModel.PretensaoSalarial);
 
+            freelancerNew.TenantId = Guid.NewGuid().ToString();
             freelancerNew.SetPasswordHash(inputModel.Senha);
             var freelancer = await _repository.PostAsync(freelancerNew);
         
@@ -99,7 +103,7 @@ public class FreelancerService : IFreelancerService
         }
     }
 
-    public async Task<DefaultResponse<Freelancer>> PutAsync(int id, Freelancer entidade)
+    public async Task<DefaultResponse<Freelancer>> PutAsync(int id, Freelancer entidade, string? tenantId = "")
     {
         try
         {
@@ -125,7 +129,7 @@ public class FreelancerService : IFreelancerService
 
     }
 
-    public async Task<bool> DeleteAsync(int id)
+    public async Task<bool> DeleteAsync(int id, string? tenantId = "")
     {
         try
         {
@@ -139,7 +143,7 @@ public class FreelancerService : IFreelancerService
         }
     }
 
-    public async Task<FreelancerViewModel> LoginAsync(string email, string senha)
+    public async Task<UsuarioViewModel> LoginAsync(string email, string senha)
     {
         var senhaCriptografada = senha.GenerateHash();
 
@@ -147,15 +151,13 @@ public class FreelancerService : IFreelancerService
 
         if (freelancer == null) return null;
 
-        return new FreelancerViewModel
+        return new UsuarioViewModel
         {
-            Id = freelancer.Id,
-            NumeroDocumento = freelancer.NumeroDocumento,
+            UserId = freelancer.Id,
+            TenantId = freelancer.TenantId,
             Nome = freelancer.Nome,
-            DataNascimento = freelancer.DataNascimento,
             Email = freelancer.Email,
-            Telefone = freelancer.Telefone,
-            PretensaoSalarial = freelancer.PretensaoSalarial
+            Role = EUserRole.Freelancer
         };
     }
 }
