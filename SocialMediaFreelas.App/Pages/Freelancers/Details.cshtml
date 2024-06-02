@@ -5,58 +5,50 @@
 }
 
 <style>
-    body {
-        background-color: #edf2f6 !important;
-        font-family: Arial, sans-serif !important;
+    .icon-container {
+        display: inline-block;
+        width: 70px;
+        height: 50px;
+        overflow: hidden;
     }
 
-    .profile-container {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: flex-start !important;
-        padding: 20px !important;
+    .img-icon {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 30%;
     }
 
-    .profile-sidebar, .profile-form {
-        background-color: #fff !important;
-        padding: 20px !important;
-        border-radius: 10px !important;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+    .search-input {
+        border-radius: 25px 0 0 25px;
     }
 
-    .profile-sidebar {
-        margin-right: 20px !important;
-        text-align: center !important;
+    .search-button {
+        border-radius: 0 25px 25px 0;
     }
 
-    .profile-sidebar img {
-        border-radius: 50% !important;
-        width: 150px !important;
-        height: 150px !important;
-    }
+img{
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 50%;
+}
 
-    .profile-sidebar h2 {
-        font-size: 24px !important;
-        margin: 10px 0 !important;
-    }
+#main-card {
+    color: #000 !important;
+    margin-top: 10vh;
+    display: flex !important;
+    padding: 20px;
+    color: #fff;
+}
 
-    .profile-sidebar p {
-        color: #777 !important;
-    }
+.card-body {
+    color: #fff;
+}
 
-    .profile-sidebar button {
-        background-color: #dc3545 !important;
-        color: #fff !important;
-        border: none !important;
-        padding: 10px 20px !important;
-        margin-top: 10px !important;
-        cursor: pointer !important;
-    }
+h2 {
+    color: #fff;
+}
 
-    .profile-form {
-        flex: 1 !important;
-        max-width: 600px !important;
-    }
 
     .profile-form h3 {
         margin-bottom: 20px !important;
@@ -96,54 +88,69 @@
     }
 </style>
 
-<div class="profile-container">
-
-    <div class="profile-sidebar">
-        <img src="~/assets/img/freelancer.jpg" alt="Profile Picture">
-        <h2>Detalhes do perfil</h2>
-    </div>
-    <div class="profile-form">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-            <input type="hidden" asp-for="FreelancerViewModel.Id"/>
-
-            <div class="form-group">
-                <label asp-for="FreelancerViewModel.NumeroDocumento" class="control-label"></label>
-                <input asp-for="FreelancerViewModel.NumeroDocumento" class="form-control" disabled />
+<div id="main-card">
+    <div class="d-flex justify-content-center">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+            <img src="https://labes.inf.ufes.br/wp-content/uploads/sem-foto.jpg">
+        </div>
+    <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.FreelancerViewModel.Nome</h5>
+                <p class="">@Model.FreelancerViewModel.Email</p>
+                <p class="">Desenvolvedor .NET | C# | EF Core | SQL</p>
+                @* <p class="card-text"><small class="text-body-secondary">Online</small></p> *@
+                <a href="https://web.whatsapp.com/" class="btn btn-success">Whatsapp</a>
             </div>
-
-            <div class="form-group">
-                <label asp-for="FreelancerViewModel.Nome" class="control-label"></label>
-                <input asp-for="FreelancerViewModel.Nome" class="form-control" disabled />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="FreelancerViewModel.DataNascimento" class="control-label"></label>
-                <input asp-for="FreelancerViewModel.DataNascimento" type="date" class="form-control" disabled />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="FreelancerViewModel.Email" class="control-label"></label>
-                <input asp-for="FreelancerViewModel.Email" class="form-control" disabled />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="FreelancerViewModel.Telefone" class="control-label"></label>
-                <input asp-for="FreelancerViewModel.Telefone" class="form-control" disabled />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="FreelancerViewModel.PretensaoSalarial" class="control-label"></label>
-                <input asp-for="FreelancerViewModel.PretensaoSalarial" class="form-control" disabled />
-            </div>
-
-            <div class="form-group">
-                <a asp-page="Index" class="btn btn-secondary">Voltar</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+
+
+<div class="container-exp mt-2">
+
+    <table class="table table-bordered align-middle table-light">
+        <h2>Experiências</h2>
+        <thead class="table table-dark">
+            <tr>
+                <th scope="col">Projeto</th>
+                <th scope="col">Empresa</th>
+                <th scope="col">Tecnologias</th>
+                <th scope="col">Valor do projeto</th>
+                <th scope="col">Avaliação</th>
+            </tr>
+        </thead>
+        <tbody>
+                @if (Model != null)
+                {
+                    foreach (var experiencia in Model.FreelancerViewModel.Experiencias)
+                    {
+                    <tr>
+                        <th scope="row">@experiencia.Projeto</th>
+                        <td>@experiencia.Empresa</td>
+                        <td>@experiencia.Tecnologia</td>
+                        <td>@experiencia.Valor</td>
+                        <td>@experiencia.Avaliacao</td>
+                    </tr>
+                    }
+                }
+                 <tr>
+                        <th scope="row">experiencia.Projeto</th>
+                        <td>experiencia.Empresa</td>
+                        <td>experiencia.Tecnologia</td>
+                        <td>experiencia.Valor</td>
+                        <td>experiencia.Avaliacao</td>
+                    </tr>
+                     <tr>
+                        <th scope="row">experiencia.Projeto</th>
+                        <td>experiencia.Empresa</td>
+                        <td>experiencia.Tecnologia</td>
+                        <td>experiencia.Valor</td>
+                        <td>experiencia.Avaliacao</td>
+                    </tr>
+        </tbody>
+    </table>
+</div>
+
 
 @section Scripts {
     @{

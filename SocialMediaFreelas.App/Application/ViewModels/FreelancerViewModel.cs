@@ -9,4 +9,5 @@ public class FreelancerViewModel : IDefaultEntity
     public string Email { get; set; }
     public string Telefone { get; set; }
     public double PretensaoSalarial { get; set; }
+    public List<Experiencia> Experiencias { get; set; }
 }

@@ -5,15 +5,114 @@
 }
 
 <style>
-    .classe{
-        background: red !important;
-    }
+/*body {
+     background: #f7f7f7;
+    font-family: 'Roboto', sans-serif;
+}*/
+
+.registration-form {
+    padding: 50px 0;
+}
+
+.registration-form form {
+    background: #fff;
+    max-width: 400px;
+    margin: auto;
+    padding: 30px 50px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-radius: 30px;
+    box-shadow: 0px 2px 10px 0px #f7f7f7;
+}
+
+.registration-form .form-icon {
+    text-align: center;
+    background-color: #5891ff;
+    border-radius: 50%;
+    font-size: 40px;
+    color: white;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    margin-bottom: 50px;
+    line-height: 100px;
+}
+/*
+.registration-form .form-group {
+    margin-bottom: 20px;
+}*/
+
+/*.registration-form .form-control {
+    border: 2px solid #d7d7d7;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 14px;
+    height: 40px;
+}*/
+
+/*.registration-form .form-control:focus {
+    border-color: #5891ff;
+    box-shadow: 0 0 8px 0 #5891ff;
+}*/
+
+.registration-form .create-account {
+    background: #5891ff;
+    border: none;
+    border-radius: 30px;
+    color: white;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.registration-form .create-account:hover {
+    background: #4478e3;
+}
+
 </style>
 
-<h1>Create</h1>
+<div class="registration-form">
+    <form id="create-experience-form">
+        <div class="form-icon">
+            <span><i class="icon icon-briefcase"></i></span>
+        </div>
+        @* <h2 class="text-center">Cadastrar Experiência</h2> *@
+        <div class="form-group">
+            <input type="hidden" class="form-control item" id="freelancer" placeholder="Freelancer" required>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control item" id="project" placeholder="Projeto" required>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control item" id="company" placeholder="Empresa" required>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control item" id="technology" placeholder="Tecnologia" required>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control item" id="value" placeholder="Valor" required>
+        </div>
+        <div class="form-group">
+            <select class="form-control item" id="rating" required>
+                <option value="" disabled selected>Avaliação</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-block create-account">Cadastrar Experiência</button>
+        </div>
+    </form>
+</div>
 
-<h4>Experiencia</h4>
-<hr />
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+@*
+
 <div class="row">
     <div class="col-md-4">
         <form method="post">
@@ -72,3 +171,4 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+*@

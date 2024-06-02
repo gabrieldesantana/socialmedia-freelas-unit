@@ -17,7 +17,8 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0 15px; 
+    padding: 0 15px;
+    margin-top: 10vh;
 }
 
 .registration-form form {
@@ -106,6 +107,9 @@ html, body {
         font-size: 30px;
         line-height: 70px;
     }
+    .registration-form {
+    margin-top: 5vh;
+    }
 }
 
 </style>
@@ -148,6 +152,7 @@ html, body {
             </div>
             <div class="form-group">
                 <button type="button" class="btn btn-block create-account">Criar conta</button>
+                <button type="button" asp-page="/Home/Index" class="btn btn-block create-account">Voltar</button>
             </div>
         </form>
     </div>

@@ -21,7 +21,7 @@ namespace SocialMediaFreelas.Infrastructure.Persistence.Repositories
               :  await _dbSet.Where(x => x.Actived && x.TenantId == tenantId).ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id, string? tenantId = "")
+        public virtual async Task<T> GetByIdAsync(int id, string? tenantId = "")
         {
             return (string.IsNullOrEmpty(tenantId))
             ? await _dbSet.FirstOrDefaultAsync(x => x.Id == id)

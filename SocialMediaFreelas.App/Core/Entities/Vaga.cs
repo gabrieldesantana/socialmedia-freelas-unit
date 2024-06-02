@@ -15,6 +15,7 @@ public class Vaga : BaseEntity
     public string Descricao { get; private set; }
     public string Cargo { get; private set; }
     public string Tipo { get; private set; }
+    //Modalidade
     public double Remuneracao { get ; private set; }
     public int ClienteId { get; private set; }
     public virtual List<Freelancer?> Freelancers { get; set; }
