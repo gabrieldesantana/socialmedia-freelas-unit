@@ -63,7 +63,8 @@ public class FreelancerService : IFreelancerService
                 DataNascimento = freelancer.DataNascimento,
                 Email = freelancer.Email,
                 Telefone = freelancer.Telefone,
-                PretensaoSalarial = freelancer.PretensaoSalarial
+                PretensaoSalarial = freelancer.PretensaoSalarial,
+                Experiencias = freelancer.Experiencias!
                 }
             }
         };
