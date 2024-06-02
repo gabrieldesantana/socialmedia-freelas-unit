@@ -21,24 +21,30 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
     <div class="container px-5">
-        <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Freelas Unit - @Model.Role.ToString()</span></a>
+        @if(Model != null)
+        {
+            <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Freelas Unit - @Model.Role.ToString()</span></a>
+        }
+        else {
+            <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Freelas Unit</span></a>
+        }
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
 
-                @if (Model.Role == Frontend.Enums.EUserRole.Freelancer)
+                @if (Model != null && Model.Role == Frontend.Enums.EUserRole.Freelancer)
                 {
                 <li class="nav-item"><a class="nav-link" asp-page="/Home/Freelancer/Index">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" asp-page="/Experiencias/IndexByUser">Minhas Experiencias</a></li> 
                 }
 
-                @if (Model.Role == Frontend.Enums.EUserRole.Cliente)
+                @if (Model != null && Model.Role == Frontend.Enums.EUserRole.Cliente)
                 {
                     <li class="nav-item"><a class="nav-link" asp-page="/Home/Cliente/Index">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" asp-page="/Vagas/IndexByUser"> Minhas Vagas</a></li>
                 }
 
-                @if (Model.Role == Frontend.Enums.EUserRole.Admin)
+                @if (Model != null && Model.Role == Frontend.Enums.EUserRole.Admin)
                 {
                     <li class="nav-item"><a class="nav-link" asp-page="/Vagas/Index">Vagas</a></li>
                     <li class="nav-item"><a class="nav-link" asp-page="/Freelancers/Index">Freelancers</a></li>
