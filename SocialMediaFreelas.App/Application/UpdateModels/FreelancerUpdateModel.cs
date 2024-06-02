@@ -8,5 +8,6 @@ public class FreelancerUpdateModel : IDefaultEntity
     public DateTime DataNascimento { get; set; }
     public string Email { get; set; }
     public string Telefone { get; set; }
+    public string Sobre { get; set; }
     public double PretensaoSalarial { get; set; }
 }

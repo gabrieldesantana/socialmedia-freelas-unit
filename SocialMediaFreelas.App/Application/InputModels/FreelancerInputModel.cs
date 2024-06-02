@@ -24,5 +24,7 @@ public class FreelancerInputModel
     [Required(ErrorMessage = "Campo obrigátorio")]
     public string? Senha { get; set; }
 
+    public string Sobre { get; set; }
+
     public double PretensaoSalarial { get; set; }
 }

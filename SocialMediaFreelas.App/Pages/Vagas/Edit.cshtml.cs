@@ -29,6 +29,8 @@ namespace SocialMediaFreelas.Pages.Vagas
                 Descricao = x.Descricao,
                 Cargo = x.Cargo,
                 Tipo = x.Tipo,
+                Localizacao = x.Localizacao,
+                Status = x.Status,
                 Remuneracao = x.Remuneracao,
                 //FreelancerId = x.FreelancerId
             }).FirstOrDefault();
@@ -55,6 +57,8 @@ namespace SocialMediaFreelas.Pages.Vagas
                         VagaUpdateModel.Descricao,
                         VagaUpdateModel.Cargo,
                         VagaUpdateModel.Tipo,
+                        VagaUpdateModel.Localizacao,
+                        VagaUpdateModel.Status,
                         VagaUpdateModel.Remuneracao),
                     tenantId
                     );

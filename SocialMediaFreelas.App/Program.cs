@@ -29,7 +29,7 @@ app.MapPut(@"/api/freelancers/{id:int}", async (int id, [FromBody] FreelancerUpd
 await service.PutAsync
 (
     id,
-    new Freelancer(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone, updateModel.PretensaoSalarial))
+    new Freelancer(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone, updateModel.Sobre, updateModel.PretensaoSalarial))
 )
 .WithSummary("Atualiza freelancer")
 .WithDescription("PUT - Atualiza freelancer");
@@ -93,7 +93,7 @@ app.MapPut(@"/api/vagas/{id:int}", async (int id, [FromBody] VagaUpdateModel upd
 await service.PutAsync
 (
     id,
-    new Vaga(updateModel.Titulo, updateModel.Descricao, updateModel.Cargo, updateModel.Tipo, updateModel.Remuneracao),
+    new Vaga(updateModel.Titulo, updateModel.Descricao, updateModel.Cargo, updateModel.Tipo, updateModel.Localizacao, updateModel.Status, updateModel.Remuneracao),
     tenantId)
 )
 .WithSummary("Atualiza vaga")

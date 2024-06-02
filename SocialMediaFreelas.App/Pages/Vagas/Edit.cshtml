@@ -46,6 +46,18 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="VagaUpdateModel.Localizacao" class="control-label"></label>
+                <input asp-for="VagaUpdateModel.Localizacao" class="form-control" />
+                <span asp-validation-for="VagaUpdateModel.Localizacao" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="VagaUpdateModel.Status" class="control-label"></label>
+                <input asp-for="VagaUpdateModel.Status" class="form-control" />
+                <span asp-validation-for="VagaUpdateModel.Status" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="VagaUpdateModel.Remuneracao" class="control-label"></label>
                 <input asp-for="VagaUpdateModel.Remuneracao" class="form-control" />
                 <span asp-validation-for="VagaUpdateModel.Remuneracao" class="text-danger"></span>

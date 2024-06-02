@@ -30,6 +30,8 @@ public class VagaService : IVagaService
                 Descricao = x.Descricao,
                 Cargo = x.Cargo,
                 Tipo = x.Tipo,
+                Localizacao = x.Localizacao,
+                Status = x.Status,
                 Remuneracao = x.Remuneracao,
                 ClienteId = x.ClienteId,
                 Freelancers = x.Freelancers!
@@ -61,6 +63,8 @@ public class VagaService : IVagaService
                 Descricao = vaga.Descricao,
                 Cargo = vaga.Cargo,
                 Tipo = vaga.Tipo,
+                Localizacao = vaga.Localizacao,
+                Status = vaga.Status,
                 Remuneracao = vaga.Remuneracao,
                 ClienteId = vaga.ClienteId
                 }
@@ -77,6 +81,8 @@ public class VagaService : IVagaService
             inputModel.Descricao,
             inputModel.Cargo,
             inputModel.Tipo,
+            inputModel.Localizacao,
+            inputModel.Status,
             inputModel.Remuneracao,
             inputModel.ClienteId);
 

@@ -40,6 +40,12 @@
                 @Html.DisplayNameFor(model => model.Response[0].Tipo)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Response[0].Localizacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Response[0].Status)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Response[0].Remuneracao)
             </th>
             <th></th>
@@ -79,6 +85,12 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Localizacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Remuneracao)
