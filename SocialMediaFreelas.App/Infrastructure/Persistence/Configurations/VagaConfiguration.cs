@@ -12,6 +12,8 @@ public class VagaConfiguration : IEntityTypeConfiguration<Vaga>
         builder.Property(x => x.Descricao).IsRequired();
         builder.Property(x => x.Cargo).IsRequired();
         builder.Property(x => x.Tipo).IsRequired();
+        builder.Property(x => x.Localizacao).IsRequired();
+        builder.Property(x => x.Status).IsRequired();
         builder.Property(x => x.Remuneracao).IsRequired();
 
         //public int FreelancerId { get; private set; }

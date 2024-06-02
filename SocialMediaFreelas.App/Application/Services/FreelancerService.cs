@@ -33,6 +33,7 @@ public class FreelancerService : IFreelancerService
                     NumeroDocumento = x.NumeroDocumento,
                     Email = x.Email,
                     Telefone = x.Telefone,
+                    Sobre = x.Sobre,
                     PretensaoSalarial = x.PretensaoSalarial
                 }).ToList()
             };
@@ -63,6 +64,7 @@ public class FreelancerService : IFreelancerService
                 DataNascimento = freelancer.DataNascimento,
                 Email = freelancer.Email,
                 Telefone = freelancer.Telefone,
+                Sobre = freelancer.Sobre,
                 PretensaoSalarial = freelancer.PretensaoSalarial,
                 Experiencias = freelancer.Experiencias!
                 }
@@ -80,6 +82,7 @@ public class FreelancerService : IFreelancerService
             inputModel.DataNascimento,
             inputModel.Email,
             inputModel.Telefone,
+            inputModel.Sobre,
             inputModel.PretensaoSalarial);
 
             freelancerNew.TenantId = Guid.NewGuid().ToString();

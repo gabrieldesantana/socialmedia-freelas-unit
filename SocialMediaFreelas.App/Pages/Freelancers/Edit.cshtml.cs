@@ -29,6 +29,7 @@ namespace SocialMediaFreelas.Pages.Freelancers
                 DataNascimento = x.DataNascimento,
                 Email = x.Email,
                 Telefone = x.Telefone,
+                Sobre = x.Sobre,
                 PretensaoSalarial = x.PretensaoSalarial
             }).FirstOrDefault();
             #pragma warning restore CS8601
@@ -53,6 +54,7 @@ namespace SocialMediaFreelas.Pages.Freelancers
                         FreelancerUpdateModel.DataNascimento,
                         FreelancerUpdateModel.Email,
                         FreelancerUpdateModel.Telefone,
+                        FreelancerUpdateModel.Sobre,
                         FreelancerUpdateModel.PretensaoSalarial)
                     );
 
