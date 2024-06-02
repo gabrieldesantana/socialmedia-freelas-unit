@@ -9,6 +9,11 @@
 
 <style>
 
+    #foto_quemsomos{
+        max-width: 300px;
+        border-radius: 69% 31% 70% 30% / 30% 20% 80% 70% ;
+    }
+
 
     @@media (min-width: 1000px)
     {
@@ -43,8 +48,8 @@
                     <!-- Header text content-->
                     <div class="text-center text-xxl-start">
                         <div class="badge bg-gradient-primary-to-secondary text-white mb-4"><div class="text-uppercase">Design &middot; Development &middot; Marketing</div></div>
-                        <div class="fs-3 fw-light text-muted">Nós podemos ajudar a sua empresa a </div>
-                        <h1 class="display-3 fw-bolder mb-5" id="titulo-principal-home"><span class="text-gradient d-inline">Encontrar os melhores programadores</span></h1>
+                        <div class="fs-3 fw-light text-muted">Olá, como vai?</div>
+                        <h1 class="display-3 fw-bolder mb-5" id="titulo-principal-home"><span class="text-gradient d-inline">Descubra os melhores programadores.</span></h1>
                         <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
                             <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="Login/Cliente">Encontre um profissional</a>
                             <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="Login/Freelancer">Quero trabalhar</a>
@@ -68,140 +73,58 @@
     <!-- About Section-->
 
      <div class="container px-5 my-5">
-                <div class="text-center mb-5">
-                    <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Resume</span></h1>
-                </div>
+                
                 <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-11 col-xl-9 col-xxl-8">
+                    <div class="col-lg-11">
+                        
                         <!-- Experience Section-->
-                        <section>
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h2 class="text-primary fw-bolder mb-0">Experience</h2>
-                                <!-- Download resume button-->
-                                <!-- Note: Set the link href target to a PDF file within your project-->
-                                <a class="btn btn-primary px-4 py-3" href="#!">
-                                    <div class="d-inline-block bi bi-download me-2"></div>
-                                    Download Resume
-                                </a>
-                            </div>
+                        <section id="quemSomos">
+                        
                             <!-- Experience Card 1-->
                             <div class="card shadow border-0 rounded-4 mb-5">
+                                
                                 <div class="card-body p-5">
-                                    <div class="row align-items-center gx-5">
-                                        <div class="col text-center text-lg-start mb-4 mb-lg-0">
-                                            <div class="bg-light p-4 rounded-4">
-                                                <div class="text-primary fw-bolder mb-2">2019 - Present</div>
-                                                <div class="small fw-bolder">Web Developer</div>
-                                                <div class="small text-muted">Stark Industries</div>
-                                                <div class="small text-muted">Los Angeles, CA</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus laudantium, voluptatem quis repellendus eaque sit animi illo ipsam amet officiis corporis sed aliquam non voluptate corrupti excepturi maxime porro fuga.</div></div>
-                                    </div>
+                                <div class="text-center mb-5">
+                                    <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Quem Somos?</span></h1>
                                 </div>
-                            </div>
-                            <!-- Experience Card 2-->
-                            <div class="card shadow border-0 rounded-4 mb-5">
-                                <div class="card-body p-5">
                                     <div class="row align-items-center gx-5">
                                         <div class="col text-center text-lg-start mb-4 mb-lg-0">
-                                            <div class="bg-light p-4 rounded-4">
-                                                <div class="text-primary fw-bolder mb-2">2017 - 2019</div>
-                                                <div class="small fw-bolder">SEM Specialist</div>
-                                                <div class="small text-muted">Wayne Enterprises</div>
-                                                <div class="small text-muted">Gotham City, NY</div>
+                                            <div class="bg-light p-4 rounded-4" style="position: relative;">
+                                                <img id="foto_quemsomos" src="~/assets/img/mulher_freela.jpg" alt="Profile Picture">
                                             </div>
                                         </div>
-                                        <div class="col-lg-8"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus laudantium, voluptatem quis repellendus eaque sit animi illo ipsam amet officiis corporis sed aliquam non voluptate corrupti excepturi maxime porro fuga.</div></div>
+                                        <div class="col-lg-6"><div>Freelas Unit é uma plataforma que conecta desenvolvedores de software a oportunidades globais de trabalho, simplificando o processo de contratação para empresas e freelancers. Com ferramentas integradas para busca, seleção, negociação e execução de projetos, enfrentamos desafios como competitividade e garantia de qualidade, enquanto contribuímos para a democratização do trabalho e a mudança na estrutura de emprego. Nosso compromisso inclui o uso de tecnologias modernas para garantir escalabilidade e segurança, impulsionando o crescimento contínuo das plataformas de freelance na economia digital.</div></div>
                                     </div>
                                 </div>
                             </div>
                         </section>
                         <!-- Education Section-->
-                        <section>
-                            <h2 class="text-secondary fw-bolder mb-4">Education</h2>
-                            <!-- Education Card 1-->
-                            <div class="card shadow border-0 rounded-4 mb-5">
-                                <div class="card-body p-5">
-                                    <div class="row align-items-center gx-5">
-                                        <div class="col text-center text-lg-start mb-4 mb-lg-0">
-                                            <div class="bg-light p-4 rounded-4">
-                                                <div class="text-secondary fw-bolder mb-2">2015 - 2017</div>
-                                                <div class="mb-2">
-                                                    <div class="small fw-bolder">Barnett College</div>
-                                                    <div class="small text-muted">Fairfield, NY</div>
-                                                </div>
-                                                <div class="fst-italic">
-                                                    <div class="small text-muted">Master's</div>
-                                                    <div class="small text-muted">Web Development</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus laudantium, voluptatem quis repellendus eaque sit animi illo ipsam amet officiis corporis sed aliquam non voluptate corrupti excepturi maxime porro fuga.</div></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Education Card 2-->
-                            <div class="card shadow border-0 rounded-4 mb-5">
-                                <div class="card-body p-5">
-                                    <div class="row align-items-center gx-5">
-                                        <div class="col text-center text-lg-start mb-4 mb-lg-0">
-                                            <div class="bg-light p-4 rounded-4">
-                                                <div class="text-secondary fw-bolder mb-2">2011 - 2015</div>
-                                                <div class="mb-2">
-                                                    <div class="small fw-bolder">ULA</div>
-                                                    <div class="small text-muted">Los Angeles, CA</div>
-                                                </div>
-                                                <div class="fst-italic">
-                                                    <div class="small text-muted">Undergraduate</div>
-                                                    <div class="small text-muted">Computer Science</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8"><div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus laudantium, voluptatem quis repellendus eaque sit animi illo ipsam amet officiis corporis sed aliquam non voluptate corrupti excepturi maxime porro fuga.</div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+                        
                         <!-- Divider-->
                         <div class="pb-5"></div>
                         <!-- Skills Section-->
-                        <section>
+                        <section id="parceiros">
                             <!-- Skillset Card-->
+                            
                             <div class="card shadow border-0 rounded-4 mb-5">
                                 <div class="card-body p-5">
+                                    <div class="text-center mb-5">
+                                        <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Nossos Parceiros</span></h1>
+                                    </div>
                                     <!-- Professional skills list-->
                                     <div class="mb-5">
                                         <div class="d-flex align-items-center mb-4">
                                             <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3"><i class="bi bi-tools"></i></div>
-                                            <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Professional Skills</span></h3>
                                         </div>
                                         <div class="row row-cols-1 row-cols-md-3 mb-4">
-                                            <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">SEO/SEM Marketing</div></div>
-                                            <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Statistical Analysis</div></div>
-                                            <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Web Development</div></div>
+                                            <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Nexia Innovadora</div></div>
+                                            <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">EcoSustentável</div></div>
+                                            <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">RL Costa</div></div>
                                         </div>
                                         <div class="row row-cols-1 row-cols-md-3">
-                                            <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Network Security</div></div>
-                                            <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Adobe Software Suite</div></div>
-                                            <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">User Interface Design</div></div>
-                                        </div>
-                                    </div>
-                                    <!-- Languages list-->
-                                    <div class="mb-0">
-                                        <div class="d-flex align-items-center mb-4">
-                                            <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3"><i class="bi bi-code-slash"></i></div>
-                                            <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Languages</span></h3>
-                                        </div>
-                                        <div class="row row-cols-1 row-cols-md-3 mb-4">
-                                            <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">HTML</div></div>
-                                            <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">CSS</div></div>
-                                            <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">JavaScript</div></div>
-                                        </div>
-                                        <div class="row row-cols-1 row-cols-md-3">
-                                            <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Python</div></div>
-                                            <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Ruby</div></div>
-                                            <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Node.js</div></div>
+                                            <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">NovaSoft</div></div>
+                                            <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Engplay</div></div>
+                                            <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Neurometa</div></div>
                                         </div>
                                     </div>
                                 </div>
@@ -254,8 +177,8 @@
                                     <!-- has successfully submitted-->
                                     <div class="d-none" id="submitSuccessMessage">
                                         <div class="text-center mb-3">
-                                            <div class="fw-bolder">Form submission successful!</div>
-                                            To activate this form, sign up at
+                                            <div class="fw-bolder">Envio do formulário realizado com sucesso!</div>
+                                            Para ativar este formulário, inscreva-se em
                                             <br />
                                             <a href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
                                         </div>
@@ -264,9 +187,9 @@
                                     <!---->
                                     <!-- This is what your users will see when there is-->
                                     <!-- an error submitting the form-->
-                                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
+                                    <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Erro ao enviar mensagem!</div></div>
                                     <!-- Submit Button-->
-                                    <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Submit</button></div>
+                                    <div class="d-grid"><button class="btn btn-primary btn-lg disabled" id="submitButton" type="submit">Enviar</button></div>
                                 </form>
                             </div>
                         </div>
