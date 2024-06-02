@@ -1,4 +1,5 @@
-﻿<style>
+﻿@model SocialMediaFreelas.Frontend.Dtos.UserDTO
+<style>
     #botaoSair 
     {
         border: 0 !important;
@@ -20,19 +21,30 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
     <div class="container px-5">
-        <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Freelas Unit</span></a>
+        <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Freelas Unit - @Model.Role.ToString()</span></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                <li class="nav-item"><a class="nav-link" asp-page="/Home/Cliente/Index">Inicio C</a></li>
-                <li class="nav-item"><a class="nav-link" asp-page="/Home/Freelancer/Index">Inicio F</a></li>
-                <li class="nav-item"><a class="nav-link" asp-page="/Vagas/Index">Vagas</a></li>
-                <li class="nav-item"><a class="nav-link" asp-page="/Vagas/IndexByUser"> Minhas Vagas</a></li>
-                <li class="nav-item"><a class="nav-link" asp-page="/Freelancers/Index">Freelancers</a></li>
-                <li class="nav-item"><a class="nav-link" asp-page="/Clientes/Index">Clientes</a></li>
-                <li class="nav-item"><a class="nav-link" asp-page="/Experiencias/Index">Experiencias</a></li>
-                <li class="nav-item"><a class="nav-link" asp-page="/Experiencias/IndexByUser">Minhas Experiencias</a></li>
 
+                @if (Model.Role == Frontend.Enums.EUserRole.Freelancer)
+                {
+                <li class="nav-item"><a class="nav-link" asp-page="/Home/Freelancer/Index">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" asp-page="/Experiencias/IndexByUser">Minhas Experiencias</a></li> 
+                }
+
+                @if (Model.Role == Frontend.Enums.EUserRole.Cliente)
+                {
+                    <li class="nav-item"><a class="nav-link" asp-page="/Home/Cliente/Index">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-page="/Vagas/IndexByUser"> Minhas Vagas</a></li>
+                }
+
+                @if (Model.Role == Frontend.Enums.EUserRole.Admin)
+                {
+                    <li class="nav-item"><a class="nav-link" asp-page="/Vagas/Index">Vagas</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-page="/Freelancers/Index">Freelancers</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-page="/Clientes/Index">Clientes</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-page="/Experiencias/Index">Experiencias</a></li>
+                }
                 <form method="post" asp-page-handler="Logout">
                     <input id="botaoSair" role="link" type="submit" class="nav-link" value="Sair">
                 </form>

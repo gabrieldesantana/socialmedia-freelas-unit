@@ -16,8 +16,8 @@ namespace SocialMediaFreelas.Pages.Vagas
 
         public async Task OnGetAsync()
         {
-            var tenantId = GetTenantIdUser();
-            var response = await _service.GetAllAsync(tenantId);
+            //var tenantId = GetTenantIdUser();
+            var response = await _service.GetAllAsync();
             Response = response.Body;
         }
     }

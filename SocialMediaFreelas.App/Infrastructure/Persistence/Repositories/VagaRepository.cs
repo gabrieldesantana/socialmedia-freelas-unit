@@ -37,7 +37,7 @@ public class VagaRepository : GenericRepository<Vaga>, IVagaRepository
 
     public override async Task<List<Vaga>> GetAllAsync(string? tenantId = "")
     {
-        return (tenantId == "")
+        return string.IsNullOrEmpty(tenantId)
           ? await _context.Vagas
           .Include(x => x.Freelancers)
           .Where(x => x.Actived).ToListAsync()
