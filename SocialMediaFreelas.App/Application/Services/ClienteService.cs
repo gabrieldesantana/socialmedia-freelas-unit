@@ -30,6 +30,7 @@ public class ClienteService : IClienteService
             {
                 Id = x.Id,
                 Nome = x.Nome,
+                Sobre = x.Sobre,
                 NumeroDocumento = x.NumeroDocumento,
                 Email = x.Email,
                 Telefone = x.Telefone
@@ -59,6 +60,7 @@ public class ClienteService : IClienteService
                 Id = cliente.Id,
                 NumeroDocumento = cliente.NumeroDocumento,
                 Nome = cliente.Nome,
+                Sobre = cliente.Sobre,
                 DataNascimento = cliente.DataNascimento,
                 Email = cliente.Email,
                 Telefone = cliente.Telefone
@@ -74,6 +76,7 @@ public class ClienteService : IClienteService
             var clienteNew = new Cliente(
             inputModel.NumeroDocumento,
             inputModel.Nome,
+            inputModel.Sobre,
             inputModel.DataNascimento,
             inputModel.Email,
             inputModel.Telefone);

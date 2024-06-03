@@ -26,6 +26,7 @@ namespace SocialMediaFreelas.Pages.Clientes
                 Id = x.Id,
                 NumeroDocumento = x.NumeroDocumento,
                 Nome = x.Nome,
+                Sobre = x.Sobre,
                 DataNascimento = x.DataNascimento,
                 Email = x.Email,
                 Telefone = x.Telefone
@@ -48,6 +49,7 @@ namespace SocialMediaFreelas.Pages.Clientes
                     ClienteUpdateModel.Id,
                     new Cliente(
                         ClienteUpdateModel.Nome,
+                        ClienteUpdateModel.Sobre,
                         ClienteUpdateModel.NumeroDocumento,
                         ClienteUpdateModel.DataNascimento,
                         ClienteUpdateModel.Email,

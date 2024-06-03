@@ -61,7 +61,7 @@ app.MapPut(@"/api/clientes/{id:int}", async (int id, [FromBody] ClienteUpdateMod
 await service.PutAsync
 (
     id,
-    new Cliente(updateModel.Nome, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone))
+    new Cliente(updateModel.Nome, updateModel.Sobre, updateModel.NumeroDocumento, updateModel.DataNascimento, updateModel.Email, updateModel.Telefone))
 )
 .WithSummary("Atualiza cliente")
 .WithDescription("PUT - Atualiza cliente");

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 public class Cliente : BaseEntity
 {
-    public Cliente(string numeroDocumento, string nome, DateTime dataNascimento, string email, string telefone)
+    public Cliente(string numeroDocumento, string nome, string sobre, DateTime dataNascimento, string email, string telefone)
     {
         Nome = nome;
         NumeroDocumento = numeroDocumento;
@@ -10,10 +10,13 @@ public class Cliente : BaseEntity
         Email = email;
         Telefone = telefone;
         Vagas = new List<Vaga>();
+        Sobre = sobre;
     }
 
     public string NumeroDocumento { get; private set; }
     public string Nome { get; private set; }
+
+    public string Sobre { get; private set; }
 
     public DateTime DataNascimento { get; private set; }
     public string Email { get; private set; }

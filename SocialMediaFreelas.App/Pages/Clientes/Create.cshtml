@@ -33,6 +33,12 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="ClienteInputModel.Sobre" class="control-label"></label>
+                <input asp-for="ClienteInputModel.Sobre" class="form-control" />
+                <span asp-validation-for="ClienteInputModel.Sobre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="ClienteInputModel.DataNascimento" class="control-label"></label>
                 <input asp-for="ClienteInputModel.DataNascimento" type="date" class="form-control" />
                 <span asp-validation-for="ClienteInputModel.DataNascimento" class="text-danger"></span>
