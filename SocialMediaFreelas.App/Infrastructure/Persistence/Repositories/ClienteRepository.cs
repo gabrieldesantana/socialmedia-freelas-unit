@@ -35,6 +35,13 @@ public class ClienteRepository : GenericRepository<Cliente>, IClienteRepository
         return entidadeDb;
     }
 
+    public override async Task<Cliente> GetByIdAsync(int id, string? tenantId = "")
+    {
+        return (string.IsNullOrEmpty(tenantId))
+        ? await _dbSet.Include(x => x.Vagas).FirstOrDefaultAsync(x => x.Id == id)
+        : await _dbSet.Include(x => x.Vagas).FirstOrDefaultAsync(x => x.Id == id && x.TenantId == tenantId);
+    }
+
     public async Task<Cliente> LoginAsync(string email, string senha)
     {
         return await _context.Clientes

@@ -5,36 +5,36 @@
 }
 
 <style>
-    .card-custom {
+   /* .card-custom {
         margin-top: 20px;
-        max-width: 80%; /* Aumenta a largura do card */
-        font-size: 1.5rem; /* Ajusta o tamanho do texto */
+        max-width: 80%;
+        font-size: 1.5rem; 
         padding: 20px;
-        border: none; /* Remove a borda do card */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona uma leve sombra para destaque */
+        border: none; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     }
 
     .card-title-custom {
-        font-size: 2.5rem; /* Aumenta o tamanho do título */
+        font-size: 2.5rem;
         margin-bottom: 20px;
     }
 
     .info-item {
-        margin-bottom: 10px; /* Espaçamento entre os itens de informação */
+        margin-bottom: 10px; 
     }
 
     .profile-img {
-        width: 100%; /* Garante que a imagem ocupe toda a coluna */
-        height: auto; /* Mantém a proporção da imagem */
-        object-fit: cover; /* Ajusta a imagem para cobrir o espaço disp onível */
+        width: 100%;
+        height: auto;
+        object-fit: cover;
     }
 
     .mt-5 {
         margin-top: 20 !important;
-    }
+    }*/
 
 </style>
-
+@*
 <div class="d-flex justify-content-center">
     <div class="card card-custom mt-5">
         <div class="row g-0">
@@ -66,6 +66,151 @@
         </div>
     </div>
 </div>
+*@
+
+
+<style>
+    .icon-container {
+        display: inline-block;
+        width: 70px;
+        height: 50px;
+        overflow: hidden;
+    }
+
+    .img-icon {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 30%;
+    }
+
+    .search-input {
+        border-radius: 25px 0 0 25px;
+    }
+
+    .search-button {
+        border-radius: 0 25px 25px 0;
+    }
+
+    img {
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 50%;
+    }
+
+    #main-card {
+        color: #000 !important;
+        margin-top: 10vh;
+        display: flex !important;
+        padding: 20px;
+        color: #fff;
+    }
+
+    .card-body {
+        color: #fff;
+    }
+
+    h2 {
+        color: #fff;
+    }
+
+
+    .profile-form h3 {
+        margin-bottom: 20px !important;
+        font-size: 24px !important;
+    }
+
+    .profile-form .form-group {
+        margin-bottom: 15px !important;
+    }
+
+    .profile-form label {
+        display: block !important;
+        margin-bottom: 5px !important;
+    }
+
+    .profile-form input, .profile-form select {
+        width: 100% !important;
+        padding: 10px !important;
+        border: 1px solid #ccc !important;
+        border-radius: 5px !important;
+    }
+
+    .profile-form button {
+        background-color: #28a745 !important;
+        color: #fff !important;
+        border: none !important;
+        padding: 10px 20px !important;
+        cursor: pointer !important;
+    }
+
+    .profile-sidebar h2 {
+        color: #495057;
+    }
+
+    .control-label {
+        color: #495057;
+    }
+</style>
+
+<div id="main-card">
+    <div class="d-flex justify-content-center">
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+            <img src="https://labes.inf.ufes.br/wp-content/uploads/sem-foto.jpg">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.ClienteViewModel.Nome</h5>
+                <p class=""></p>
+                <p class="">@Model.ClienteViewModel.Sobre</p>
+                <a href="mailto:@Model.ClienteViewModel.Email" class="btn btn-danger">Email</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-exp mt-2">
+
+    <table class="table table-bordered align-middle table-light text-primary">
+        <h2>Vagas</h2>
+        <thead class="table table-light text-primary">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Cargo</th>
+                <th scope="col">Localizacao</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var vaga in Model.ClienteViewModel.Vagas)
+                {
+                    <tr>
+                        <th scope="row">@vaga.Titulo</th>
+                        <td>@vaga.Cargo</td>
+                        <td>@vaga.Localizacao</td>
+                        <td>@vaga.Tipo</td>
+                        <td>@vaga.Status</td>
+                        @if (vaga.Status == "Fechada")
+                        {
+                            <td style="font-weight:bold"><a style="color:rgba(0,0,0,0.2)">Ver mais</a></td>
+                        }
+                        else
+                        {
+                            <td style="font-weight:bold;"><a asp-page="../Vagas/Details" asp-route-id="@vaga.Id">Ver mais</a></td>
+                        }
+
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
 
 @section Scripts {
     @{

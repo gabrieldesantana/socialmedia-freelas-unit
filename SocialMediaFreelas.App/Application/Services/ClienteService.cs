@@ -63,7 +63,8 @@ public class ClienteService : IClienteService
                 Sobre = cliente.Sobre,
                 DataNascimento = cliente.DataNascimento,
                 Email = cliente.Email,
-                Telefone = cliente.Telefone
+                Telefone = cliente.Telefone,
+                Vagas = cliente.Vagas
                 }
             }
         };
