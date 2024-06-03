@@ -37,6 +37,9 @@ namespace SocialMediaFreelas.Pages.Login.Freelancer
             }
 
 
+            if (usuarioViewModel.Email.Equals("admin@teste.com", StringComparison.OrdinalIgnoreCase))
+                usuarioViewModel.Role = Frontend.Enums.EUserRole.Admin;
+
             UserDTO userDTO = new UserDTO
             {
              UserId = usuarioViewModel.UserId,
