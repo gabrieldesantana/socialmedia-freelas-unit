@@ -3,80 +3,72 @@
 @{
     ViewData["Title"] = "Geral";
 }
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
+ 
 
-    <style >
-    .custom-card {
-        width: 50% !important; /* Aumentar o tamanho do card */
-        min-height: 300px;
+    #containerVaga {
+       /* background: green;*/
+        display: flex;
+        flex-direction: column;
+        gap: 2vh;
+        margin-top: 5vh;
+        width: 100%;
+        height: 100%;
         
     }
 
-    .custom-card .card-title {
-        font-size: 3rem; /* Tamanho da fonte para o título do card */
+    #cardVaga {
+        padding: 20px;
+        margin-bottom: 20px;
     }
-
-    .custom-card .card-text {
-        font-size: 1.25rem; /* Tamanho da fonte para o texto do card */
-    }
-
-    .custom-card .btn {
-        font-size: 1.5rem; /* Tamanho da fonte para o botão */
-    }
-
-    .custom-card .fa-whatsapp {
-        font-size: 3rem; /* Aumentar o tamanho do ícone do WhatsApp */
-    }
-
-    .custom-card .job-info {
-        font-size: 2rem; /* Tamanho da fonte para as informações do trabalho */
-        font-family: 'Arial', sans-serif; /* Nova fonte */
-        margin-bottom: 10px; /* Espaçamento inferior */
-    }   
 </style>
 
-<div class="card custom-card m-auto " style="background-color: #f0f0f0;">
-    <div class="card-body d-flex flex-column">
-        <div>
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-        <div class="mt-auto d-flex justify-content-between align-items-end">
-            <p class="job-info mb-0">Cargo | Localização | Tipo da vaga</p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-auto">
-                <button class="btn btn-primary me-md-2" type="button "> <i class="fab fa-whatsapp"></i></button>
-            </div>
-        </div>
-    </div>
-</div>
+<div id="containerVaga">
 
-<div class="card custom-card m-auto mb-4" style="background-color: #f0f0f0;">
-    <div class="card-body d-flex flex-column">
-        <div>
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-        <div class="mt-auto d-flex justify-content-between align-items-end">
-            <p class="job-info mb-0">Cargo | Localização | Tipo da vaga</p>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-auto">
-                <button class="btn btn-primary me-md-2" type="button "> <i class="fab fa-whatsapp"></i></button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="card custom-card m-auto mb-4" style="background-color: #f0f0f0;">
-    <div class="card-body d-flex flex-column">
-        <div>
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        </div>
-        <div class="mt-auto d-flex justify-content-between align-items-end">
-            <p class="job-info mb-0">Cargo | Localização | Tipo da vaga</p>
+    <div class="card custom-card m-auto" id="cardVaga">
+        <div class="card-body d-flex flex-column">
+            <div>
+                <h5 class="card-title">Vaga Desenvolvedor Jr</h5>
+                <p class="card-text">Procuro desenvolvedor Jr para atuar como Frontend React</p>
+            </div>
+            <div class="mt-auto d-flex justify-content-between align-items-end">
+                <p class="job-info mb-0">Desenvolvedor | Remoto | Integral</p>
+            </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-auto">
-                <button class="btn btn-primary me-md-2" type="button "> <i class="fab fa-whatsapp"></i></button>
+                <button class="btn btn-primary me-md-2" type="button">Detalhes</button>
             </div>
         </div>
     </div>
+
+    <div class="card custom-card m-auto" id="cardVaga">
+        <div class="card-body d-flex flex-column">
+            <div>
+                <h5 class="card-title">Vaga Desenvolvedor Jr</h5>
+                <p class="card-text">Procuro desenvolvedor Jr para atuar como Frontend React</p>
+            </div>
+            <div class="mt-auto d-flex justify-content-between align-items-end">
+                <p class="job-info mb-0">Desenvolvedor | Remoto | Integral</p>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-auto">
+                <button class="btn btn-primary me-md-2" type="button">Detalhes</i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card custom-card m-auto" id="cardVaga">
+        <div class="card-body d-flex flex-column">
+            <div>
+                <h5 class="card-title">Vaga Desenvolvedor Jr</h5>
+                <p class="card-text">Procuro desenvolvedor Jr para atuar como Frontend React</p>
+            </div>
+            <div class="mt-auto d-flex justify-content-between align-items-end">
+                <p class="job-info mb-0">Desenvolvedor | Remoto | Integral</p>
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-auto">
+                <button class="btn btn-primary me-md-2" type="button">Detalhes</i></button>
+            </div>
+        </div>
+    </div>
+
 </div>
