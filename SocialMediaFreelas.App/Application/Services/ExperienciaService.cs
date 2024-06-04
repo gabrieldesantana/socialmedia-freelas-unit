@@ -31,7 +31,8 @@ public class ExperienciaService : IExperienciaService
                 Tecnologia = x.Tecnologia,
                 Valor = x.Valor,
                 Avaliacao = x.Avaliacao,
-                FreelancerId = x.FreelancerId
+                FreelancerId = x.FreelancerId,
+                Freelancer = x.Freelancer
             }).ToList()
         };
     }

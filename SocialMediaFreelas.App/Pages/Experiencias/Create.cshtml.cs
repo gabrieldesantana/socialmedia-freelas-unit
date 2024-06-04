@@ -6,15 +6,19 @@ namespace SocialMediaFreelas.Pages.Experiencias
     public class CreateModel : BaseModel
     {
         private readonly IExperienciaService _service;
+        private readonly IFreelancerService _freelancerService;
 
-        public CreateModel(IExperienciaService service, ISessao sessao)
+        public CreateModel(IExperienciaService service, ISessao sessao, IFreelancerService freelancerService)
             : base(sessao)
         {
             _service = service;
+            _freelancerService = freelancerService;
         }
 
         public IActionResult OnGet() 
         {
+            var freelancers = _freelancerService.GetAllAsync();
+            ExperienciaInputModel.Freelancers = freelancers.Result.Body;
             return Page();
         }
 

@@ -8,4 +8,6 @@ public class ExperienciaInputModel
     public int FreelancerId { get; set; }
 
     public string? TenantIdOwner { get; set; }
+
+    public List<FreelancerViewModel>? Freelancers { get; set; }
 }

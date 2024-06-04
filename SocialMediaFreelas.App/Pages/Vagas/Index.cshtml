@@ -3,72 +3,60 @@
 @{
     ViewData["Title"] = "Geral";
 }
+
 <style>
- 
 
-    #containerVaga {
-       /* background: green;*/
-        display: flex;
-        flex-direction: column;
-        gap: 2vh;
-        margin-top: 5vh;
-        width: 100%;
-        height: 100%;
-        
-    }
-
-    #cardVaga {
-        padding: 20px;
-        margin-bottom: 20px;
-    }
+    .icon {
+        color: #5891ff;
+}
 </style>
 
-<div id="containerVaga">
+<div class="container mt-5">
+  <div class="row">
+    @if (Model.Response != null)
+        {
+            foreach (var vaga in Model.Response)
+            {
+                <!-- Card Vaga 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@vaga.Titulo</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@vaga.Localizacao</h6>
+                            @if (vaga.Status == "Aberta")
+                            {
+                                <p class="badge badge-success">Aberta para candidatura</p>
+                            }else
+                            {
+                                <p class="badge badge-secondary">Está vaga não aceita mais candidatura</p>
+                            }
+                            <p class="card-text">@vaga.Descricao</p>
+                            <h6 class="card-subtitle mb-2 text-muted"><a asp-page="../Clientes/Details" asp-route-id="@vaga.Cliente.Id">@vaga.Cliente.Nome</a></h6>
+                            
+                            <ol class="list-group list-group-flush">
+                                <li class="list-group-item"><span><i class="icon icon-bag"></i> </span>: @vaga.Cargo</li>
+                                <li class="list-group-item"><span><i class="icon icon-pie-chart"> </i></span>: R$@vaga.Remuneracao</li>
+                                <li class="list-group-item"><span><i class="icon icon-clock"></i> </span>: @vaga.Tipo</li>
+                            </ol>
+                            @if (vaga.Status == "Aberta")
+                            {
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-outline-primary mb-1" asp-page="./Details" asp-route-id="@vaga.Id">Detalhes</button>
+                                </div>
+                            }
+                            else if (vaga.Status == "Fechada")
+                            {
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-outline-dark mb-1" disabled>Detalhes</button>
+                                </div>
+                            }
+                          
+                        </div>
+                    </div>
+                </div>
+            }
+       }
+            <!-- Repita o bloco acima para cada vaga, alterando o título, localização, descrição e detalhes conforme necessário -->
 
-
-    <div class="card custom-card m-auto" id="cardVaga">
-        <div class="card-body d-flex flex-column">
-            <div>
-                <h5 class="card-title">Vaga Desenvolvedor Jr</h5>
-                <p class="card-text">Procuro desenvolvedor Jr para atuar como Frontend React</p>
-            </div>
-            <div class="mt-auto d-flex justify-content-between align-items-end">
-                <p class="job-info mb-0">Desenvolvedor | Remoto | Integral</p>
-            </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-auto">
-                <button class="btn btn-primary me-md-2" type="button">Detalhes</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="card custom-card m-auto" id="cardVaga">
-        <div class="card-body d-flex flex-column">
-            <div>
-                <h5 class="card-title">Vaga Desenvolvedor Jr</h5>
-                <p class="card-text">Procuro desenvolvedor Jr para atuar como Frontend React</p>
-            </div>
-            <div class="mt-auto d-flex justify-content-between align-items-end">
-                <p class="job-info mb-0">Desenvolvedor | Remoto | Integral</p>
-            </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-auto">
-                <button class="btn btn-primary me-md-2" type="button">Detalhes</i></button>
-            </div>
-        </div>
-    </div>
-
-    <div class="card custom-card m-auto" id="cardVaga">
-        <div class="card-body d-flex flex-column">
-            <div>
-                <h5 class="card-title">Vaga Desenvolvedor Jr</h5>
-                <p class="card-text">Procuro desenvolvedor Jr para atuar como Frontend React</p>
-            </div>
-            <div class="mt-auto d-flex justify-content-between align-items-end">
-                <p class="job-info mb-0">Desenvolvedor | Remoto | Integral</p>
-            </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-auto">
-                <button class="btn btn-primary me-md-2" type="button">Detalhes</i></button>
-            </div>
-        </div>
-    </div>
-
+  </div>
 </div>

@@ -77,7 +77,23 @@
         <div class="form-icon">
             <span><i class="icon icon-briefcase"></i></span>
         </div>
-        @* <h2 class="text-center">Cadastrar Experiência</h2> *@
+
+           <input type="search" list="mylistFreelancers" autocomplete="off" id="inputSelectFreelancer" class="form-control">
+
+            <datalist id="mylistFreelancers">
+                <option disabled>Selecione</option>
+            @if (Model.ExperienciaInputModel != null)
+            {
+                foreach (var freelancer in Model.ExperienciaInputModel.Freelancers)
+                {
+                    <option value="@freelancer.Id">@freelancer.Nome</option>
+                }
+            }
+
+            </datalist>
+
+
+
         <div class="form-group">
             <input type="text" class="form-control item" id="freelancer" placeholder="Freelancer" required>
         </div>

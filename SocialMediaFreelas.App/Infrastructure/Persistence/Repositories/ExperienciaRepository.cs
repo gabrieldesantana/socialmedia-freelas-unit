@@ -34,4 +34,15 @@ public class ExperienciaRepository : GenericRepository<Experiencia>,IExperiencia
         }
         return entidadeDb;
     }
+
+    public override async Task<List<Experiencia>> GetAllAsync(string? tenantId = "")
+    {
+        return string.IsNullOrEmpty(tenantId)
+          ? await _context.Experiencias
+          .Include(x => x.Freelancer)
+          .Where(x => x.Actived).ToListAsync()
+          : await _context.Experiencias
+          .Include(x => x.Freelancer)
+          .Where(x => x.Actived && x.TenantId == tenantId).ToListAsync();
+    }
 }

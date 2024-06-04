@@ -7,4 +7,6 @@ public class ExperienciaViewModel : IDefaultEntity
     public string Tecnologia { get; set; }
     public double Valor { get; set; }
     public int Avaliacao { get; set; }
+
+    public Freelancer? Freelancer { get; set; }
 }

@@ -4,105 +4,59 @@
     ViewData["Title"] = "Geral by User";
 }
 
-<h1>Vagas</h1>
 
-@*@if (TempData["MensagemSucesso"] != null)
-{
-    <div class="alert alert-success button-success" role="alert" id="success-message">
-        @TempData["MensagemSucesso"]
-        <i class="fa fa-check" aria-hidden="true"></i>
-    </div>
-}*@
+<style>
 
-<table class="table table-light">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].ClienteId)
-            </th>
-            @*            <th>
-            @Html.DisplayNameFor(model => model.Response[0].FreelancerId)
-            </th>*@
+    .icon {
+        color: #5891ff;
+    }
+</style>
 
-            <th>
-                Candidatos
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Cargo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Tipo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Localizacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Remuneracao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Response)
+<div class="container mt-5">
+    <div class="row">
+        @if (Model.Response != null)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ClienteId)
-                </td>
-                <td>
-                    @if (!Model.Response.First<VagaViewModel>(x => x.Id == item.Id).Freelancers.Any())
-                    {
-                        <p>Nenhum candidado</p>
-                    }
-                    else
-                    {
-                        @foreach (var freelancer in Model.Response.First<VagaViewModel>(x => x.Id == item.Id).Freelancers)
-                        {
-                            <p>
-                                @freelancer.Nome
-                                <a asp-page="../Freelancers/Details" asp-route-id="@freelancer.Id">Perfil</a>
-                            </p>
-                        }
-                    }
+            foreach (var vaga in Model.Response)
+            {
+                <!-- Card Vaga 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@vaga.Titulo</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@vaga.Localizacao</h6>
+                            @if (vaga.Status == "Aberta")
+                            {
+                                <p class="badge badge-success">Aberta para candidatura</p>
+                            }
+                            else
+                            {
+                                <p class="badge badge-secondary">Está vaga não aceita mais candidatura</p>
+                            }
+                            <p class="card-text">@vaga.Descricao</p>
+                            <ol class="list-group list-group-flush">
+                                <li class="list-group-item"><span><i class="icon icon-bag"></i> </span>: @vaga.Cargo</li>
+                                <li class="list-group-item"><span><i class="icon icon-pie-chart"> </i></span>: R$@vaga.Remuneracao</li>
+                                <li class="list-group-item"><span><i class="icon icon-clock"></i> </span>: @vaga.Tipo</li>
+                            </ol>
+                            @if (vaga.Status == "Aberta")
+                            {
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-outline-primary mb-1" asp-page="./Details" asp-route-id="@vaga.Id">Detalhes</button>
+                                </div>
+                            }
+                            else if (vaga.Status == "Fechada")
+                            {
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-outline-dark mb-1" disabled>Detalhes</button>
+                                </div>
+                            }
 
-                </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Titulo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cargo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tipo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Localizacao)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Remuneracao)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+                        </div>
+                    </div>
+                </div>
+            }
         }
-    </tbody>
-</table>
+        <!-- Repita o bloco acima para cada vaga, alterando o título, localização, descrição e detalhes conforme necessário -->
+
+    </div>
+</div>

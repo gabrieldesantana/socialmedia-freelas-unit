@@ -40,6 +40,7 @@ public class VagaRepository : GenericRepository<Vaga>, IVagaRepository
         return string.IsNullOrEmpty(tenantId)
           ? await _context.Vagas
           .Include(x => x.Freelancers)
+          .Include(x => x.Cliente)
           .Where(x => x.Actived).ToListAsync()
           : await _context.Vagas
           .Include(x => x.Freelancers)
@@ -66,7 +67,7 @@ public class VagaRepository : GenericRepository<Vaga>, IVagaRepository
 
     public Task<List<Vaga>> GetAllByFreelancerIdAsync(int freelancerId)
     {
-        var vagasPorFreelancer = _context.Vagas.Include(v => v.Freelancers).Where(vaga => vaga.Freelancers.Any(f => f.Id == freelancerId)).ToList();
+        var vagasPorFreelancer = _context.Vagas.Include(v => v.Freelancers).Where(vaga => vaga.Freelancers.Any(f => f.Id == freelancerId)).Include(c => c.Cliente).ToList();
 
         return Task.FromResult(vagasPorFreelancer);
     }

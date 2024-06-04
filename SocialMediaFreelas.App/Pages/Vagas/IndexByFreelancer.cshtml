@@ -1,18 +1,7 @@
 ﻿@page "{id:int?}"
 @model SocialMediaFreelas.Pages.Vagas.IndexByFreelancerModel
-@{
-}
 
-
-<h1>Vagas</h1>
-
-@*@if (TempData["MensagemSucesso"] != null)
-{
-    <div class="alert alert-success button-success" role="alert" id="success-message">
-        @TempData["MensagemSucesso"]
-        <i class="fa fa-check" aria-hidden="true"></i>
-    </div>
-}*@
+@*
 
 <table class="table table-light">
     <thead>
@@ -20,10 +9,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Response[0].ClienteId)
             </th>
-            @*            <th>
-                @Html.DisplayNameFor(model => model.Response[0].FreelancerId)
-            </th>*@
-
             <th>
                 Candidatos
             </th>
@@ -104,3 +89,60 @@
         }
     </tbody>
 </table>
+*@
+
+<style>
+
+    .icon {
+        color: #5891ff;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row">
+        @if (Model.Response != null)
+        {
+            foreach (var vaga in Model.Response)
+            {
+                <!-- Card Vaga 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">@vaga.Titulo</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">@vaga.Localizacao</h6>
+                            @if (vaga.Status == "Aberta")
+                            {
+                                <p class="badge badge-success">Aberta</p>
+                            }
+                            else
+                            {
+                                <p class="badge badge-secondary">Fechada</p>
+                            }
+                            <p class="card-text">@vaga.Descricao</p>
+                            <ol class="list-group list-group-flush">
+                                <li class="list-group-item"><span><i class="icon icon-bag"></i> </span>: @vaga.Cargo</li>
+                                <li class="list-group-item"><span><i class="icon icon-pie-chart"> </i></span>: R$@vaga.Remuneracao</li>
+                                <li class="list-group-item"><span><i class="icon icon-clock"></i> </span>: @vaga.Tipo</li>
+                            </ol>
+                            @if (vaga.Status == "Aberta")
+                            {
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-outline-primary mb-1" asp-page="./Details" asp-route-id="@vaga.Id">Detalhes</button>
+                                </div>
+                            }
+                            else if (vaga.Status == "Fechada")
+                            {
+                                <div class="card-body">
+                                    <button type="button" class="btn btn-outline-dark mb-1" disabled>Detalhes</button>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        <!-- Repita o bloco acima para cada vaga, alterando o título, localização, descrição e detalhes conforme necessário -->
+
+    </div>
+</div>

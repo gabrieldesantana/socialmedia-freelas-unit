@@ -34,7 +34,8 @@ public class VagaService : IVagaService
                 Status = x.Status,
                 Remuneracao = x.Remuneracao,
                 ClienteId = x.ClienteId,
-                Freelancers = x.Freelancers!
+                Freelancers = x.Freelancers!,
+                Cliente = x.Cliente
             }).ToList()
         };
     }
@@ -191,7 +192,8 @@ public class VagaService : IVagaService
                 Status = x.Status,
                 Remuneracao = x.Remuneracao,
                 ClienteId = x.ClienteId,
-                Freelancers = x.Freelancers!
+                Freelancers = x.Freelancers!,
+                Cliente = x.Cliente
             }).ToList()
         };
     }
