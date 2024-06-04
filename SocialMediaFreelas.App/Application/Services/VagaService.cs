@@ -82,7 +82,7 @@ public class VagaService : IVagaService
             inputModel.Cargo,
             inputModel.Tipo,
             inputModel.Localizacao,
-            inputModel.Status,
+            status: "Aberta",
             inputModel.Remuneracao,
             inputModel.ClienteId);
 
@@ -160,5 +160,39 @@ public class VagaService : IVagaService
         {
             return false;
         }
+    }
+
+    public async Task<DefaultResponse<VagaViewModel>> GetAllByFreelancerIdAsync(int freelancerId)
+    {
+        var vagasPorFreelancerId = await _repository.GetAllByFreelancerIdAsync(freelancerId);
+
+        if (!vagasPorFreelancerId.Any())
+        {
+            return new DefaultResponse<VagaViewModel>
+            {
+                Success = true,
+                ErrorMessage = "Lista vazia",
+                Body = new List<VagaViewModel>()
+            };
+        }
+
+        return new DefaultResponse<VagaViewModel>
+        {
+            Success = true,
+            ErrorMessage = string.Empty,
+            Body = vagasPorFreelancerId.Select(x => new VagaViewModel
+            {
+                Id = x.Id,
+                Titulo = x.Titulo,
+                Descricao = x.Descricao,
+                Cargo = x.Cargo,
+                Tipo = x.Tipo,
+                Localizacao = x.Localizacao,
+                Status = x.Status,
+                Remuneracao = x.Remuneracao,
+                ClienteId = x.ClienteId,
+                Freelancers = x.Freelancers!
+            }).ToList()
+        };
     }
 }

@@ -37,7 +37,7 @@
                 <li class="nav-item"><a class="nav-link" asp-page="/Home/Freelancer/Index">Inicio</a></li>
                 <li class="nav-item"><a class="nav-link" asp-page="/Experiencias/IndexByUser">Minhas Experiencias</a></li> 
 
-                <li class="nav-item"><a class="nav-link" asp-page="/Vagas/IndexByFreelancerId">Minhas Vagas</a></li>
+                <li class="nav-item"><a class="nav-link" asp-page="/Vagas/IndexByFreelancer" asp-route-id="@Model.UserId">Minhas Vagas</a></li>
                     <li class="nav-item"><a class="nav-link" asp-page="/Vagas/Index">Vagas</a></li>
                 }
 

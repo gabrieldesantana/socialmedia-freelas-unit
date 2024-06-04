@@ -7,4 +7,5 @@ public interface IVagaService
     Task<bool> DeleteAsync(int id, string? tenantId = "");
 
     Task<bool> AddFreelancerAsync(int idVaga, int idFreelancer);
+    Task<DefaultResponse<VagaViewModel>> GetAllByFreelancerIdAsync(int freelancerId);
 }

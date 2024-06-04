@@ -63,4 +63,11 @@ public class VagaRepository : GenericRepository<Vaga>, IVagaRepository
         }
         return false;
     }
+
+    public Task<List<Vaga>> GetAllByFreelancerIdAsync(int freelancerId)
+    {
+        var vagasPorFreelancer = _context.Vagas.Include(v => v.Freelancers).Where(vaga => vaga.Freelancers.Any(f => f.Id == freelancerId)).ToList();
+
+        return Task.FromResult(vagasPorFreelancer);
+    }
 }

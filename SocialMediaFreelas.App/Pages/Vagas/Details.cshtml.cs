@@ -25,11 +25,11 @@ namespace SocialMediaFreelas.Pages.Vagas
             var tenantId = GetTenantIdUser();
             var model = await _service.GetByIdAsync(id, tenantId);
 
-            model.Body[0].UserId = GetUserId();
+            //if (!model.Body.Any()) return RedirectToPage("./Index");
 
-            if (!model.Body.Any()) return RedirectToPage("./Index");
+            //model.Body[0].UserId = GetUserId();
 
-            VagaViewModel = model.Body[0];
+            //VagaViewModel = model.Body[0];
 
             return Page();
         }
