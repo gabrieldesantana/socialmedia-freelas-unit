@@ -14,101 +14,81 @@
 
 <div class="container mt-5">
 
-    <!-- Barra de Pesquisa -->
-    <div class="row mb-4">
-        <div class="col-12">
-            <input class="form-control form-control-lg" type="text" placeholder="Pesquisar experiências...">
+    <form method="post" data-ajax="true" data-ajax-method="post" data-ajax-update="#idDoElementoParaAtualizar">
+        <div class="row mb-4">
+            <div class="col-12">
+                <input class="form-control form-control-lg" name="query" id="callAjaxQuery" type="text" placeholder="Pesquisar experiências..."><span></span>
+            </div>
         </div>
-    </div>
-    <!-- Cards de Experiências -->
 
-  <div class="row">
-       @if (Model.Response != null)
-        {
-            foreach (var experiencia in Model.Response)
+    </form>
+    <div id="idDoElementoParaAtualizar">
+        <div class="row">
+            @if (Model.Response != null)
             {
-                <!-- Card Experiência 1 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">@experiencia.Projeto</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">@experiencia.Empresa</h6>
-                            <p class="card-text"><small class="text-muted">@experiencia.Tecnologia</small></p>
+                foreach (var experiencia in Model.Response)
+                {
+                    <!-- Card Experiência 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">@experiencia.Projeto</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">@experiencia.Empresa</h6>
+                                <p class="card-text"><small class="text-muted">@experiencia.Tecnologia</small></p>
 
-                            <p class="card-text">R$@experiencia.Valor</p>
+                                <p class="card-text">R$@experiencia.Valor</p>
 
-                            <p class="card-text">Avaliação do cliente:
-                            @for (int i = 0; i < experiencia.Avaliacao; i++)
-                            {
-                                <span><i class="icon icon-diamond"></i></span>
-                            }
-                                    </p>
+                                <p class="card-text">
+                                    Avaliação do cliente:
+                                    @for (int i = 0; i < experiencia.Avaliacao; i++)
+                                    {
+                                        <span><i class="icon icon-diamond"></i></span>
+                                    }
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
             }
-            }
-            <!-- Repita o bloco acima para cada experiência, alterando o título, empresa, descrição e detalhes conforme necessário -->
-  </div>
+        </div>
+    </div>
 </div>
 
-@*
-<h1>Experiencias</h1>
+@section Scripts
+{
+    <script type="text/javascript">
 
-
-<table class="table table-light">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].FreelancerId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Projeto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Empresa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Tecnologia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Valor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Avaliacao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Response)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FreelancerId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Projeto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Empresa)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tecnologia)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Valor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Avaliacao)
-                </td>
-                <td>
-                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+    $('input[type="text"]').on('keyup', function() {
+    var form = $(this).closest('form');
+    $.ajax({
+        url: form.attr('action'),
+        type: form.attr('method'),
+        data: form.serialize(),
+        success: function(response) {
+            // Atualiza o elemento com a resposta da PartialView
+            $('#idDoElementoParaAtualizar').html(response);
+        },
+        error: function() {
+            alert('Erro ao atualizar os dados.');
         }
-    </tbody>
-</table>
-*@
+    });
+    });
+
+    //$('form').submit(function(e) {
+    //e.preventDefault(); // Previne o comportamento padrão do formulário
+    //var form = $(this);
+    //$.ajax({
+    //    url: form.attr('action'),
+    //    type: form.attr('method'),
+    //    data: form.serialize(),
+    //    success: function(response) {
+    //        // Atualiza o elemento com a resposta da PartialView
+    //        $('#idDoElementoParaAtualizar').html(response);
+    //    },
+    //    error: function() {
+    //        alert('Erro ao atualizar os dados.');
+    //    }
+    //});
+    //});
+    </script>
+}

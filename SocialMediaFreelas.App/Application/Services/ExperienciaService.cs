@@ -37,6 +37,43 @@ public class ExperienciaService : IExperienciaService
         };
     }
 
+    public async Task<DefaultResponse<ExperienciaViewModel>> GetAllByFilterAsync(string query, string? tenantId = "")
+    {
+        var experiencias = await _repository.GetAllAsync(tenantId);
+
+        if (!experiencias.Any())
+        {
+            return new DefaultResponse<ExperienciaViewModel>
+            {
+                Success = true,
+                ErrorMessage = "Lista vazia",
+                Body = new List<ExperienciaViewModel>()
+            };
+        }
+
+        experiencias = experiencias.Where(e =>
+        e.Projeto.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+        e.Empresa.Contains(query, StringComparison.OrdinalIgnoreCase) ||
+        e.Tecnologia.Contains(query, StringComparison.OrdinalIgnoreCase)).ToList();
+
+        return new DefaultResponse<ExperienciaViewModel>
+        {
+            Success = true,
+            ErrorMessage = string.Empty,
+            Body = experiencias.Select(x => new ExperienciaViewModel
+            {
+                Id = x.Id,
+                Projeto = x.Projeto,
+                Empresa = x.Empresa,
+                Tecnologia = x.Tecnologia,
+                Valor = x.Valor,
+                Avaliacao = x.Avaliacao,
+                FreelancerId = x.FreelancerId,
+                Freelancer = x.Freelancer
+            }).ToList()
+        };
+    }
+
     public async Task<DefaultResponse<ExperienciaViewModel>> GetByIdAsync(int id, string? tenantId)
     {
         var experiencia = await _repository.GetByIdAsync(id, tenantId);

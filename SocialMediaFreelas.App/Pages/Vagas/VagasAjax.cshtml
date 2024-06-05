@@ -1,0 +1,48 @@
+﻿@model List<VagaViewModel>?
+
+
+<div class="row">
+    @if (Model != null)
+    {
+        foreach (var vaga in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@vaga.Titulo</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@vaga.Localizacao</h6>
+                        @if (vaga.Status == "Aberta")
+                        {
+                            <p class="badge badge-success">Aberta para candidatura</p>
+                        }
+                        else
+                        {
+                            <p class="badge badge-secondary">Está vaga não aceita mais candidatura</p>
+                        }
+                        <p class="card-text">@vaga.Descricao</p>
+                        <h6 class="card-subtitle mb-2 text-muted"><a asp-page="../Clientes/Details" asp-route-id="@vaga.Cliente.Id">@vaga.Cliente.Nome</a></h6>
+
+                        <ol class="list-group list-group-flush">
+                            <li class="list-group-item"><span><i class="icon icon-bag"></i> </span>: @vaga.Cargo</li>
+                            <li class="list-group-item"><span><i class="icon icon-pie-chart"> </i></span>: R$@vaga.Remuneracao</li>
+                            <li class="list-group-item"><span><i class="icon icon-clock"></i> </span>: @vaga.Tipo</li>
+                        </ol>
+                        @if (vaga.Status == "Aberta")
+                        {
+                            <div class="card-body">
+                                <button type="button" class="btn btn-outline-primary mb-1" asp-page="./Details" asp-route-id="@vaga.Id">Detalhes</button>
+                            </div>
+                        }
+                        else if (vaga.Status == "Fechada")
+                        {
+                            <div class="card-body">
+                                <button type="button" class="btn btn-outline-dark mb-1" disabled>Detalhes</button>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>

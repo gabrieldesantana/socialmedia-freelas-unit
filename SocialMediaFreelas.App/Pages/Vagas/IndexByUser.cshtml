@@ -13,50 +13,82 @@
 </style>
 
 <div class="container mt-5">
-    <div class="row">
-        @if (Model.Response != null)
-        {
-            foreach (var vaga in Model.Response)
-            {
-                <!-- Card Vaga 1 -->
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">@vaga.Titulo</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">@vaga.Localizacao</h6>
-                            @if (vaga.Status == "Aberta")
-                            {
-                                <p class="badge badge-success">Aberta para candidatura</p>
-                            }
-                            else
-                            {
-                                <p class="badge badge-secondary">Está vaga não aceita mais candidatura</p>
-                            }
-                            <p class="card-text">@vaga.Descricao</p>
-                            <ol class="list-group list-group-flush">
-                                <li class="list-group-item"><span><i class="icon icon-bag"></i> </span>: @vaga.Cargo</li>
-                                <li class="list-group-item"><span><i class="icon icon-pie-chart"> </i></span>: R$@vaga.Remuneracao</li>
-                                <li class="list-group-item"><span><i class="icon icon-clock"></i> </span>: @vaga.Tipo</li>
-                            </ol>
-                            @if (vaga.Status == "Aberta")
-                            {
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-outline-primary mb-1" asp-page="./Details" asp-route-id="@vaga.Id">Detalhes</button>
-                                </div>
-                            }
-                            else if (vaga.Status == "Fechada")
-                            {
-                                <div class="card-body">
-                                    <button type="button" class="btn btn-outline-dark mb-1" disabled>Detalhes</button>
-                                </div>
-                            }
 
+    <form method="post" data-ajax="true" data-ajax-method="post" data-ajax-update="#idDoElementoParaAtualizar">
+        <div class="row mb-4">
+            <div class="col-12">
+                <input class="form-control form-control-lg" name="query" id="callAjaxQuery" type="text" placeholder="Pesquisar vagas...">
+            </div>
+        </div>
+    </form>
+    <div id="idDoElementoParaAtualizar">
+        <div class="row">
+            @if (Model.Response != null)
+            {
+                foreach (var vaga in Model.Response)
+                {
+                    <!-- Card Vaga 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">@vaga.Titulo</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">@vaga.Localizacao</h6>
+                                @if (vaga.Status == "Aberta")
+                                {
+                                    <p class="badge badge-success">Aberta para candidatura</p>
+                                }
+                                else
+                                {
+                                    <p class="badge badge-secondary">Está vaga não aceita mais candidatura</p>
+                                }
+                                <p class="card-text">@vaga.Descricao</p>
+                                <h6 class="card-subtitle mb-2 text-muted"><a asp-page="../Clientes/Details" asp-route-id="@vaga.Cliente.Id">@vaga.Cliente.Nome</a></h6>
+
+                                <ol class="list-group list-group-flush">
+                                    <li class="list-group-item"><span><i class="icon icon-bag"></i> </span>: @vaga.Cargo</li>
+                                    <li class="list-group-item"><span><i class="icon icon-pie-chart"> </i></span>: R$@vaga.Remuneracao</li>
+                                    <li class="list-group-item"><span><i class="icon icon-clock"></i> </span>: @vaga.Tipo</li>
+                                </ol>
+                                @if (vaga.Status == "Aberta")
+                                {
+                                    <div class="card-body">
+                                        <button type="button" class="btn btn-outline-primary mb-1" asp-page="./Details" asp-route-id="@vaga.Id">Detalhes</button>
+                                    </div>
+                                }
+                                else if (vaga.Status == "Fechada")
+                                {
+                                    <div class="card-body">
+                                        <button type="button" class="btn btn-outline-dark mb-1" disabled>Detalhes</button>
+                                    </div>
+                                }
+
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
             }
-        }
-        <!-- Repita o bloco acima para cada vaga, alterando o título, localização, descrição e detalhes conforme necessário -->
-
+        </div>
     </div>
 </div>
+
+@section Scripts
+    {
+    <script type="text/javascript">
+
+        $('input[type="text"]').on('keyup', function () {
+            var form = $(this).closest('form');
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: form.serialize(),
+                success: function (response) {
+                    // Atualiza o elemento com a resposta da PartialView
+                    $('#idDoElementoParaAtualizar').html(response);
+                },
+                error: function () {
+                    alert('Erro ao atualizar os dados.');
+                }
+            });
+        });
+    </script>
+}

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SocialMediaFreelas.Frontend.Helpers;
+using System.Xml.Linq;
 
 namespace SocialMediaFreelas.Pages.Experiencias
 {
@@ -21,6 +22,23 @@ namespace SocialMediaFreelas.Pages.Experiencias
             var tenantId = GetTenantIdUser();
             var response = await _service.GetAllAsync(tenantId);
             Response = response.Body;
+        }
+
+        public IActionResult OnPost(string query)
+        {
+            var tenantId = GetTenantIdUser();
+
+            query= query ?? string.Empty;
+
+            var experiencias = _service.GetAllByFilterAsync(query, tenantId).Result.Body;
+
+            if (experiencias == null || !experiencias.Any())
+            {
+                // Retorne uma lista vazia ou lide com o caso de 'nenhuma experiência encontrada'
+                experiencias = new List<ExperienciaViewModel>();
+            }
+
+            return Partial("ExperienciasAjax", experiencias);
         }
     }
 }

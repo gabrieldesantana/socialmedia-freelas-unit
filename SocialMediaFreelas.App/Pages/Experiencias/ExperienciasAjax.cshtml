@@ -1,0 +1,30 @@
+﻿@model List<ExperienciaViewModel>?
+
+
+<div class="row">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var experiencia in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">@experiencia.Projeto</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@experiencia.Empresa</h6>
+                        <p class="card-text"><small class="text-muted">@experiencia.Tecnologia</small></p>
+
+                        <p class="card-text">R$@experiencia.Valor</p>
+
+                        <p class="card-text">
+                            Avaliação do cliente:
+                            @for (int i = 0; i < experiencia.Avaliacao; i++)
+                            {
+                                <span><i class="icon icon-diamond"></i></span>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
