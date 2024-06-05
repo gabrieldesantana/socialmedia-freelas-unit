@@ -1,100 +1,15 @@
 ﻿@page "{id:int?}"
 @model SocialMediaFreelas.Pages.Vagas.IndexByFreelancerModel
 
-@*
-
-<table class="table table-light">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].ClienteId)
-            </th>
-            <th>
-                Candidatos
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Titulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Cargo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Tipo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Localizacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Response[0].Remuneracao)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Response)
-        {
-                <tr>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.ClienteId)
-                    </td>
-                    <td>
-                    @if (!Model.Response.First<VagaViewModel>(x => x.Id == item.Id).Freelancers.Any())
-                    {
-                                <p>Nenhum candidado</p>
-                    }
-                    else
-                    {
-                        @foreach (var freelancer in Model.Response.First<VagaViewModel>(x => x.Id == item.Id).Freelancers)
-                        {
-                                        <p>@freelancer.Nome
-                                            <a asp-page="../Freelancers/Details" asp-route-id="@freelancer.Id">Perfil</a></p>
-                        }
-                    }
-
-                    </td>
-
-                    <td>
-                    @Html.DisplayFor(modelItem => item.Titulo)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.Cargo)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.Tipo)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.Localizacao)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    <td>
-                    @Html.DisplayFor(modelItem => item.Remuneracao)
-                    </td>
-                    <td>
-                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
-        }
-    </tbody>
-</table>
-*@
-
 <style>
 
     .icon {
         color: #5891ff;
+    }
+
+        #footer 
+    {
+        display: none;
     }
 </style>
 
