@@ -23,13 +23,9 @@ namespace SocialMediaFreelas.Pages.Vagas
         public async Task<IActionResult> OnGetAsync(int id)
         {
             var tenantId = GetTenantIdUser();
-            var model = await _service.GetByIdAsync(id, tenantId);
+            var model = await _service.GetByIdAsync(id);
 
-            //if (!model.Body.Any()) return RedirectToPage("./Index");
-
-            //model.Body[0].UserId = GetUserId();
-
-            //VagaViewModel = model.Body[0];
+            VagaViewModel = model.Body[0];
 
             return Page();
         }

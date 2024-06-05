@@ -67,7 +67,8 @@ public class VagaService : IVagaService
                 Localizacao = vaga.Localizacao,
                 Status = vaga.Status,
                 Remuneracao = vaga.Remuneracao,
-                ClienteId = vaga.ClienteId
+                ClienteId = vaga.ClienteId,
+                Freelancers = vaga.Freelancers
                 }
             }
         };

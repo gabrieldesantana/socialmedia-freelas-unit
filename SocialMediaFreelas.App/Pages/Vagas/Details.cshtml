@@ -4,7 +4,60 @@
     ViewData["Title"] = "Detalhes";
 }
 
-<h1>Details</h1>
+<style>
+  .caixa {
+    background-color: #fff; /* Cor de fundo branca para a caixa */
+    border-radius: 5px; /* Bordas arredondadas */
+    padding: 20px; /* Espaçamento interno */
+    margin-top: 20px; /* Espaço acima da caixa */
+  }
+
+  #footer {
+      display:none;
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="caixa shadow-lg"> <!-- Adiciona sombra e estilização à caixa -->
+    <!-- Título da Vaga -->
+    <div class="jumbotron">
+      <h1 class="display-5">@Model.VagaViewModel.Titulo</h1>
+      <p class="lead">@Model.VagaViewModel.Descricao</p>
+      <hr class="">
+      <p><strong>Cargo:</strong> @Model.VagaViewModel.Cargo</p>
+      <p><strong>Localização:</strong> @Model.VagaViewModel.Localizacao</p>
+      <p><strong>Tipo da Vaga:</strong>@Model.VagaViewModel.Tipo</p>
+    </div>
+
+    <!-- Lista de Candidatos -->
+    <div class="row">
+            @if (Model.VagaViewModel != null && Model.VagaViewModel.Freelancers.Any())
+            {
+                @foreach (var candidato in Model.VagaViewModel.Freelancers)
+                {
+                    <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                      <div class="card-body">
+                        <h5 class="card-title">@candidato.Nome</h5>
+                        <p class="card-text">@candidato.Sobre</p>
+                        <a role="button" class="btn btn-outline-primary" asp-page="../Freelancers/Details" asp-route-id="@candidato.Id">Perfil</a>
+                        <button role="button" class="btn btn-success">Whatsapp</button>
+                      </div>
+                    </div>
+                  </div>
+                }
+            }
+            
+      <!-- Card do Candidato -->
+      
+      <!-- Repita os cards para outros candidatos -->
+
+
+    </div>
+  </div>
+</div>
+
+@*<h1>Details</h1>
 
 <h4>Vaga</h4>
 <hr />
@@ -76,3 +129,4 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
+*@

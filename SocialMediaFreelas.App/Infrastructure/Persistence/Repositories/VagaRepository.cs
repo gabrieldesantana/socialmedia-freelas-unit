@@ -47,6 +47,13 @@ public class VagaRepository : GenericRepository<Vaga>, IVagaRepository
           .Where(x => x.Actived && x.TenantId == tenantId).ToListAsync();
     }
 
+    public virtual async Task<Vaga> GetByIdAsync(int id, string? tenantId = "")
+    {
+        return (string.IsNullOrEmpty(tenantId))
+        ? await _dbSet.Include(v => v.Freelancers).FirstOrDefaultAsync(x => x.Id == id)
+        : await _dbSet.FirstOrDefaultAsync(x => x.Id == id && x.TenantId == tenantId);
+    }
+
     public async Task<bool> AddFreelancerAsync(int idVaga,int idFreelancer)
     {
         var vaga = await GetByIdAsync(idVaga);
