@@ -115,55 +115,73 @@ html, body {
 </style>
 
  <div class="registration-form">
-        <form>
+        <form method="post">
             <div class="form-icon">
                 <span><i class="icon icon-user"></i></span>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control item" id="username" placeholder="Nome Completo">
+                <label asp-for="UserInputModel.Nome" class="control-label"></label>
+                <input asp-for="UserInputModel.Nome" class="form-control" />
+                <span asp-validation-for="UserInputModel.Nome" class="text-danger"></span>
+            </div>
+
+            <div class="form-group classe">
+                <label asp-for="UserInputModel.Sobre" class="control-label"></label>
+                <input asp-for="UserInputModel.Sobre" class="form-control" />
+                <span asp-validation-for="UserInputModel.Sobre" class="text-danger"></span>
+            </div>
+
+            <div class="form-group classe">
+                <label asp-for="UserInputModel.NumeroDocumento" class="control-label"></label>
+                <input asp-for="UserInputModel.NumeroDocumento" class="form-control" />
+                <span asp-validation-for="UserInputModel.NumeroDocumento" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control item" id="about" placeholder="Sobre">
+                <label asp-for="UserInputModel.Senha" class="control-label"></label>
+                <input asp-for="UserInputModel.Senha" class="form-control" type="password" />
+                <span asp-validation-for="UserInputModel.Senha" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="UserInputModel.Email" class="control-label"></label>
+                <input asp-for="UserInputModel.Email" class="form-control" />
+                <span asp-validation-for="UserInputModel.Email" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control item" id="document" placeholder="Documento">
+                <label asp-for="UserInputModel.Telefone" class="control-label"></label>
+                <input asp-for="UserInputModel.Telefone" class="form-control" />
+                <span asp-validation-for="UserInputModel.Telefone" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
-                <input type="password" class="form-control item" id="password" placeholder="Senha">
+                <label asp-for="UserInputModel.DataNascimento" class="control-label"></label>
+                <input asp-for="UserInputModel.DataNascimento" type="date" class="form-control" />
+                <span asp-validation-for="UserInputModel.DataNascimento" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="email" class="form-control item" id="email" placeholder="E-mail">
-            </div>
-            <div class="form-group">
-                <input type="tel" class="form-control item" id="phone-number" placeholder="Telefone (XX) XXXXX-XXXX">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control item" id="birth-date" placeholder="Data de nascimento">
-            </div>
+
             <div class="form-group">
                 <div class="radio-container">
-                    <label class="radio-label">
-                        <input type="radio" name="user-type" value="empresa"> Empresa
+                    <label asp-for="UserInputModel.Perfil" class="radio-label">
+                        <input type="radio" asp-for="UserInputModel.Perfil" value="cliente"> Empresa
                     </label>
-                    <label class="radio-label">
-                        <input type="radio" name="user-type" value="freelancer" id="freelancer-radio"> Freelancer
+                    <label asp-for="UserInputModel.Perfil" class="radio-label">
+                        <input type="radio" asp-for="UserInputModel.Perfil" name="user-type" value="freelancer" id="freelancer-radio"> Freelancer
                     </label>
                 </div>
                 <div class="form-group" id="salary-container" style="display: none;">
-                    <input type="text" class="form-control item" id="salary-expectation" placeholder="Pretenção salarial">
+                    <input type="number" value="0" class="form-control item" id="salary-expectation" placeholder="Pretenção salarial">
                 </div>
             </div>
             <div class="form-group">
-                <button type="button" class="btn btn-block create-account">Criar conta</button>
-                <button type="button" asp-page="/Home/Index" class="btn btn-block create-account">Voltar</button>
+                <input type="submit" class="btn btn-block create-account">
+                <a type="button" asp-page="/Home/Index" class="btn btn-block create-account">Voltar</a>
             </div>
         </form>
     </div>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-    <script src="assets/js/script.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             var freelancerRadio = document.getElementById('freelancer-radio');
