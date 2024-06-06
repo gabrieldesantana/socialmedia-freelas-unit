@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Filters;
 using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Vagas
 {
+    [TypeFilter(typeof(RestrictedFreelancerPageFilter))]
     public class IndexByFreelancerModel : BaseModel
     {
         private readonly IVagaService _service;

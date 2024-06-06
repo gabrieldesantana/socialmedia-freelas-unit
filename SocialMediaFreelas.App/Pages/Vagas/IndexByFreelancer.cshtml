@@ -11,7 +11,24 @@
     {
         display: none;
     }
+
+    /* Estilo para a mensagem em primeiro plano */
+    .container-messages {
+        margin-top: 20px;
+        position: relative; /* Posiciona relativo ao seu local normal */
+        z-index: 2; /* Coloca a mensagem na frente do fundo */
+    }
 </style>
+
+
+        <div class="container-messages d-flex justify-content-center">
+        @if (TempData["MensagemSucesso"] != null)
+        {
+            <div class="alert alert-success" style="border-radius: 30px;" role="alert" id="success-message">
+                <p style="text-align: center">@TempData["MensagemSucesso"]</p>
+            </div>
+        }
+        </div>
 
 <div class="container mt-5">
     <div class="row">
@@ -61,3 +78,18 @@
 
     </div>
 </div>
+
+
+<script>
+    window.onload = function() {
+    // Seleciona as mensagens de sucesso e erro
+    var successMessage = document.getElementById('success-message');
+
+    // Verifica se a mensagem de sucesso existe e a esconde após 3 segundos
+    if (successMessage) {
+        setTimeout(function() {
+            successMessage.style.display = 'none';
+        }, 3000);
+    }
+};
+</script>

@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using SocialMediaFreelas.Frontend.Filters;
 using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Vagas
 {
+    [TypeFilter(typeof(RestrictedClientePageFilter))]
     public class CreateModel : BaseModel
     {
         private readonly IVagaService _service;
@@ -32,10 +34,11 @@ namespace SocialMediaFreelas.Pages.Vagas
 
             try
             {
-                VagaInputModel.Status = "Aberta";
-                VagaInputModel.TenantIdOwner = GetTenantIdUser();
-                await _service.PostAsync(VagaInputModel);
-                TempData["MensagemSucesso"] = "Cadastro feito com sucesso!";
+                //VagaInputModel.Status = "Aberta";
+                //VagaInputModel.TenantIdOwner = GetTenantIdUser();
+                //await _service.PostAsync(VagaInputModel);
+
+                TempData["MensagemSucesso"] = "Vaga publicada com sucesso!";
                 return RedirectToPage("./IndexByUser");
             }
             catch (Exception)

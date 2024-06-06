@@ -54,7 +54,6 @@ namespace SocialMediaFreelas.Pages.Login.Cliente
             _sessao.CreateUserSession(userDTO);
 
             TempData["MensagemSucesso"] = null;
-            TempData["MensagemSucesso"] = "Login realizado com sucesso!";
 
             return RedirectPreserveMethod("../Home/Cliente");
 

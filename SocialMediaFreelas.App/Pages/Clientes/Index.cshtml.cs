@@ -1,8 +1,11 @@
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Filters;
 using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Clientes
 {
+    [TypeFilter(typeof(RestrictedAdminPageFilter))]
     public class IndexModel : BaseModel
     {
         private readonly IClienteService _service;

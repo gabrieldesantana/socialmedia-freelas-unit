@@ -16,9 +16,25 @@
         color: #fff !important;
     }
 
+        /* Estilo para a mensagem em primeiro plano */
+    .container-messages {
+        margin-top:20px;
+        position: relative; /* Posiciona relativo ao seu local normal */
+        z-index: 2; /* Coloca a mensagem na frente do fundo */
+    }
+
 </style>
 
     <!-- Navigation-->
+
+        <div class="container-messages d-flex justify-content-center">
+        @if (TempData["MensagemSucesso"] != null)
+        {
+            <div class="alert alert-success" style="border-radius: 30px;" role="alert" id="success-message">
+                <p style="text-align: center">@TempData["MensagemSucesso"]</p>
+            </div>
+        }
+        </div>
 
     <!-- Header-->
     <header class="py-5">
@@ -31,7 +47,7 @@
                         <div class="fs-3 fw-light text-muted">Seja bem vindo!</div>
                         <h1 class="display-3 fw-bolder mb-5" id="titulo-principal-home"><span class="text-gradient d-inline">Encontre um serviço agora.</span></h1>
                         <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                        <a class="button-29 btn" asp-page="/Vagas/Index" role="button">Encontre um serviço</a>
+                        <a class="button-29 btn" asp-page="/Vagas/IndexToFreelancer" role="button">Encontre um serviço</a>
                         </div>
                     </div>
                 </div>
@@ -44,3 +60,17 @@
             </div>
         </div>
     </header>
+
+<script>
+    window.onload = function() {
+    // Seleciona as mensagens de sucesso e erro
+    var successMessage = document.getElementById('success-message');
+
+    // Verifica se a mensagem de sucesso existe e a esconde após 3 segundos
+    if (successMessage) {
+    setTimeout(function() {
+    successMessage.style.display = 'none';
+    }, 3000);
+    }
+    };
+</script>

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using SocialMediaFreelas.Frontend.Filters;
 using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Vagas
@@ -45,12 +46,12 @@ namespace SocialMediaFreelas.Pages.Vagas
             if (vagaChanged == false)
             {
                 TempData["MensagemErro"] = "Houve um erro ao tentar se candidatar";
-                return Page();
+                return RedirectToPage("./IndexByFreelancer", VagaViewModel.Id);
             }
 
             TempData["MensagemSucesso"] = "Você se candidatou com sucesso!";
 
-            return Page();
+            return RedirectToPage("./IndexByFreelancer", VagaViewModel.Id);
         }
     }
 }

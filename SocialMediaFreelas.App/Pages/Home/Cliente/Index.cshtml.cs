@@ -6,7 +6,7 @@ using SocialMediaFreelas.Pages;
 
 namespace SocialMediaFreelas.App.Pages.Home.Cliente;
 
-[TypeFilter(typeof(RestrictedAdminPageFilter))]
+[TypeFilter(typeof(RestrictedClientePageFilter))]
 public class IndexModel : BaseModel
 {
     private readonly ILogger<IndexModel> _logger;

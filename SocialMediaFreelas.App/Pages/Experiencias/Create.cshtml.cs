@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using SocialMediaFreelas.Frontend.Filters;
 using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Experiencias
 {
+    [TypeFilter(typeof(RestrictedClientePageFilter))]
     public class CreateModel : BaseModel
     {
         private readonly IExperienciaService _service;
@@ -37,8 +39,9 @@ namespace SocialMediaFreelas.Pages.Experiencias
                 ExperienciaInputModel.TenantIdOwner = GetTenantIdUser();
                 ExperienciaInputModel.FreelancerId = Int32.Parse(ExperienciaInputModel.FreelancerIdByString);
                 await _service.PostAsync(ExperienciaInputModel);
-                TempData["MensagemSucesso"] = "Cadastro feito com sucesso!";
-                return RedirectToPage("../Home/Cliente");
+
+                TempData["MensagemSucesso"] = "Freelancer avaliado com sucesso!";
+                return RedirectToPage("../Home/Cliente/Index");
             }
             catch (Exception)
             {

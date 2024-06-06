@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Filters;
 using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Experiencias
 {
+    [TypeFilter(typeof(RestrictedAdminPageFilter))]
     public class EditModel : BaseModel
     {
         private readonly IExperienciaService _service;

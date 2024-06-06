@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using SocialMediaFreelas.Frontend.Filters;
 using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Vagas
 {
+    [TypeFilter(typeof(RestrictedClientePageFilter))]
     public class DeleteModel : BaseModel
     {
         private readonly IVagaService _service;

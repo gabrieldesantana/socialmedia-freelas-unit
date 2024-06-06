@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using SocialMediaFreelas.Frontend.Filters;
 using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Vagas
 {
+    [TypeFilter(typeof(RestrictedAdminPageFilter))]
     public class IndexModel : BaseModel
     {
         private readonly IVagaService _service;

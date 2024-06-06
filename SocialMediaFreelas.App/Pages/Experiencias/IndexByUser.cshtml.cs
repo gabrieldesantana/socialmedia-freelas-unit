@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using SocialMediaFreelas.Frontend.Filters;
 using SocialMediaFreelas.Frontend.Helpers;
 using System.Xml.Linq;
 
 namespace SocialMediaFreelas.Pages.Experiencias
 {
+    [TypeFilter(typeof(RestrictedFreelancerPageFilter))]
     public class IndexByUserModel : BaseModel
     {
         private readonly IExperienciaService _service;

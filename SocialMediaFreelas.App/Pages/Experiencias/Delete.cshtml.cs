@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using SocialMediaFreelas.Frontend.Filters;
 using SocialMediaFreelas.Frontend.Helpers;
 
 namespace SocialMediaFreelas.Pages.Experiencias
 {
+    [TypeFilter(typeof(RestrictedAdminPageFilter))]
     public class DeleteModel : BaseModel
     {
         private readonly IExperienciaService _service;
