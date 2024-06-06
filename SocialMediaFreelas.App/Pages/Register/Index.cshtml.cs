@@ -24,42 +24,50 @@ namespace SocialMediaFreelas.Pages.Register
         public async Task<IActionResult> OnPostAsync()
         {
             var user = UserInputModel;
-
-        try
-            {
-            (user.Perfil == "Cliente")
-            ? _clienteService.PostAsync(new ClienteInputModel() 
-            {
-                Nome = user.Nome,
-                Sobre = user.Sobre,
-                NumeroDocumento = user.NumeroDocumento,
-                Senha = user.Senha,
-                Email = user.Email,
-                Telefone = user.Telefone,
-                DataNascimento = user.DataNascimento
-            })
-            : _freelancerService.PostAsync(new FreelancerInputModel() 
-            {
-                Nome = user.Nome,
-                Sobre = user.Sobre,
-                NumeroDocumento = user.NumeroDocumento,
-                Senha = user.Senha,
-                Email = user.Email,
-                Telefone = user.Telefone,
-                DataNascimento = user.DataNascimento,
-                PretensaoSalarial = user.PretensaoSalarial
-            })
+            DefaultResponse<Cliente> cliente = new();
+            DefaultResponse<Freelancer> freelancer = new();
 
 
-                // await _service.PostAsync(FreelancerInputModel);
-                TempData["MensagemSucesso"] = "Cadastro feito com sucesso!";
-                return RedirectToPage("./Index");
+            if (user.Perfil == "Cliente")
+            {
+                cliente = await _clienteService.PostAsync(new ClienteInputModel()
+                {
+                    Nome = user.Nome,
+                    Sobre = user.Sobre,
+                    NumeroDocumento = user.NumeroDocumento,
+                    Senha = user.Senha,
+                    Email = user.Email,
+                    Telefone = RemoverFormatacao(user.Telefone),
+                    DataNascimento = user.DataNascimento
+                });
             }
-            catch (Exception)
+            else if (user.Perfil == "Freelancer")
             {
-
-                throw;
+                freelancer = await _freelancerService.PostAsync(new FreelancerInputModel()
+                {
+                    Nome = user.Nome,
+                    Sobre = user.Sobre,
+                    NumeroDocumento = user.NumeroDocumento,
+                    Senha = user.Senha,
+                    Email = user.Email,
+                    Telefone = RemoverFormatacao(user.Telefone),
+                    DataNascimento = user.DataNascimento,
+                    PretensaoSalarial = user.PretensaoSalarial
+                });
             }
+
+            if (freelancer.Body != null) return RedirectToPage("../Login/Freelancer/Index");
+            if (cliente.Body != null) return RedirectToPage("../Login/Cliente/Index");
+
+            return Page();
+
+        }
+
+        private static string RemoverFormatacao(string numeroFormatado)
+        {
+            return numeroFormatado.Replace("(", "")
+                                  .Replace(") ", "")
+                                  .Replace("-", "");
         }
     }
 }

@@ -4,6 +4,7 @@
     Layout = "_LayoutCustom";
 }
 
+
 <style>
 html, body {
     height: 100%;
@@ -96,6 +97,19 @@ html, body {
     opacity: 0.6;
 }
 
+/* Estilos para o layout de duas colunas */
+.registration-form .form-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.registration-form .form-column {
+    display: flex;
+    flex-direction: column;
+    width: 48%; /* Ajuste a largura conforme necessário */
+}
+
+/* Responsividade */
 @@media (max-width: 576px) {
     .registration-form form {
         padding: 40px 15px; 
@@ -108,83 +122,93 @@ html, body {
         line-height: 70px;
     }
     .registration-form {
-    margin-top: 5vh;
+        margin-top: 5vh;
     }
-}
 
+    /* Ajuste as colunas para empilhar verticalmente em telas menores */
+    .registration-form .form-row {
+        flex-direction: column;
+    }
+
+    .registration-form .form-column {
+        width: 100%; /* Colunas ocupam toda a largura em telas pequenas */
+    }
+
+}
 </style>
 
- <div class="registration-form">
-        <form method="post">
-            <div class="form-icon">
-                <span><i class="icon icon-user"></i></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UserInputModel.Nome" class="control-label"></label>
-                <input asp-for="UserInputModel.Nome" class="form-control" />
-                <span asp-validation-for="UserInputModel.Nome" class="text-danger"></span>
-            </div>
-
-            <div class="form-group classe">
-                <label asp-for="UserInputModel.Sobre" class="control-label"></label>
-                <input asp-for="UserInputModel.Sobre" class="form-control" />
-                <span asp-validation-for="UserInputModel.Sobre" class="text-danger"></span>
-            </div>
-
-            <div class="form-group classe">
-                <label asp-for="UserInputModel.NumeroDocumento" class="control-label"></label>
-                <input asp-for="UserInputModel.NumeroDocumento" class="form-control" />
-                <span asp-validation-for="UserInputModel.NumeroDocumento" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="UserInputModel.Senha" class="control-label"></label>
-                <input asp-for="UserInputModel.Senha" class="form-control" type="password" />
-                <span asp-validation-for="UserInputModel.Senha" class="text-danger"></span>
-            </div>
-
-
-            <div class="form-group">
-                <label asp-for="UserInputModel.Email" class="control-label"></label>
-                <input asp-for="UserInputModel.Email" class="form-control" />
-                <span asp-validation-for="UserInputModel.Email" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="UserInputModel.Telefone" class="control-label"></label>
-                <input asp-for="UserInputModel.Telefone" class="form-control" />
-                <span asp-validation-for="UserInputModel.Telefone" class="text-danger"></span>
-            </div>
-            
-            <div class="form-group">
-                <label asp-for="UserInputModel.DataNascimento" class="control-label"></label>
-                <input asp-for="UserInputModel.DataNascimento" type="date" class="form-control" />
-                <span asp-validation-for="UserInputModel.DataNascimento" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <div class="radio-container">
-                    <label asp-for="UserInputModel.Perfil" class="radio-label">
-                        <input type="radio" asp-for="UserInputModel.Perfil" value="cliente"> Empresa
-                    </label>
-                    <label asp-for="UserInputModel.Perfil" class="radio-label">
-                        <input type="radio" asp-for="UserInputModel.Perfil" name="user-type" value="freelancer" id="freelancer-radio"> Freelancer
-                    </label>
+<div class="registration-form">
+    <form method="post" id="meuFormulario">
+        <div class="form-icon">
+            <span><i class="icon icon-user"></i></span>
+        </div>
+        <div class="form-row">
+            <div class="form-column">
+                <div class="form-group">
+                    <label asp-for="UserInputModel.Nome" class="control-label"></label>
+                    <input asp-for="UserInputModel.Nome" class="form-control" required/>
+                    <span asp-validation-for="UserInputModel.Nome" class="text-danger"></span>
                 </div>
-                <div class="form-group" id="salary-container" style="display: none;">
-                    <input type="number" value="0" class="form-control item" id="salary-expectation" placeholder="Pretenção salarial">
+                <div class="form-group classe">
+                    <label asp-for="UserInputModel.Sobre" class="control-label"></label>
+                    <input asp-for="UserInputModel.Sobre" class="form-control" />
+                    <span asp-validation-for="UserInputModel.Sobre" class="text-danger"></span>
+                </div>
+
+                <div class="form-group classe">
+                    <label asp-for="UserInputModel.NumeroDocumento" class="control-label"></label>
+                    <input asp-for="UserInputModel.NumeroDocumento" class="form-control" required/>
+                    <span asp-validation-for="UserInputModel.NumeroDocumento" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UserInputModel.Senha" class="control-label"></label>
+                    <input asp-for="UserInputModel.Senha" id="senha1" class="form-control" type="password" required/>
+                    <span id="validaSenha" class="text-danger"></span>
                 </div>
             </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-block create-account">
-                <a type="button" asp-page="/Home/Index" class="btn btn-block create-account">Voltar</a>
+            <div class="form-column">
+                <div class="form-group">
+                    <label asp-for="UserInputModel.Email" class="control-label"></label>
+                    <input asp-for="UserInputModel.Email" class="form-control" required/>
+                    <span asp-validation-for="UserInputModel.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserInputModel.Telefone" class="control-label"></label>
+                    <input asp-for="UserInputModel.Telefone" id="telefone" class="form-control" required />
+                    <span asp-validation-for="UserInputModel.Telefone" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="UserInputModel.DataNascimento" class="control-label"></label>
+                    <input asp-for="UserInputModel.DataNascimento" type="date" class="form-control" required/>
+                    <span asp-validation-for="UserInputModel.DataNascimento" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <div class="radio-container">
+                        <label class="radio-label">
+                            <input type="radio" id="clienteOption" asp-for="UserInputModel.Perfil" value="Cliente"> Cliente
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" id="freelancerOption" asp-for="UserInputModel.Perfil" value="Freelancer"> Freelancer
+                        </label>
+                    </div>
+                    <div class="form-group" id="salary-container" style="display: none;">
+                        <input type="number" asp-for="UserInputModel.PretensaoSalarial" value="0" class="form-control item" id="salary-expectation" placeholder="Pretenção salarial">
+                    </div>
+                </div>
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Registrar" class="btn btn-block create-account">
+            <a type="button" asp-page="../Index" class="btn btn-block create-account">Voltar</a>
+        </div>
+    </form>
+</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var freelancerRadio = document.getElementById('freelancer-radio');
+            var freelancerRadio = document.getElementById('freelancerOption');
             var salaryContainer = document.getElementById('salary-container');
 
             freelancerRadio.addEventListener('change', function () {
@@ -193,20 +217,60 @@ html, body {
                 }
             });
 
-            var empresaRadio = document.querySelector('input[name="user-type"][value="empresa"]');
+        var empresaRadio = document.getElementById('clienteOption');
             empresaRadio.addEventListener('change', function () {
                 if (empresaRadio.checked) {
                     salaryContainer.style.display = 'none';
                 }
             });
         });
-    </script>
 
+        function aplicarMascaraTelefone(input) {
+          let valor = input.value.replace(/\D/g, ''); // Remove tudo o que não é dígito
+          valor = valor.substring(0, 11); // Limita o tamanho máximo em 11 dígitos
+          valor = valor.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3'); // Aplica a máscara
+          input.value = valor; // Atualiza o valor do input
+        }
 
-<script>
+        window.onload = function() {
+          var inputTelefone = document.getElementById('telefone');
+          inputTelefone.addEventListener('input', function() {
+            aplicarMascaraTelefone(this);
+          });
+            var inputCPF = document.getElementById('cpf');
+            inputCPF.addEventListener('input', function () {
+            aplicarMascaraCPF(this);
+            });
+        }
 
-    $(document).ready(function () {
-        $('#phone-number').mask('(00)00000-0000');
-    });
+        function aplicarMascaraCPF(input) {
+          let valor = input.value.replace(/\D/g, ''); // Remove tudo o que não é dígito
+          valor = valor.substring(0, 11); // Limita o tamanho máximo em 11 dígitos
+          valor = valor.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4'); // Aplica a máscara
+          input.value = valor; // Atualiza o valor do input
+        }
 
+        function verificarSenha() {
+        var senha1 = document.getElementById('senha1').value;
+        var padraoSenhaForte = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+          // Verifica se a senha é forte
+          if (!padraoSenhaForte.test(senha1)) {
+            return false;
+          }
+
+          return true;
+        }
+
+        document.getElementById('meuFormulario').addEventListener('submit', function(evento) {
+          var senha1 = document.getElementById('senha1').value;
+          var validaSenha = document.getElementById('validaSenha');
+          var padraoSenhaForte = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+
+          // Verifica se a senha é forte
+          if (!padraoSenhaForte.test(senha1)) {
+            validaSenha.innerHTML = "A senha deve conter pelo menos 8 caracteres, uma letra maiúscula, uma letra minúscula e um número"
+            evento.preventDefault(); // Impede o envio do formulário
+          }
+        });
 </script>
