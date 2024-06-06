@@ -42,8 +42,11 @@
                                     <p class="badge badge-secondary">Está vaga não aceita mais candidatura</p>
                                 }
                                 <p class="card-text">@vaga.Descricao</p>
-                                <h6 class="card-subtitle mb-2 text-muted"><a asp-page="../Clientes/Details" asp-route-id="@vaga.Cliente.Id">@vaga.Cliente.Nome</a></h6>
-
+                                @if (vaga.Cliente != null)
+                                {
+                                    <h6 class="card-subtitle mb-2 text-muted"><a asp-page="../Clientes/Details" asp-route-id="@vaga.Cliente.Id">@vaga.Cliente.Nome</a></h6>
+                                }
+                               
                                 <ol class="list-group list-group-flush">
                                     <li class="list-group-item"><span><i class="icon icon-bag"></i> </span>: @vaga.Cargo</li>
                                     <li class="list-group-item"><span><i class="icon icon-pie-chart"> </i></span>: R$@vaga.Remuneracao</li>

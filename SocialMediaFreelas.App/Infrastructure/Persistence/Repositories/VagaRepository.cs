@@ -44,6 +44,7 @@ public class VagaRepository : GenericRepository<Vaga>, IVagaRepository
           .Where(x => x.Actived).ToListAsync()
           : await _context.Vagas
           .Include(x => x.Freelancers)
+          .Include(x => x.Cliente)
           .Where(x => x.Actived && x.TenantId == tenantId).ToListAsync();
     }
 

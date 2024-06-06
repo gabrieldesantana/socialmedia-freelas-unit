@@ -73,12 +73,12 @@
 </style>
 
 <div class="registration-form">
-    <form id="create-experience-form">
+    <form id="create-experience-form" method="post">
         <div class="form-icon">
             <span><i class="icon icon-briefcase"></i></span>
         </div>
 
-           <input type="search" list="mylistFreelancers" autocomplete="off" id="inputSelectFreelancer" class="form-control">
+        <input type="search" list="mylistFreelancers" autocomplete="off" name="FreelancerIdByString" id="inputSelectFreelancer" class="form-control">
 
             <datalist id="mylistFreelancers">
                 <option disabled>Selecione</option>
@@ -86,31 +86,34 @@
             {
                 foreach (var freelancer in Model.ExperienciaInputModel.Freelancers)
                 {
-                    <option value="@freelancer.Id">@freelancer.Nome</option>
+                    <option value="@freelancer.Nome">@freelancer.Id</option>
                 }
             }
 
             </datalist>
 
-
-
+            <div class="form-group">
+                <label asp-for="ExperienciaInputModel.Projeto" class="control-label"></label>
+                <input asp-for="ExperienciaInputModel.Projeto" class="form-control" />
+                <span asp-validation-for="ExperienciaInputModel.Projeto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExperienciaInputModel.Empresa" class="control-label"></label>
+                <input asp-for="ExperienciaInputModel.Empresa" class="form-control" />
+                <span asp-validation-for="ExperienciaInputModel.Empresa" class="text-danger"></span>
+            </div>
         <div class="form-group">
-            <input type="text" class="form-control item" id="freelancer" placeholder="Freelancer" required>
+            <label asp-for="ExperienciaInputModel.Tecnologia" class="control-label"></label>
+            <input asp-for="ExperienciaInputModel.Tecnologia" class="form-control" />
+            <span asp-validation-for="ExperienciaInputModel.Tecnologia" class="text-danger"></span>
         </div>
+            <div class="form-group">
+                <label asp-for="ExperienciaInputModel.Valor" class="control-label"></label>
+                <input asp-for="ExperienciaInputModel.Valor" class="form-control" />
+                <span asp-validation-for="ExperienciaInputModel.Valor" class="text-danger"></span>
+            </div>
         <div class="form-group">
-            <input type="text" class="form-control item" id="project" placeholder="Projeto" required>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control item" id="company" placeholder="Empresa" required>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control item" id="technology" placeholder="Tecnologia" required>
-        </div>
-        <div class="form-group">
-            <input type="text" class="form-control item" id="value" placeholder="Valor" required>
-        </div>
-        <div class="form-group">
-            <select class="form-control item" id="rating" required>
+            <select class="form-control item" id="rating" asp-for="ExperienciaInputModel.Avaliacao" required>
                 <option value="" disabled selected>Avaliação</option>
                 <option value="1">1</option>
                 <option value="2">2</option>

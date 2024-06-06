@@ -15,15 +15,15 @@ namespace SocialMediaFreelas.Pages.Experiencias
             _freelancerService = freelancerService;
         }
 
-        public IActionResult OnGet() 
+        [BindProperty]
+        public ExperienciaInputModel ExperienciaInputModel { get; set; } = new ExperienciaInputModel();
+
+        public async Task<IActionResult> OnGet() 
         {
-            var freelancers = _freelancerService.GetAllAsync();
-            ExperienciaInputModel.Freelancers = freelancers.Result.Body;
+            var freelancers = await _freelancerService.GetAllAsync();
+            ExperienciaInputModel.Freelancers = freelancers.Body;
             return Page();
         }
-
-        [BindProperty]
-        public ExperienciaInputModel ExperienciaInputModel { get; set; } = default!;
 
         public async Task<IActionResult> OnPostAsync()
         {
