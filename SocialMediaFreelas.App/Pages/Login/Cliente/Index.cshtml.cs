@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using SocialMediaFreelas.Application.InputModels;
@@ -16,8 +17,13 @@ namespace SocialMediaFreelas.Pages.Login.Cliente
             _clienteService = clienteService;
             _sessao = sessao;
         }
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (_sessao.GetUserSession() != null)
+                return RedirectPreserveMethod($"../Home/{_sessao.GetUserSession().Role}");
+
+            return Page();
+
         }
 
         [BindProperty]

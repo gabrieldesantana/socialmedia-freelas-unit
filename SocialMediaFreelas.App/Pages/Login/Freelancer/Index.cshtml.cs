@@ -17,8 +17,13 @@ namespace SocialMediaFreelas.Pages.Login.Freelancer
             _sessao = sessao;
         }
 
-        public void OnGet()
+        public IActionResult OnGet()
         {
+            if (_sessao.GetUserSession() != null)
+                return RedirectPreserveMethod($"../Home/{_sessao.GetUserSession().Role}");
+
+            return Page();
+
         }
 
         [BindProperty]

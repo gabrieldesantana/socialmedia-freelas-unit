@@ -50,7 +50,7 @@ namespace SocialMediaFreelas.Pages.Vagas
 
             TempData["MensagemSucesso"] = "Você se candidatou com sucesso!";
 
-            return RedirectPreserveMethod("../");
+            return Page();
         }
     }
 }
