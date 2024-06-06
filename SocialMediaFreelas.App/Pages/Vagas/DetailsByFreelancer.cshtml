@@ -1,0 +1,57 @@
+﻿@page "{id:int?}"
+@model SocialMediaFreelas.Pages.Vagas.DetailsByFreelancerModel
+@{
+}
+
+<style>
+    .caixa {
+        background-color: #fff; /* Cor de fundo branca para a caixa */
+        border-radius: 5px; /* Bordas arredondadas */
+        padding: 20px; /* Espaçamento interno */
+        margin-top: 20px; /* Espaço acima da caixa */
+    }
+
+    #footer {
+        display: none;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="caixa shadow-lg">
+        <!-- Adiciona sombra e estilização à caixa -->
+        <!-- Título da Vaga -->
+        <div class="jumbotron">
+            <h1 class="display-5"> @Model.VagaViewModel.Titulo</h1>
+            <p class="lead">@Model.VagaViewModel.Descricao</p>
+            <hr class="">
+            <p><strong>Cargo:</strong> @Model.VagaViewModel.Cargo</p>
+            <p><strong>Localização:</strong> @Model.VagaViewModel.Localizacao</p>
+            <p><strong>Tipo da Vaga:</strong> @Model.VagaViewModel.Tipo</p>
+
+            <div>
+                <form method="post">
+                    <div class="form-group">
+                        <input type="hidden" asp-for="VagaViewModel.Id" />
+                        <input type="hidden" asp-for="VagaViewModel.UserId" />
+                        @if (Model.VagaViewModel.Done == true)
+                        {
+                            <button class="btn btn-outline-dark" disabled>Candidatado</button>
+                        }
+                        else if (Model.VagaViewModel.Done == false)
+                        {
+                            <input type="submit" value="Candidatar-se" class="btn btn-outline-primary" />
+                        }
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Lista de Candidatos -->
+        <div class="row">
+           
+
+        </div>
+    </div>
+</div>
+

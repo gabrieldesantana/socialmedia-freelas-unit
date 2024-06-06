@@ -38,14 +38,15 @@
                 <li class="nav-item"><a class="nav-link" asp-page="/Experiencias/IndexByUser">Minhas Experiencias</a></li> 
 
                 <li class="nav-item"><a class="nav-link" asp-page="/Vagas/IndexByFreelancer" asp-route-id="@Model.UserId">Minhas Vagas</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-page="/Vagas/Index">Vagas</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-page="/Vagas/IndexToFreelancer">Vagas</a></li>
                 }
 
                 @if (Model != null && Model.Role == Frontend.Enums.EUserRole.Cliente)
                 {
                     <li class="nav-item"><a class="nav-link" asp-page="/Home/Cliente/Index">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" asp-page="/Vagas/IndexByUser"> Minhas Vagas</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-page="/Experiencias/Create">Avaliar freelancer</a></li> 
+                    <li class="nav-item"><a class="nav-link" asp-page="/Vagas/Create"> Criar Vaga</a></li>
+                    <li class="nav-item"><a class="nav-link" asp-page="/Experiencias/Create" asp-route-id="@Model.UserId">Avaliar freelancer</a></li>
                 }
 
                 @if (Model != null && Model.Role == Frontend.Enums.EUserRole.Admin)

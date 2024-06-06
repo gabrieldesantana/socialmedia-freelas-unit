@@ -64,7 +64,7 @@ namespace SocialMediaFreelas.Pages.Vagas
                     );
 
                 TempData["MensagemSucesso"] = "Atualização feita com sucesso!";
-                return RedirectToPage("./Index");
+                return RedirectToPage("./IndexByUser");
             }
             catch (Exception)
             {

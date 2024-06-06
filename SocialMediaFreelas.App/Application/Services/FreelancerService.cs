@@ -164,4 +164,37 @@ public class FreelancerService : IFreelancerService
             Role = EUserRole.Freelancer
         };
     }
+
+    public async Task<DefaultResponse<FreelancerViewModel>> GetAllByVagaClienteIdAsync(int clienteId)
+    {
+        var freelancers = await _repository.GetAllAsync();
+
+        freelancers = freelancers.Where(f => f.Vagas.Any(f => f.ClienteId == clienteId)).ToList();
+
+        if (!freelancers.Any())
+        {
+            return new DefaultResponse<FreelancerViewModel>
+            {
+                Success = true,
+                ErrorMessage = "Lista vazia",
+                Body = new List<FreelancerViewModel>()
+            };
+        }
+
+        return new DefaultResponse<FreelancerViewModel>
+        {
+            Success = true,
+            ErrorMessage = string.Empty,
+            Body = freelancers.Select(x => new FreelancerViewModel
+            {
+                Id = x.Id,
+                Nome = x.Nome,
+                NumeroDocumento = x.NumeroDocumento,
+                Email = x.Email,
+                Telefone = x.Telefone,
+                Sobre = x.Sobre,
+                PretensaoSalarial = x.PretensaoSalarial
+            }).ToList()
+        };
+    }
 }

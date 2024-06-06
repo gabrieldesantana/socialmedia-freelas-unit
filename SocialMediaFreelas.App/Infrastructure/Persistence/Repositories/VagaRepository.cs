@@ -52,7 +52,7 @@ public class VagaRepository : GenericRepository<Vaga>, IVagaRepository
     {
         return (string.IsNullOrEmpty(tenantId))
         ? await _dbSet.Include(v => v.Freelancers).FirstOrDefaultAsync(x => x.Id == id)
-        : await _dbSet.FirstOrDefaultAsync(x => x.Id == id && x.TenantId == tenantId);
+        : await _dbSet.Include(v => v.Freelancers).FirstOrDefaultAsync(x => x.Id == id && x.TenantId == tenantId);
     }
 
     public async Task<bool> AddFreelancerAsync(int idVaga,int idFreelancer)

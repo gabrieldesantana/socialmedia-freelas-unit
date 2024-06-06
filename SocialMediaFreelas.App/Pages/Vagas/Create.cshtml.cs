@@ -15,25 +15,28 @@ namespace SocialMediaFreelas.Pages.Vagas
 
         public IActionResult OnGet() 
         {
+            var userId = GetUserId();
+            VagaInputModel.ClienteId = userId;
             return Page();
         }
 
         [BindProperty]
-        public VagaInputModel VagaInputModel { get; set; } = default!;
+        public VagaInputModel VagaInputModel { get; set; } = new VagaInputModel();
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid || _service == null || VagaInputModel == null)
+            if (_service == null || VagaInputModel == null)
             {
                 return Page();
             }
 
             try
             {
+                VagaInputModel.Status = "Aberta";
                 VagaInputModel.TenantIdOwner = GetTenantIdUser();
                 await _service.PostAsync(VagaInputModel);
                 TempData["MensagemSucesso"] = "Cadastro feito com sucesso!";
-                return RedirectToPage("./Index");
+                return RedirectToPage("./IndexByUser");
             }
             catch (Exception)
             {

@@ -19,18 +19,19 @@ namespace SocialMediaFreelas.Pages.Experiencias
 
         public async Task OnGetAsync()
         {
-            var tenantId = GetTenantIdUser();
-            var response = await _service.GetAllAsync(tenantId);
+            var userId = GetUserId();
+            var response = await _service.GetAllByUserIdAsync(userId);
             Response = response.Body;
         }
 
         public IActionResult OnPost(string query)
         {
-            var tenantId = GetTenantIdUser();
+            var tenantId = "";
 
-            query= query ?? string.Empty;
+            var userId = GetUserId();
+            query = query ?? string.Empty;
 
-            var experiencias = _service.GetAllByFilterAsync(query, tenantId).Result.Body;
+            var experiencias = _service.GetAllByFilterAsync(query, tenantId, userId).Result.Body;
 
             if (experiencias == null || !experiencias.Any())
             {

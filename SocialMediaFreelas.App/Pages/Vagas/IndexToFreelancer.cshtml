@@ -1,19 +1,18 @@
 ﻿@page
-@model SocialMediaFreelas.Pages.Vagas.IndexModel
+@model SocialMediaFreelas.Pages.Vagas.IndexToFreelancerModel
 @{
-    ViewData["Title"] = "Geral";
 }
+
 
 <style>
 
     .icon {
         color: #5891ff;
-}
+    }
 
-#footer 
-{
-    display: none;
-}
+    #footer {
+        display: none;
+    }
 </style>
 
 
@@ -58,7 +57,7 @@
                                 @if (vaga.Status == "Aberta")
                                 {
                                     <div class="card-body">
-                                        <a class="btn btn-outline-primary mb-1" asp-page="./Details" asp-route-id="@vaga.Id">Detalhes</a>
+                                        <a class="btn btn-outline-primary mb-1" asp-page="./DetailsByFreelancer" asp-route-id="@vaga.Id">Detalhes</a>
                                     </div>
                                 }
                                 else if (vaga.Status == "Fechada")
@@ -78,23 +77,23 @@
 </div>
 
 @section Scripts
-{
+    {
     <script type="text/javascript">
 
-    $('input[type="text"]').on('keyup', function() {
-    var form = $(this).closest('form');
-    $.ajax({
-        url: form.attr('action'),
-        type: form.attr('method'),
-        data: form.serialize(),
-        success: function(response) {
-            // Atualiza o elemento com a resposta da PartialView
-            $('#idDoElementoParaAtualizar').html(response);
-        },
-        error: function() {
-            alert('Erro ao atualizar os dados.');
-        }
-    });
-    });
+        $('input[type="text"]').on('keyup', function () {
+            var form = $(this).closest('form');
+            $.ajax({
+                url: form.attr('action'),
+                type: form.attr('method'),
+                data: form.serialize(),
+                success: function (response) {
+                    // Atualiza o elemento com a resposta da PartialView
+                    $('#idDoElementoParaAtualizar').html(response);
+                },
+                error: function () {
+                    alert('Erro ao atualizar os dados.');
+                }
+            });
+        });
     </script>
 }

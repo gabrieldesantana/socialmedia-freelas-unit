@@ -4,22 +4,109 @@
     ViewData["Title"] = "Editar";
 }
 
-<h1>Edit</h1>
+<style>
+    body {
+        background-color: #edf2f6 !important;
+        font-family: Arial, sans-serif !important;
+    }
 
-<h4>Vaga</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+    .profile-container {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: flex-start !important;
+        padding: 20px !important;
+    }
+
+    .profile-sidebar, .profile-form {
+        background-color: #fff !important;
+        padding: 20px !important;
+        border-radius: 10px !important;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .profile-sidebar {
+        margin-right: 20px !important;
+        text-align: center !important;
+    }
+
+        .profile-sidebar img {
+            border-radius: 50% !important;
+            width: 150px !important;
+            height: 150px !important;
+        }
+
+        .profile-sidebar h2 {
+            font-size: 24px !important;
+            margin: 10px 0 !important;
+        }
+
+        .profile-sidebar p {
+            color: #777 !important;
+        }
+
+        .profile-sidebar button {
+            background-color: #dc3545 !important;
+            color: #fff !important;
+            border: none !important;
+            padding: 10px 20px !important;
+            margin-top: 10px !important;
+            cursor: pointer !important;
+        }
+
+    .profile-form {
+        flex: 1 !important;
+        max-width: 600px !important;
+    }
+
+        .profile-form h3 {
+            margin-bottom: 20px !important;
+            font-size: 24px !important;
+        }
+
+        .profile-form .form-group {
+            margin-bottom: 15px !important;
+        }
+
+        .profile-form label {
+            display: block !important;
+            margin-bottom: 5px !important;
+        }
+
+        .profile-form input, .profile-form select {
+            width: 100% !important;
+            padding: 10px !important;
+            border: 1px solid #ccc !important;
+            border-radius: 5px !important;
+        }
+
+        .profile-form button {
+            background-color: #28a745 !important;
+            color: #fff !important;
+            border: none !important;
+            padding: 10px 20px !important;
+            cursor: pointer !important;
+        }
+
+    .profile-sidebar h2 {
+        color: #495057;
+    }
+
+    .control-label {
+        color: #495057;
+    }
+</style>
+
+<div class="profile-container">
+    <div class="profile-sidebar">
+        <img src="~/assets/img/freelancer.jpg" alt="Profile Picture">
+        <h2>Editar vaga</h2>
+    </div>
+
+    <div class="profile-form">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <input type="hidden" asp-for="VagaUpdateModel.Id"/>
-
-@*            <div class="form-group">
-                <label asp-for="VagaUpdateModel.FreelancerId" class="control-label"></label>
-                <input asp-for="VagaUpdateModel.FreelancerId" class="form-control" />
-                <span asp-validation-for="VagaUpdateModel.FreelancerId" class="text-danger"></span>
-            </div>*@
+            <input type="hidden" asp-for="VagaUpdateModel.Id" />
 
             <div class="form-group">
                 <label asp-for="VagaUpdateModel.Titulo" class="control-label"></label>
@@ -39,17 +126,10 @@
                 <span asp-validation-for="VagaUpdateModel.Cargo" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <label asp-for="VagaUpdateModel.Tipo" class="control-label"></label>
-                <input asp-for="VagaUpdateModel.Tipo" class="form-control" />
-                <span asp-validation-for="VagaUpdateModel.Tipo" class="text-danger"></span>
-            </div>
+                <input type="hidden" asp-for="VagaUpdateModel.Tipo" class="form-control" />
 
-            <div class="form-group">
-                <label asp-for="VagaUpdateModel.Localizacao" class="control-label"></label>
-                <input asp-for="VagaUpdateModel.Localizacao" class="form-control" />
-                <span asp-validation-for="VagaUpdateModel.Localizacao" class="text-danger"></span>
-            </div>
+                <input type="hidden" asp-for="VagaUpdateModel.Localizacao" class="form-control" />
+
 
             <div class="form-group">
                 <label asp-for="VagaUpdateModel.Status" class="control-label"></label>
@@ -63,19 +143,15 @@
                 <span asp-validation-for="VagaUpdateModel.Remuneracao" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
-                <input type="submit" value="Edit" class="btn btn-primary" />
+            <div style="display: flex; justify-content: space-between;">
+                <div class="form-group">
+                    <a asp-page="Index" class="btn btn-secondary">Voltar</a>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Editar" class="btn btn-primary" />
+                </div>
             </div>
         </form>
     </div>
 </div>
-
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}

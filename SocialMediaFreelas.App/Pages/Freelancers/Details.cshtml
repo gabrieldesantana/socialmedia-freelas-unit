@@ -99,7 +99,10 @@ h2 {
                 <p class="">@Model.FreelancerViewModel.Email</p>
                 <p class="">@Model.FreelancerViewModel.Sobre</p>
                 @* <p class="card-text"><small class="text-body-secondary">Online</small></p> *@
-                <a href="https://wa.me/@Model.FreelancerViewModel.Telefone" class="btn btn-success">Whatsapp</a>
+                @{
+                    var telefoneFormated = "55" + Model.FreelancerViewModel.Telefone;
+                }
+                <a href="https://wa.me/@telefoneFormated" class="btn btn-success">Whatsapp</a>
             </div>
         </div>
     </div>

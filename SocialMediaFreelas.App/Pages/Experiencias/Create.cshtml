@@ -1,14 +1,14 @@
-﻿@page
+﻿@page "{id:int}"
 @model SocialMediaFreelas.Pages.Experiencias.CreateModel
 @{
     ViewData["Title"] = "Adicionar";
 }
-
+@*
 <style>
-/*body {
+body {
      background: #f7f7f7;
     font-family: 'Roboto', sans-serif;
-}*/
+}
 
 .registration-form {
     padding: 50px 0;
@@ -37,23 +37,22 @@
     margin-bottom: 50px;
     line-height: 100px;
 }
-/*
 .registration-form .form-group {
     margin-bottom: 20px;
-}*/
+}
 
-/*.registration-form .form-control {
+.registration-form .form-control {
     border: 2px solid #d7d7d7;
     border-radius: 0;
     box-shadow: none;
     font-size: 14px;
     height: 40px;
-}*/
+}
 
-/*.registration-form .form-control:focus {
+.registration-form .form-control:focus {
     border-color: #5891ff;
     box-shadow: 0 0 8px 0 #5891ff;
-}*/
+}
 
 .registration-form .create-account {
     background: #5891ff;
@@ -70,26 +69,159 @@
     background: #4478e3;
 }
 
+
+</style>*@
+
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background-color: #dee9ff;
+    }
+
+    .registration-form {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 15px;
+        margin-top: 10vh;
+    }
+
+        .registration-form form {
+            background-color: #fff;
+            max-width: 600px;
+            width: 100%;
+            padding: 40px 20px;
+            border-radius: 30px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+        }
+
+        .registration-form .form-icon {
+            text-align: center;
+            background-color: #5891ff;
+            border-radius: 50%;
+            font-size: 40px;
+            color: white;
+            width: 100px;
+            height: 100px;
+            margin: auto;
+            margin-bottom: 30px;
+            line-height: 100px;
+        }
+
+        .registration-form .item {
+            border-radius: 20px;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+        }
+
+        .registration-form .create-account {
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #5791ff;
+            border: none;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .registration-form .social-media {
+            max-width: 600px;
+            background-color: #fff;
+            margin: auto;
+            padding: 25px 0;
+            text-align: center;
+            border-radius: 30px;
+            color: #9fadca;
+            border-top: 1px solid #dee9ff;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+        }
+
+        .registration-form .social-icons {
+            margin-top: 20px;
+            margin-bottom: 16px;
+        }
+
+            .registration-form .social-icons a {
+                font-size: 23px;
+                margin: 0 3px;
+                color: #5691ff;
+                border: 1px solid;
+                border-radius: 50%;
+                width: 45px;
+                display: inline-block;
+                height: 45px;
+                text-align: center;
+                background-color: #fff;
+                line-height: 45px;
+            }
+
+                .registration-form .social-icons a:hover {
+                    text-decoration: none;
+                    opacity: 0.6;
+                }
+
+        /* Estilos para o layout de duas colunas */
+        .registration-form .form-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .registration-form .form-column {
+            display: flex;
+            flex-direction: column;
+            width: 48%; /* Ajuste a largura conforme necessário */
+        }
+
+    /* Responsividade */
+    @@media (max-width: 576px) {
+        .registration-form form {
+            padding: 40px 15px;
+        }
+
+        .registration-form .form-icon {
+            width: 70px;
+            height: 70px;
+            font-size: 30px;
+            line-height: 70px;
+        }
+
+        .registration-form {
+            margin-top: 5vh;
+        }
+            /* Ajuste as colunas para empilhar verticalmente em telas menores */
+            .registration-form .form-row {
+                flex-direction: column;
+            }
+
+            .registration-form .form-column {
+                width: 100%; /* Colunas ocupam toda a largura em telas pequenas */
+            }
+    }
 </style>
+
 
 <div class="registration-form">
     <form id="create-experience-form" method="post">
         <div class="form-icon">
             <span><i class="icon icon-briefcase"></i></span>
         </div>
-
-        <input type="search" list="mylistFreelancers" autocomplete="off" name="FreelancerIdByString" id="inputSelectFreelancer" class="form-control">
-
+<div class="form-row">
+<div class="form-column">
+        <label class="control-label">Freelancer</label>
+        <input type="search" list="mylistFreelancers" autocomplete="off" asp-for="ExperienciaInputModel.FreelancerIdByString" id="inputSelectFreelancer" class="form-control">
             <datalist id="mylistFreelancers">
                 <option disabled>Selecione</option>
-            @if (Model.ExperienciaInputModel != null)
-            {
-                foreach (var freelancer in Model.ExperienciaInputModel.Freelancers)
+                @if (Model.ExperienciaInputModel != null)
                 {
-                    <option value="@freelancer.Nome">@freelancer.Id</option>
+                    foreach (var freelancer in Model.ExperienciaInputModel.Freelancers)
+                    {
+                        <option value="@freelancer.Id">@freelancer.Nome</option>
+                    }
                 }
-            }
-
             </datalist>
 
             <div class="form-group">
@@ -102,18 +234,20 @@
                 <input asp-for="ExperienciaInputModel.Empresa" class="form-control" />
                 <span asp-validation-for="ExperienciaInputModel.Empresa" class="text-danger"></span>
             </div>
+</div>
+<div class="form-column">
         <div class="form-group">
             <label asp-for="ExperienciaInputModel.Tecnologia" class="control-label"></label>
             <input asp-for="ExperienciaInputModel.Tecnologia" class="form-control" />
             <span asp-validation-for="ExperienciaInputModel.Tecnologia" class="text-danger"></span>
         </div>
-            <div class="form-group">
-                <label asp-for="ExperienciaInputModel.Valor" class="control-label"></label>
-                <input asp-for="ExperienciaInputModel.Valor" class="form-control" />
-                <span asp-validation-for="ExperienciaInputModel.Valor" class="text-danger"></span>
-            </div>
         <div class="form-group">
-            <select class="form-control item" id="rating" asp-for="ExperienciaInputModel.Avaliacao" required>
+            <label asp-for="ExperienciaInputModel.Valor" class="control-label"></label>
+            <input asp-for="ExperienciaInputModel.Valor" class="form-control" />
+            <span asp-validation-for="ExperienciaInputModel.Valor" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <select class="form-control my-3" id="rating" asp-for="ExperienciaInputModel.Avaliacao" required>
                 <option value="" disabled selected>Avaliação</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -122,6 +256,8 @@
                 <option value="5">5</option>
             </select>
         </div>
+</div>
+</div>
         <div class="form-group">
             <button type="submit" class="btn btn-block create-account">Cadastrar Experiência</button>
         </div>

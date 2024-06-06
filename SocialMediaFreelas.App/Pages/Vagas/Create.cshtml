@@ -84,41 +84,52 @@
 </style>
 
   <div class="registration-form">
-        <form id="create-job-form">
+        <form method="post">
             <div class="form-icon">
                 <span><i class="icon icon-briefcase"></i></span>
             </div>
             @* <h2 class="text-center">Criar Vaga</h2> *@
+
+            <div class="form-group classe">
+
+                <input type="hidden" value="@Model.VagaInputModel.ClienteId" asp-for="VagaInputModel.ClienteId" class="form-control" />
+
+
             <div class="form-group">
-                <input type="text" class="form-control item" id="title" placeholder="Título da Vaga" required>
+                <input asp-for="VagaInputModel.Titulo" class="form-control item" placeholder="Título da Vaga"/>
+                <span asp-validation-for="VagaInputModel.Titulo" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="text" class="form-control item" id="position" placeholder="Cargo" required>
+                <input asp-for="VagaInputModel.Cargo" class="form-control item" placeholder="Cargo" />
+                <span asp-validation-for="VagaInputModel.Cargo" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <select class="form-control item" id="job-type" required>
+                <select class="form-control item" asp-for="VagaInputModel.Tipo" required>
                     <option value="" disabled selected>Tipo da Vaga</option>
-                    <option value="full-time">Tempo Integral</option>
-                    <option value="part-time">Meio Período</option>
+                    <option value="Integral">Tempo Integral</option>
+                    <option value="Meio Periodo">Meio Período</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control item" id="localizacao" placeholder="Localizacao" required>
+                <input asp-for="VagaInputModel.Localizacao" class="form-control item" placeholder="Localização" />
+                <span asp-validation-for="VagaInputModel.Localizacao" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control item" id="status" placeholder="Status" required>
+                <label class="control-label">Remuneração (R$)</label>
+                <input asp-for="VagaInputModel.Remuneracao" class="form-control item" />
+                <span asp-validation-for="VagaInputModel.Remuneracao" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="text" class="form-control item" id="remuneration" placeholder="Remuneração" required>
+                <textarea type="text" asp-for="VagaInputModel.Descricao" class="form-control item" id="textArea" placeholder="Descrição da Vaga" rows="10"></textarea>
             </div>
+
             <div class="form-group">
-                <textarea type="text" class="form-control item" id="textArea" placeholder="Descrição da Vaga" rows="10"></textarea>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-block create-account">Criar Vaga</button>
+                <input type="submit" class="btn btn-block create-account" value="Criar Vaga">
             </div>
         </form>
     </div>

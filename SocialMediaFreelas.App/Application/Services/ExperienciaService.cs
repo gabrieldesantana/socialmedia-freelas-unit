@@ -37,9 +37,19 @@ public class ExperienciaService : IExperienciaService
         };
     }
 
-    public async Task<DefaultResponse<ExperienciaViewModel>> GetAllByFilterAsync(string query, string? tenantId = "")
+    public async Task<DefaultResponse<ExperienciaViewModel>> GetAllByFilterAsync(string query, string? tenantId = "" , int userId = 0)
     {
-        var experiencias = await _repository.GetAllAsync(tenantId);
+        List<Experiencia> experiencias;
+
+        if (userId != 0)
+        {
+            experiencias = await _repository.GetAllByUserIdAsync(userId);
+        }
+        else
+        {
+            experiencias = await _repository.GetAllAsync(tenantId);
+        }
+
 
         if (!experiencias.Any())
         {
@@ -177,5 +187,37 @@ public class ExperienciaService : IExperienciaService
         {
             return false;
         }
+    }
+
+    public async Task<DefaultResponse<ExperienciaViewModel>> GetAllByUserIdAsync(int userId)
+    {
+        var experiencias = await _repository.GetAllByUserIdAsync(userId);
+
+        if (!experiencias.Any())
+        {
+            return new DefaultResponse<ExperienciaViewModel>
+            {
+                Success = true,
+                ErrorMessage = "Lista vazia",
+                Body = new List<ExperienciaViewModel>()
+            };
+        }
+
+        return new DefaultResponse<ExperienciaViewModel>
+        {
+            Success = true,
+            ErrorMessage = string.Empty,
+            Body = experiencias.Select(x => new ExperienciaViewModel
+            {
+                Id = x.Id,
+                Projeto = x.Projeto,
+                Empresa = x.Empresa,
+                Tecnologia = x.Tecnologia,
+                Valor = x.Valor,
+                Avaliacao = x.Avaliacao,
+                FreelancerId = x.FreelancerId,
+                Freelancer = x.Freelancer
+            }).ToList()
+        };
     }
 }

@@ -52,18 +52,10 @@
                                     <li class="list-group-item"><span><i class="icon icon-pie-chart"> </i></span>: R$@vaga.Remuneracao</li>
                                     <li class="list-group-item"><span><i class="icon icon-clock"></i> </span>: @vaga.Tipo</li>
                                 </ol>
-                                @if (vaga.Status == "Aberta")
-                                {
                                     <div class="card-body">
-                                        <button type="button" class="btn btn-outline-primary mb-1" asp-page="./Details" asp-route-id="@vaga.Id">Detalhes</button>
+                                        <a class="btn btn-outline-primary mb-1" asp-page="./Details" asp-route-id="@vaga.Id">Detalhes</a>
                                     </div>
-                                }
-                                else if (vaga.Status == "Fechada")
-                                {
-                                    <div class="card-body">
-                                        <button type="button" class="btn btn-outline-dark mb-1" disabled>Detalhes</button>
-                                    </div>
-                                }
+
 
                             </div>
                         </div>

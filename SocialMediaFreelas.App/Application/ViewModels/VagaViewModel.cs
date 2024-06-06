@@ -14,4 +14,5 @@ public class VagaViewModel : IDefaultEntity
     public Cliente? Cliente { get; set; }
     public int ClienteId { get; set; }
     public int UserId { get; set; }
+    public bool Done { get; set; }
 }

@@ -44,6 +44,13 @@ public class FreelancerRepository : GenericRepository<Freelancer>, IFreelancerRe
         : await _dbSet.Include(x => x.Experiencias).FirstOrDefaultAsync(x => x.Id == id && x.TenantId == tenantId);
     }
 
+    public override async Task<List<Freelancer>> GetAllAsync(string? tenantId = "")
+    {
+        return (string.IsNullOrEmpty(tenantId))
+          ? await _dbSet.Include(x => x.Vagas).Where(x => x.Actived).ToListAsync()
+          : await _dbSet.Where(x => x.Actived && x.TenantId == tenantId).ToListAsync();
+    }
+
     public async Task<Freelancer> LoginAsync(string email, string senha)
     {
         return await _context.Freelancers

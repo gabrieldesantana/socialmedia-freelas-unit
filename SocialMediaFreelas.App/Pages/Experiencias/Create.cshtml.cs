@@ -18,9 +18,9 @@ namespace SocialMediaFreelas.Pages.Experiencias
         [BindProperty]
         public ExperienciaInputModel ExperienciaInputModel { get; set; } = new ExperienciaInputModel();
 
-        public async Task<IActionResult> OnGet() 
+        public async Task<IActionResult> OnGet(int id) 
         {
-            var freelancers = await _freelancerService.GetAllAsync();
+            var freelancers = await _freelancerService.GetAllByVagaClienteIdAsync(id);
             ExperienciaInputModel.Freelancers = freelancers.Body;
             return Page();
         }
@@ -35,9 +35,10 @@ namespace SocialMediaFreelas.Pages.Experiencias
             try
             {
                 ExperienciaInputModel.TenantIdOwner = GetTenantIdUser();
+                ExperienciaInputModel.FreelancerId = Int32.Parse(ExperienciaInputModel.FreelancerIdByString);
                 await _service.PostAsync(ExperienciaInputModel);
                 TempData["MensagemSucesso"] = "Cadastro feito com sucesso!";
-                return RedirectToPage("./Index");
+                return RedirectToPage("../Home/Cliente");
             }
             catch (Exception)
             {

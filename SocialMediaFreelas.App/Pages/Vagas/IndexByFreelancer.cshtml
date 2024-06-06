@@ -42,7 +42,7 @@
                             @if (vaga.Status == "Aberta")
                             {
                                 <div class="card-body">
-                                    <button type="button" class="btn btn-outline-primary mb-1" asp-page="./Details" asp-route-id="@vaga.Id">Detalhes</button>
+                                    <a class="btn btn-outline-primary mb-1" asp-page="./DetailsByFreelancer" asp-route-id="@vaga.Id">Detalhes</a>
                                 </div>
                             }
                             else if (vaga.Status == "Fechada")

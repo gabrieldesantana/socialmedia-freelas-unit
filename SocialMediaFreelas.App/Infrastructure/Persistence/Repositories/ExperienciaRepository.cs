@@ -45,4 +45,11 @@ public class ExperienciaRepository : GenericRepository<Experiencia>,IExperiencia
           .Include(x => x.Freelancer)
           .Where(x => x.Actived && x.TenantId == tenantId).ToListAsync();
     }
+
+    public async Task<List<Experiencia>> GetAllByUserIdAsync(int userId)
+    {
+        return await _context.Experiencias
+         .Include(x => x.Freelancer)
+         .Where(x => x.Actived && x.FreelancerId == userId).ToListAsync();
+    }
 }
