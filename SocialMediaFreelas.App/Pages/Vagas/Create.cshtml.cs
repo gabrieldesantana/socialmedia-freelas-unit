@@ -34,9 +34,9 @@ namespace SocialMediaFreelas.Pages.Vagas
 
             try
             {
-                //VagaInputModel.Status = "Aberta";
-                //VagaInputModel.TenantIdOwner = GetTenantIdUser();
-                //await _service.PostAsync(VagaInputModel);
+                VagaInputModel.Status = "Aberta";
+                VagaInputModel.TenantIdOwner = GetTenantIdUser();
+                await _service.PostAsync(VagaInputModel);
 
                 TempData["MensagemSucesso"] = "Vaga publicada com sucesso!";
                 return RedirectToPage("./IndexByUser");

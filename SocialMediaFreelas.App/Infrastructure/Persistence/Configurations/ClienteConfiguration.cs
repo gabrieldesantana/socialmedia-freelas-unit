@@ -15,12 +15,5 @@ public class ClienteConfiguration : IEntityTypeConfiguration<Cliente>
         builder.Property(x => x.Telefone).IsRequired();
         builder.Property(x => x.Senha).IsRequired();
         builder.Property(x => x.Sobre);
-
-        //public List<Vaga>? Vagas { get; private set; }
-
-        // builder.HasMany(x => x.Vagas)
-        // .WithOne()
-        // .HasForeignKey(x => x.Id)
-        // .OnDelete(DeleteBehavior.Cascade);
     }
 }

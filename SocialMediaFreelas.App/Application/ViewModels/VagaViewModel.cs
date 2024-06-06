@@ -8,8 +8,6 @@ public class VagaViewModel : IDefaultEntity
     public string Localizacao { get; set; }
     public string Status { get; set; }
     public double Remuneracao { get; set; }
-    //public int FreelancerId { get; set; }
-
     public List<Freelancer>? Freelancers { get; set; }
     public Cliente? Cliente { get; set; }
     public int ClienteId { get; set; }

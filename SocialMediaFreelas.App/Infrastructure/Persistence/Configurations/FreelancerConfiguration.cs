@@ -16,12 +16,5 @@ public class FreelancerConfiguration : IEntityTypeConfiguration<Freelancer>
         builder.Property(x => x.Senha).IsRequired();
         builder.Property(x => x.Sobre);
         builder.Property(x => x.PretensaoSalarial);
-
-        // public List<Experiencia>? Experiencias { get; private set; }
-
-        // builder.HasMany(x => x.Experiencias)
-        // .WithOne()
-        // .HasForeignKey(x => x.Id)
-        // .OnDelete(DeleteBehavior.Cascade);
     }
 }

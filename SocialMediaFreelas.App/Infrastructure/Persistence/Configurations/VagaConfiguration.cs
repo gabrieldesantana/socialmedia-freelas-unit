@@ -16,9 +16,6 @@ public class VagaConfiguration : IEntityTypeConfiguration<Vaga>
         builder.Property(x => x.Status).IsRequired();
         builder.Property(x => x.Remuneracao).IsRequired();
 
-        //public int FreelancerId { get; private set; }
-        //public int ClienteId { get; private set; }
-
         builder
         .HasMany(x => x.Freelancers)
         .WithMany(x => x.Vagas);

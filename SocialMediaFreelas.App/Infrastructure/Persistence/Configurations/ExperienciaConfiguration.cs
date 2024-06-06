@@ -14,8 +14,6 @@ public class ExperienciaConfiguration : IEntityTypeConfiguration<Experiencia>
         builder.Property(x => x.Valor).IsRequired();
         builder.Property(x => x.Avaliacao).IsRequired();
 
-        // public int FreelancerId { get; private set; }
-
         builder.HasOne(x => x.Freelancer)
         .WithMany(f => f.Experiencias)
         .HasForeignKey(x => x.FreelancerId)

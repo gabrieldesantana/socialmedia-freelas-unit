@@ -30,20 +30,5 @@ namespace SocialMediaFreelas.Pages.Vagas
             return Page();
         }
 
-        //public async Task<IActionResult> OnPostAsync()
-        //{
-
-        //    var vagaChanged = await _service.AddFreelancerAsync(idVaga: VagaViewModel.Id, idFreelancer: VagaViewModel.UserId);
-
-        //    if (vagaChanged == false)
-        //    {
-        //        TempData["MensagemErro"] = "Houve um erro ao tentar se candidatar";
-        //        return Page();
-        //    }
-
-        //    TempData["MensagemSucesso"] = "Você se candidatou com sucesso!";
-
-        //    return RedirectPreserveMethod("../");
-        //}
     }
 }

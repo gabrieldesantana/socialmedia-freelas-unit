@@ -33,8 +33,7 @@ namespace SocialMediaFreelas.Pages.Vagas
                 Tipo = x.Tipo,
                 Localizacao = x.Localizacao,
                 Status = x.Status,
-                Remuneracao = x.Remuneracao,
-                //FreelancerId = x.FreelancerId
+                Remuneracao = x.Remuneracao
             }).FirstOrDefault();
             #pragma warning restore CS8601
 
