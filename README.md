@@ -1,4 +1,8 @@
 # FreelasUnit-Application
+Aplicação FullStack desenvolvida para a matéria de Gerenciamento de Projetos (UNIT)
+
+Foi construída com o proposito de ser uma plataforma web onde Freelancers e Empresas/Clientes
+possam se encontrar e fechar contratos.
 
 ## Tutorial para rodar a aplicação
 
